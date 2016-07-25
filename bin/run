@@ -10,7 +10,7 @@ data_path = Downloader.new.run(file_name, date)
 
 data = XlsParser.new.run(data_path)
 
-file_path ||= File.join(File.dirname(__FILE__), "../dist/data.json")
+file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 File.open(file_path,"w") do |f|
   f.write({
     companies: data,
