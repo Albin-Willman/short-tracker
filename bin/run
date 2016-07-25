@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require_relative "../ruby/downloader.rb"
+require_relative "../ruby/parser.rb"
+
+date = '2016-07-25'
+file_name = 'tmp/data.xls'
+data_path = Downloader.new.run(file_name, date)
+
+data = XlsParser.new.run(data_path)
+
+file_path ||= File.join(File.dirname(__FILE__), "../dist/data.json")
+File.open(file_path,"w") do |f|
+  f.write({
+    companies: data,
+    updated: date
+  }.to_json)
+end

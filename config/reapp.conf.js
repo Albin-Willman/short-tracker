@@ -15,7 +15,7 @@ module.exports = {
 
     // forward following urls to the api server
     proxyUrls: [
-        '/foo*',
+        '/api*',
     ],
 
     // forward following rules

@@ -13,13 +13,10 @@ export function makeStore(initialState = {}, middlewares = [reduxThunk]) {
 
     var persistParam = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
 
-    var finalCreateStore = compose(
-        applyMiddleware(...middlewares),
-        DevTools.instrument(),
-        require('redux-devtools').persistState(persistParam)
-    )(createStore);
-
-    store = finalCreateStore(reducer, initialState);
+    store = createStore(reducer, initialState, compose(
+      applyMiddleware(...middlewares),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    ));
 
     return store;
 }
