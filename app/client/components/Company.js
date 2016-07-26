@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
 import { Chart } from 'react-google-charts'
+import ActorList from 'components/ActorList';
 
 export default class Company extends React.Component {
 
@@ -81,8 +82,8 @@ export default class Company extends React.Component {
 
     var chartData = this.transformChartData(company.actors);
 
+    var actors = chartData[0];
     var lastRow = chartData[chartData.length - 1];
-    var currentTotal = lastRow[lastRow.length - 1];
 
     var options = {
       hAxis: {title: 'Date'},
@@ -94,7 +95,8 @@ export default class Company extends React.Component {
         <Col lg={5}>
           <Well>
             <h1>{company.name}</h1>
-            <p><strong>Current total:</strong> {currentTotal.toFixed(2)} %</p>
+            <h3>Current positions</h3>
+            <ActorList labels={actors} positions={lastRow} />
             <Button onClick={back}>Back</Button>
           </Well>
         </Col>
