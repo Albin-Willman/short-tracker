@@ -24,8 +24,8 @@ class XlsParser
     company_name = file.cell(line, 3)
 
     company = company_name.partition(" ").first.downcase
-    amount = file.cell(line, 5)
-    amount = 0 if file.cell(line, 7) && file.cell(line, 7).gsub(/[^0-9a-z]/i, '').include?("Fallitunder05")
+    amount = file.cell(line, 5).to_f
+    amount = 0 if amount <= 0.5
     date = Date.parse(file.cell(line, 6).to_s)
 
     @result[company] = {
