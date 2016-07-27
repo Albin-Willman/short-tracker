@@ -17,6 +17,14 @@ import { makeStore } from 'utils/store';
 import initialState from 'fixtures/initial-state-prod.fixture';
 import App from 'containers/App';
 
+var ReactGA = require('react-ga');
+ReactGA.initialize('UA-81365517-1');
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
+
 export function start(targetEl, payload) {
 
     // apply the host's page payload
@@ -32,6 +40,7 @@ export function start(targetEl, payload) {
     ReactDOM.render((
         <Main
             app={App}
-            store={appStore} />
+            store={appStore}
+            logPageView={logPageView} />
     ), targetEl);
 }

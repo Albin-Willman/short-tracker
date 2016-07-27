@@ -34,7 +34,8 @@ export function start(targetEl, payload) {
     ReactDOM.render((
         <Main
             app={App}
-            store={appStore} />
+            store={appStore}
+            />
     ), targetEl);
 }
 

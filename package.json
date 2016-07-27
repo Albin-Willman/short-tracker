@@ -70,6 +70,7 @@
     "webpack-dev-server": "^1.14.x"
   },
   "dependencies": {
+    "react-ga": "^2.1.1",
     "react-google-charts": "^1.0.2",
     "react-router": "^2.6.0"
   }

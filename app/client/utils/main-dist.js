@@ -8,20 +8,22 @@ export class Main extends React.Component {
         app: React.PropTypes.func,
         routes: React.PropTypes.object,
         store: React.PropTypes.object,
+        logPageView: React.PropTypes.func
     }
 
     static defaultProps = {
         app: null,
         routes: null,
         store: null,
+        logPageView: ()=>{},
     }
 
     render() {
-        var { app, routes } = this.props;
+        var { app, routes, logPageView } = this.props;
 
         return (
             <Provider store={this.props.store}>
-                {routes ? routes : React.createElement(app)}
+                {routes ? routes : React.createElement(app, {logPageView: logPageView})}
             </Provider>
         );
     }

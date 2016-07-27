@@ -32,14 +32,14 @@ export default class App extends React.Component {
   }
 
   buildContent() {
-    var { loaded, loading } = this.props;
+    var { loaded, loading, logPageView } = this.props;
 
     if (loading || !loaded){
       return "loading...";
     }
 
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={logPageView}>
         <Route path="/" component={CompanyListPage} />
         <Route path="/stock/:name" component={CompanyPage} />
         <Route path="*" component={CompanyListPage} />

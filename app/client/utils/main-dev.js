@@ -19,12 +19,14 @@ export class Main extends React.Component {
         app: React.PropTypes.func,
         routes: React.PropTypes.object,
         store: React.PropTypes.object,
+        logPageView: React.PropTypes.func,
     }
 
     static defaultProps = {
         app: null,
         routes: null,
         store: null,
+        logPageView: ()=>{}
     }
 
     state = {
@@ -63,12 +65,12 @@ export class Main extends React.Component {
 
     render() {
         var { showDebug } = this.state;
-        var { app, routes } = this.props;
+        var { app, routes, logPageView } = this.props;
 
         return (
             <Provider store={this.props.store}>
                 <div>
-                    {routes ? routes : React.createElement(app)}
+                    {routes ? routes : React.createElement(app, { logPageView: logPageView })}
                     {showDebug ? <DevTools /> : null}
                 </div>
             </Provider>
