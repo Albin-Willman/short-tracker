@@ -3,7 +3,7 @@ import { setCompanies, setUpdated, setLoading, setLoaded } from 'actions/data-ac
 export function loadData(){
   return (dispatch, getState) => {
     dispatch(setLoading(true));
-    fetch('api/data.json')
+    fetch('/api/data.json')
     .then(data => {
       return data.json();
     })

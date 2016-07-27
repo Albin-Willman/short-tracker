@@ -3,7 +3,7 @@ import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
-import Button from 'react-bootstrap/lib/Button';
+import { Link } from 'react-router'
 import { Chart } from 'react-google-charts'
 import ActorList from 'components/ActorList';
 
@@ -11,17 +11,10 @@ export default class Company extends React.Component {
 
   static propTypes = {
     company: React.PropTypes.object,
-    back: React.PropTypes.func,
   }
 
   static defaultProps = {
     company: {},
-    back: () => {},
-  }
-
-  state = {
-    from: '',
-    to: ''
   }
 
   transformChartData(actors){
@@ -78,7 +71,7 @@ export default class Company extends React.Component {
 
 
   render() {
-    var { company, back } = this.props;
+    var { company } = this.props;
 
     var chartData = this.transformChartData(company.actors);
 
@@ -97,7 +90,7 @@ export default class Company extends React.Component {
             <h1>{company.name}</h1>
             <h3>Current positions</h3>
             <ActorList labels={actors} positions={lastRow} />
-            <Button onClick={back}>Back</Button>
+            <Link to="/">Back</Link>
           </Well>
         </Col>
         <Col lg={7}>

@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'json'
+require 'date'
 require_relative "../ruby/downloader.rb"
 require_relative "../ruby/parser.rb"
 
-date = '2016-07-25'
+date = Date.today.to_s
 file_name = 'tmp/data.xls'
 data_path = Downloader.new.run(file_name, date)
 

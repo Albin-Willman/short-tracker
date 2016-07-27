@@ -3,6 +3,7 @@ import React from 'react';
 
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Table from 'react-bootstrap/lib/Table';
+import { Link } from 'react-router'
 
 export default class CompanyList extends React.Component {
 
@@ -24,21 +25,21 @@ export default class CompanyList extends React.Component {
         this.setState({filter: value});
     }
 
-    buildCompanyRow(key, company, setActive){
-        return (<tr key={key} onClick={() =>{setActive(company)} }>
-                <td>{company.name}</td>
+    buildCompanyRow(key, company){
+        return (<tr key={key}>
+                <td><Link to={`/stock/${key}`}>{company.name}</Link></td>
             </tr>);
     }
 
     render() {
-        var { companies, setActive } = this.props;
+        var { companies } = this.props;
         var rows = [];
 
         var { filter } = this.state;
         for(var key in companies){
             var company = companies[key];
             if(filter.length === 0 || company.name.toLowerCase().indexOf(filter.toLowerCase()) > -1){
-                rows.push(this.buildCompanyRow(key, companies[key], setActive));
+                rows.push(this.buildCompanyRow(key, companies[key]));
             }
         }
 

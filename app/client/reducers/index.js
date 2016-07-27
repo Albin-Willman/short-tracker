@@ -11,11 +11,9 @@
  */
 
 import { appReducer } from 'reducers/app-reducer';
-import { companyReducer } from 'reducers/company-reducer';
 /* reapp: import new reducer */
 
 export const reducers = {
-    app: appReducer,
-    company: companyReducer,
+    app: appReducer
     /* reapp: append new reducer */
 };

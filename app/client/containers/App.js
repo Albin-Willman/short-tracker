@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 
 // ReactBoostrap components:
 import Grid from 'react-bootstrap/lib/Grid';
-import CompanyList from 'components/CompanyList';
-import Company from 'components/Company';
+import CompanyListPage from 'containers/CompanyListPage';
+import CompanyPage from 'containers/CompanyPage';
 
 import { loadData }  from 'services/data-services';
-import { setCompany }  from 'actions/company-actions';
+
+import { Router, Route, browserHistory } from 'react-router'
 
 const STYLES = {
     grid: {
@@ -16,48 +17,45 @@ const STYLES = {
     }
 };
 
-@connect(s => s)
+@connect(s => s.app)
 export default class App extends React.Component {
-
-  static propTypes = {
-    app: React.PropTypes.object,
-    company: React.PropTypes.object,
-  }
 
   componentWillMount(){
     this.loadInitialState();
   }
 
   loadInitialState(){
-    var { dispatch, app } = this.props;
-    if(!app.loaded && !app.loading){
+    var { dispatch, loaded, loading } = this.props;
+    if(!loaded && !loading){
       dispatch(loadData());
     }
   }
 
   buildContent() {
-    var { app, company, dispatch } = this.props;
+    var { loaded, loading } = this.props;
 
-    if (app.loading || !app.loaded){
+    if (loading || !loaded){
       return "loading...";
     }
 
-    if(company.company){
-      return <Company company={company.company} back={() => {dispatch(setCompany(null))}}/>
-    }
-
-    return <CompanyList companies={app.companies} setActive={comp => {dispatch(setCompany(comp))}}/>;
+    return (
+      <Router history={browserHistory}>
+        <Route path="/" component={CompanyListPage} />
+        <Route path="/stock/:name" component={CompanyPage} />
+        <Route path="*" component={CompanyListPage} />
+      </Router>
+      );
   }
 
   render() {
-    var { app } = this.props;
+    var { updated } = this.props;
     var content = this.buildContent();
     return (
       <Grid style={STYLES.grid}>
         {content}
         <p>
           * All positions below 0.5% are considered to be 0%.<br/>
-          ** Data updated {app.updated}
+          ** Data updated {updated}
         </p>
       </Grid>
     );
