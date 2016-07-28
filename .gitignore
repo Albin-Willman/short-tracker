@@ -1,1 +1,3 @@
 node_modules/
+bin/avanza-data.json
+ruby/tmp/data.xls

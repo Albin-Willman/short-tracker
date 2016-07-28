@@ -17,7 +17,7 @@ export default class Company extends React.Component {
     company: {},
   }
 
-  transformChartData(actors){
+  transformPositionChartData(actors){
     var rows = [];
     rows.push(this.buildLabels(actors));
     var allDates = this.findAllDates(actors);
@@ -69,19 +69,45 @@ export default class Company extends React.Component {
     return res.filter((value, index, self) => { return self.indexOf(value) === index; }).sort();
   }
 
+  buildHistoryChart() {
+    var { history } = this.props;
+    if( !history.data || history.data === 'No history'){
+      return "No historic data available yet";
+    }
+    var history = history.data.history;
+    var data = [["Date", "Day low", "Day high"]];
+    for (var date in history){
+      var dayData = history[date];
+      data.push([date, dayData['low'], dayData['high']]);
+    }
+
+    var options = {
+      hAxis: {title: 'Date'},
+      vAxis: {title: 'Stock Price'}
+    }
+    return <Chart chartType="LineChart"
+              data={data}
+              options={options}
+              width={"100%"}
+              height={"400px"}
+              legend_toggle={true}/>
+  }
+
 
   render() {
     var { company } = this.props;
 
-    var chartData = this.transformChartData(company.actors);
+    var positionChartData = this.transformPositionChartData(company.actors);
 
-    var actors = chartData[0];
-    var lastRow = chartData[chartData.length - 1];
+    var actors = positionChartData[0];
+    var lastRow = positionChartData[positionChartData.length - 1];
 
     var options = {
       hAxis: {title: 'Date'},
       vAxis: {title: 'Short position'}
     }
+
+    var historyChart = this.buildHistoryChart();
 
     return (
       <Row>
@@ -96,11 +122,12 @@ export default class Company extends React.Component {
         <Col lg={7}>
           <Well>
             <Chart chartType="LineChart"
-              data={chartData}
+              data={positionChartData}
               options={options}
               width={"100%"}
               height={"400px"}
               legend_toggle={true}/>
+            {historyChart}
           </Well>
         </Col>
       </Row>

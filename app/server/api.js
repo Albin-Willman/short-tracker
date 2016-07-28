@@ -14,4 +14,10 @@ router.get('/data.json', function (req, res) {
     res.send(data);
 });
 
+router.get('/stocks/:name', function (req,res) {
+  console.log('hej')
+  var response = require(path.resolve(__dirname, '../../dist/api/stocks/' + req.params.name));
+  res.send(response);
+});
+
 module.exports = router;

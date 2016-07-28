@@ -1,12 +1,10 @@
-import { setCompanies, setUpdated, setLoading, setLoaded } from 'actions/data-actions';
+import { setCompanies, setUpdated, setLoading, setLoaded, setHistory } from 'actions/data-actions';
 
 export function loadData(){
   return (dispatch, getState) => {
     dispatch(setLoading(true));
     fetch('/api/data.json')
-    .then(data => {
-      return data.json();
-    })
+    .then(data => { return data.json(); })
     .then(data => {
       dispatch(setUpdated(data.updated));
       dispatch(setCompanies(data.companies));
@@ -15,5 +13,18 @@ export function loadData(){
       dispatch(setLoaded(true));
       dispatch(setLoading(false));
     });
-  }
+  };
+}
+
+export function loadHistory(company){
+  return (dispatch, getState) => {
+    fetch('/api/stocks/' + company + '.json')
+    .then(data => { return data.json(); })
+    .then(data => {
+      dispatch(setHistory(company, data))
+    })
+    .catch(err => {
+      dispatch(setHistory(company, 'No history'))
+    });
+  };
 }

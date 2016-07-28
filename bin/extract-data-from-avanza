@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'date'
+
+stock = 'skf'
+
+file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
+
+json =  JSON.parse(File.read(file_path))
+
+avanza_path = File.join(File.dirname(__FILE__), "avanza-data.json")
+avanza_data = JSON.parse(File.read(avanza_path))
+
+actors = json['companies'][stock]['actors']
+
+dataPoints = avanza_data['dataPoints']
+
+dates = []
+
+actors.each do |key, data|
+  dates += data['positions'].keys if data['positions']
+end
+
+data = {}
+dataPoints.each do |dataPoint|
+  date = Time.at(dataPoint[0]/1000).to_date.to_s
+  next unless dates.include?(date)
+  data[date] = { high: dataPoint[2], low: dataPoint[3] }
+end
+
+stock_path ||= File.join(File.dirname(__FILE__), "../dist/api/stocks/#{stock}.json")
+File.open(stock_path,"w") do |f|
+  f.write({
+    history: data,
+    last: avanza_data['lastPrice']
+  }.to_json)
+end
+
+
+

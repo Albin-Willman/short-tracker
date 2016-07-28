@@ -1,11 +1,12 @@
 
-import { SET_LOADED, SET_LOADING, SET_UPDATED, SET_COMPANIES } from 'actions/data-actions';
+import { SET_LOADED, SET_LOADING, SET_UPDATED, SET_COMPANIES, SET_HISTORY } from 'actions/data-actions';
 
 export const INITIAL_STATE = {
     title: 'React Client',
     loading: false,
     loaded: false,
     companies: {},
+    history: {},
     updated: ''
 };
 
@@ -28,6 +29,13 @@ export function appReducer(state = INITIAL_STATE, action) {
     case SET_COMPANIES:
       return {...state,
         companies: payload
+      }
+    case SET_HISTORY:
+      return { ...state,
+        history: {
+          company: payload.company,
+          data: payload.history
+        }
       }
     default: return state;
   }

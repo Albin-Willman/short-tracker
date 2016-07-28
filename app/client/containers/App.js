@@ -55,7 +55,8 @@ export default class App extends React.Component {
         {content}
         <p>
           * All positions below 0.5% are considered to be 0%.<br/>
-          ** Data updated {updated}
+          ** Data updated {updated}<br/>
+          *** Data from <a target="_blank" href="http://fi.se/Register/Blankning/" >Finans inspektionen</a>
         </p>
       </Grid>
     );
