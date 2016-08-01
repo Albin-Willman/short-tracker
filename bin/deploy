@@ -8,14 +8,23 @@ s3 = Aws::S3::Resource.new(region:'eu-west-1')
 
 bucket = s3.bucket(bucket_name)
 
-root_path = File.join(File.dirname(__FILE__), "../")
-Dir.chdir root_path do
-  `npm run build`
-end
-dir_path = File.join(File.dirname(__FILE__), "../dist/")
-Dir.chdir dir_path do
-  Dir.glob("**/*.*").each do |dist_file|
-    bucket.object(dist_file).upload_file(dist_file)
+dist_path = File.join(File.dirname(__FILE__), "../dist/")
+
+if ARGV.include?('--full')
+  root_path = File.join(File.dirname(__FILE__), "../")
+  Dir.chdir root_path do
+    `npm run build`
+  end
+  Dir.chdir dist_path do
+    Dir.glob("**/*.*").each do |dist_file|
+      bucket.object(dist_file).upload_file(dist_file)
+    end
+  end
+else
+  Dir.chdir dist_path do
+    Dir.glob("api/**/*.*").each do |dist_file|
+      bucket.object(dist_file).upload_file(dist_file)
+    end
   end
 end
 
