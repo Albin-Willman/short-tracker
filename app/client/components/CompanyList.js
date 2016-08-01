@@ -3,7 +3,10 @@ import React from 'react';
 
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Table from 'react-bootstrap/lib/Table';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 import { Link } from 'react-router'
+import AppInfo from 'containers/AppInfo';
 
 export default class CompanyList extends React.Component {
 
@@ -44,14 +47,17 @@ export default class CompanyList extends React.Component {
         }
 
         return (
-            <div>
-                <FormControl  placeholder="Filter" onChange={(e)=>{this.setFilter(e.target.value)}} value={filter} />
-                <Table>
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </Table>
-            </div>
+            <Row>
+                <Col md={9}>
+                    <FormControl  placeholder="Filter" onChange={(e)=>{this.setFilter(e.target.value)}} value={filter} />
+                    <Table>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col md={3}><AppInfo/></Col>
+            </Row>
         );
     }
 }

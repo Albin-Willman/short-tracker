@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'aws-sdk'
+
+bucket_name = 'short-tracker'
+
+s3 = Aws::S3::Resource.new(region:'eu-west-1')
+
+bucket = s3.bucket(bucket_name)
+
+root_path = File.join(File.dirname(__FILE__), "../")
+Dir.chdir root_path do
+  `npm run build`
+end
+dir_path = File.join(File.dirname(__FILE__), "../dist/")
+Dir.chdir dir_path do
+  Dir.glob("**/*.*").each do |dist_file|
+    bucket.object(dist_file).upload_file(dist_file)
+  end
+end
+
+
+
+
+
+
+# obj = .object('key')
+# obj.upload_file(file_path)
+
+

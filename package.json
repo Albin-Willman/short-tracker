@@ -70,8 +70,11 @@
     "webpack-dev-server": "^1.14.x"
   },
   "dependencies": {
+    "es6-promise": "^3.2.1",
     "react-ga": "^2.1.1",
+    "react-google-ad": "^1.0.2",
     "react-google-charts": "^1.0.2",
-    "react-router": "^2.6.0"
+    "react-router": "^2.6.0",
+    "whatwg-fetch": "^1.0.0"
   }
 }

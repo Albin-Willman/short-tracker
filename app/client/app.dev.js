@@ -19,6 +19,10 @@ import { makeStore } from 'utils/store';
 import initialState from 'fixtures/initial-state-dev.fixture';
 import App from 'containers/App';
 
+import { polyfill } from 'es6-promise';
+polyfill();
+import 'whatwg-fetch';
+
 var appStore;
 
 export function start(targetEl, payload) {

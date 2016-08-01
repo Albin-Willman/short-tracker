@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require_relative "../ruby/DateList.rb"
+require 'json'
+require 'pathname'
+require 'set'
+
+file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
+
+json =  JSON.parse(File.read(file_path))
+
+companies = json['companies'].keys
+
+companies.each do |company|
+  stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{company}.json")
+  puts "**** #{company} ****"
+  unless Pathname.new(stock_path).exist?
+    puts "No historic data"
+    next
+  end
+  relevant_dates = DateList.new.run(company, file_path)
+  historic_data = JSON.parse(File.read(stock_path))
+  historic_dates = historic_data['history'].keys
+  all_dates = true
+  relevant_dates.each do |date|
+    unless historic_dates.include?(date)
+      if(all_dates)
+        all_dates = false
+        puts "Missing dates"
+      end
+      puts date
+    end
+  end
+
+  puts "Ok" if all_dates
+end

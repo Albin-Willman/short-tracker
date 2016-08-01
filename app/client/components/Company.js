@@ -6,6 +6,7 @@ import Well from 'react-bootstrap/lib/Well';
 import { Link } from 'react-router'
 import { Chart } from 'react-google-charts'
 import ActorList from 'components/ActorList';
+import AppInfo from 'containers/AppInfo';
 
 export default class Company extends React.Component {
 
@@ -118,6 +119,7 @@ export default class Company extends React.Component {
             <ActorList labels={actors} positions={lastRow} />
             <Link to="/">Back</Link>
           </Well>
+          <AppInfo/>
         </Col>
         <Col lg={7}>
           <Well>

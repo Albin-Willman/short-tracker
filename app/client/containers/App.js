@@ -17,6 +17,12 @@ const STYLES = {
     }
 };
 
+const routes = [
+  <Route key={1} path="/" component={CompanyListPage} />,
+  <Route key={2} path="/stock/:name" component={CompanyPage} />,
+  <Route key={3} path="*" component={CompanyListPage} />
+];
+
 @connect(s => s.app)
 export default class App extends React.Component {
 
@@ -40,9 +46,7 @@ export default class App extends React.Component {
 
     return (
       <Router history={browserHistory} onUpdate={logPageView}>
-        <Route path="/" component={CompanyListPage} />
-        <Route path="/stock/:name" component={CompanyPage} />
-        <Route path="*" component={CompanyListPage} />
+        {routes}
       </Router>
       );
   }
@@ -53,14 +57,6 @@ export default class App extends React.Component {
     return (
       <Grid style={STYLES.grid}>
         {content}
-        <p>
-          All positions below 0.5% are considered to be 0%.<br/>
-          Data updated {updated}<br/>
-          Data from <a target="_blank" href="http://fi.se/Register/Blankning/" >Finans inspektionen</a><br/>
-          Feature requests accepted via <a target="_blank" href="https://twitter.com/SvenssonAlbin" >@SvenssonAlbin</a><br/>
-          Source code available at <a target="_blank" href="https://github.com/Albin-Willman/short-tracker/" >Github</a>
-
-        </p>
       </Grid>
     );
   }

@@ -10,7 +10,6 @@ export default class CompanyPage extends React.Component {
 
   componentWillMount() {
     var { companies, params, history, dispatch } = this.props;
-    console.log(history.company , params.name)
     if(history.company != params.name){
       dispatch(loadHistory(params.name));
     }

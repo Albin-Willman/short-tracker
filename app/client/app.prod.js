@@ -25,6 +25,10 @@ function logPageView() {
   ReactGA.pageview(window.location.pathname);
 }
 
+import { polyfill } from 'es6-promise';
+polyfill();
+import 'whatwg-fetch';
+
 export function start(targetEl, payload) {
 
     // apply the host's page payload
