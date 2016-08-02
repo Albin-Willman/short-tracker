@@ -30,8 +30,11 @@ class XlsParser
 
     @result[company] = {
       name: company_name,
-      actors: {}
+      lastChange: date,
+      actors: {},
     } unless @result[company]
+
+    @result[company][:lastChange] = date if @result[company][:lastChange] < date
 
     actor_key = actor.partition(" ").first.downcase
 
