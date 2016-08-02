@@ -18,7 +18,7 @@ export default class ActorList extends React.Component {
   buildRow(label, position) {
     return <tr key={label}>
       <td>{label}</td>
-      <td>{position.toFixed(2)}</td>
+      <td>{position.toFixed(2)} %</td>
     </tr>
   }
 
