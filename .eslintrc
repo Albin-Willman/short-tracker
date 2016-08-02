@@ -39,7 +39,7 @@
         "jsx": true
     },
     "rules" : {
-        "nodeca/indent": [ 2, "spaces", 4 ], // 4 spaces indentation
+        "nodeca/indent": [ 2, "spaces", 2 ], // 2 spaces indentation
 
         //
         //Possible Errors

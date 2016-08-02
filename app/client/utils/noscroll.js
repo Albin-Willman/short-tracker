@@ -4,7 +4,7 @@
  */
 
 var defaultPrevent = function (e) {
-    e.preventDefault();
+  e.preventDefault();
 };
 
 document.body.parentElement.addEventListener('touchmove', defaultPrevent);

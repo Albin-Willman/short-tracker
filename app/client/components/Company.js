@@ -11,7 +11,12 @@ import AppInfo from 'containers/AppInfo';
 export default class Company extends React.Component {
 
   static propTypes = {
-    company: React.PropTypes.object,
+    company: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      actors: React.PropTypes.object,
+
+    }),
+    history: React.PropTypes.object,
   }
 
   static defaultProps = {
@@ -25,7 +30,7 @@ export default class Company extends React.Component {
 
     var lastRow = new Array(Object.keys(actors).length + 1);
     lastRow.fill(0);
-    for (var i in allDates) {
+    for (var i = 0; i < allDates.length; i++ ) {
       var row = this.buildRow(actors, allDates[i], lastRow);
       rows.push(row);
       lastRow = row;
@@ -37,11 +42,13 @@ export default class Company extends React.Component {
     var row = [];
 
     for (var actor in actors){
-      var value = actors[actor]['positions'][date];
-      if(typeof value === 'undefined'){
-        value = lastRow[row.length + 1];
+      if (actors.hasOwnProperty(actor)) {
+        var value = actors[actor]['positions'][date];
+        if(typeof value === 'undefined'){
+          value = lastRow[row.length + 1];
+        }
+        row.push(value);
       }
-      row.push(value);
     }
     row.push(this.sumArray(row));
     row.unshift(date);
@@ -49,10 +56,11 @@ export default class Company extends React.Component {
   }
 
   buildLabels(actors){
-    var labels = [];
     var labels = ['Date'];
     for (var actor in actors){
-      labels.push(actors[actor]['name']);
+      if (actors.hasOwnProperty(actor)) {
+        labels.push(actors[actor]['name']);
+      }
     }
     labels.push('Total');
     return labels;
@@ -64,8 +72,10 @@ export default class Company extends React.Component {
 
   findAllDates(actors){
     var res = [];
-    for( var i in actors){
-      res =  res.concat(Object.keys(actors[i].positions));
+    for( var actor in actors ){
+      if (actors.hasOwnProperty(actor)) {
+        res = res.concat(Object.keys(actors[actor].positions));
+      }
     }
     return res.filter((value, index, self) => { return self.indexOf(value) === index; }).sort();
   }
@@ -78,8 +88,10 @@ export default class Company extends React.Component {
     var history = history.data.history;
     var data = [["Date", "Day low", "Day high"]];
     for (var date in history){
-      var dayData = history[date];
-      data.push([date, dayData['low'], dayData['high']]);
+      if (history.hasOwnProperty(date)) {
+        var dayData = history[date];
+        data.push([date, dayData['low'], dayData['high']]);
+      }
     }
 
     var options = {

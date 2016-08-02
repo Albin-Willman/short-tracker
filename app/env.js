@@ -11,18 +11,18 @@
  */
 
 var APP_ENV = {
-    BASE_PATH: '/',
+  BASE_PATH: '/',
 };
 
 /**
  * Development settings
  */
 
-/* eslint no-process-env:0 */
+ /* eslint no-process-env:0 */
 if (process.env.NODE_ENV === 'development') {
-    APP_ENV = Object.assign({}, APP_ENV, {
-        BASE_PATH: '/dist/',
-    });
+  APP_ENV = Object.assign({}, APP_ENV, {
+    BASE_PATH: '/dist/',
+  });
 }
 
 /**
@@ -34,7 +34,7 @@ var fs = require('fs');
 var path = require('path');
 
 if (fs.existsSync(path.join(__dirname, 'env.local.js'))) {
-    APP_ENV = require('./env.local');
+  APP_ENV = require('./env.local');
 }
 
 /**
