@@ -3,8 +3,8 @@ import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
-import { Link } from 'react-router'
-import { Chart } from 'react-google-charts'
+import { Link } from 'react-router';
+import { Chart } from 'react-google-charts';
 import ActorList from 'components/ActorList';
 import AppInfo from 'containers/AppInfo';
 
@@ -23,14 +23,14 @@ export default class Company extends React.Component {
     company: {},
   }
 
-  transformPositionChartData(actors){
+  transformPositionChartData(actors) {
     var rows = [];
     rows.push(this.buildLabels(actors));
     var allDates = this.findAllDates(actors);
 
     var lastRow = new Array(Object.keys(actors).length + 1);
     lastRow.fill(0);
-    for (var i = 0; i < allDates.length; i++ ) {
+    for (var i = 0; i < allDates.length; i += 1) {
       var row = this.buildRow(actors, allDates[i], lastRow);
       rows.push(row);
       lastRow = row;
@@ -38,13 +38,13 @@ export default class Company extends React.Component {
     return rows;
   }
 
-  buildRow(actors, date, lastRow){
+  buildRow(actors, date, lastRow) {
     var row = [];
 
-    for (var actor in actors){
+    for (var actor in actors) {
       if (actors.hasOwnProperty(actor)) {
-        var value = actors[actor]['positions'][date];
-        if(typeof value === 'undefined'){
+        var value = actors[actor].positions[date];
+        if(typeof value === 'undefined') {
           value = lastRow[row.length + 1];
         }
         row.push(value);
@@ -55,55 +55,59 @@ export default class Company extends React.Component {
     return row;
   }
 
-  buildLabels(actors){
+  buildLabels(actors) {
     var labels = ['Date'];
-    for (var actor in actors){
+    for (var actor in actors) {
       if (actors.hasOwnProperty(actor)) {
-        labels.push(actors[actor]['name']);
+        labels.push(actors[actor].name);
       }
     }
     labels.push('Total');
     return labels;
   }
 
-  sumArray(row){
-    return row.reduce(function(pv, cv) { return pv + cv; }, 0);
+  sumArray(row) {
+    return row.reduce(function (pv, cv) {
+      return pv + cv;
+    }, 0);
   }
 
-  findAllDates(actors){
+  findAllDates(actors) {
     var res = [];
-    for( var actor in actors ){
+    for(var actor in actors) {
       if (actors.hasOwnProperty(actor)) {
         res = res.concat(Object.keys(actors[actor].positions));
       }
     }
-    return res.filter((value, index, self) => { return self.indexOf(value) === index; }).sort();
+    return res.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    }).sort();
   }
 
   buildHistoryChart() {
     var { history } = this.props;
-    if( !history.data || history.data === 'No history'){
-      return "No historic data available yet";
+    if(!history.data || history.data === 'No history') {
+      return 'No historic data available yet';
     }
-    var history = history.data.history;
-    var data = [["Date", "Day low", "Day high"]];
-    for (var date in history){
-      if (history.hasOwnProperty(date)) {
-        var dayData = history[date];
-        data.push([date, dayData['low'], dayData['high']]);
+    var historyData = history.data.history;
+    var data = [['Date', 'Day low', 'Day high']];
+    for (var date in history) {
+      if (historyData.hasOwnProperty(date)) {
+        var dayData = historyData[date];
+        data.push([date, dayData.low, dayData.high]);
       }
     }
 
     var options = {
-      hAxis: {title: 'Date'},
-      vAxis: {title: 'Stock Price'}
-    }
-    return <Chart chartType="LineChart"
-              data={data}
-              options={options}
-              width={"100%"}
-              height={"400px"}
-              legend_toggle={true}/>
+      hAxis: { title: 'Date' },
+      vAxis: { title: 'Stock Price' },
+    };
+    return (<Chart chartType="LineChart"
+                  data={data}
+                  options={options}
+                  width={"100%"}
+                  height={"400px"}
+                  legend_toggle={true}/>);
   }
 
 
@@ -116,9 +120,9 @@ export default class Company extends React.Component {
     var lastRow = positionChartData[positionChartData.length - 1];
 
     var options = {
-      hAxis: {title: 'Date'},
-      vAxis: {title: 'Short position'}
-    }
+      hAxis: { title: 'Date' },
+      vAxis: { title: 'Short position' },
+    };
 
     var historyChart = this.buildHistoryChart();
 

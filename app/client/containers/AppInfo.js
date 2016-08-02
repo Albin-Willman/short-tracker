@@ -4,22 +4,28 @@ import { connect } from 'react-redux';
 
 import Well from 'react-bootstrap/lib/Well';
 
-import GoogleAd from 'react-google-ad'
+// import GoogleAd from 'react-google-ad';
 
 @connect(s => s.app)
 export default class AppInfo extends React.Component {
 
+  static propTypes = {
+    updated: React.PropTypes.string,
+  }
+
   buildAdd() {
-    if(window.location.hostname.indexOf('kortapositioner.se') === -1 && false){
+    if(window.location.hostname.indexOf('kortapositioner.se') === -1 && false) {
       return (<p>
         The website has moved to <a href="http://kortapositioner.se">kortapositioner.se</a>
       </p>);
     }
-    return;
-    return <p>
-        If yo like this idea, please <span>contribute</span> to this project by clicking the add below.
-        <GoogleAd client="xxx" slot="xxx" format="xxx" />
-      </p>
+    return null;
+    /*eslint-disable */
+    // return (<p>
+    //     If yo like this idea, please <span>contribute</span> to this project by clicking the add below.
+    //     <GoogleAd client="xxx" slot="xxx" format="xxx" />
+    //   </p>);
+    /*eslint-enable */
   }
 
   render() {
@@ -27,6 +33,7 @@ export default class AppInfo extends React.Component {
 
     var add = this.buildAdd();
 
+    /*eslint-disable */
     return (
       <Well>
         <p>
@@ -39,5 +46,6 @@ export default class AppInfo extends React.Component {
         {add}
       </Well>
     );
+    /*eslint-enable */
   }
 }

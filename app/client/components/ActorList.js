@@ -16,21 +16,18 @@ export default class ActorList extends React.Component {
   }
 
   buildRow(label, position) {
-    return <tr key={label}>
-      <td>{label}</td>
-      <td>{position.toFixed(2)} %</td>
-    </tr>
+    return (<tr key={label}>
+        <td>{label}</td>
+        <td>{position.toFixed(2)} %</td>
+      </tr>);
   }
 
   render() {
     var { labels, positions } = this.props;
-
     var rows = [];
 
-    for( var i in labels ){
-      if(i > 0){
-        rows.push(this.buildRow(labels[i], positions[i]));
-      }
+    for(var i = 1; i < labels.length; i += 1) {
+      rows.push(this.buildRow(labels[i], positions[i]));
     }
 
     return (

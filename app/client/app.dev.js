@@ -27,22 +27,22 @@ var appStore;
 
 export function start(targetEl, payload) {
 
-    // apply the host's page payload
-    if (payload.title) {
-        initialState.app.title = payload.title;
-    }
+  // apply the host's page payload
+  if (payload.title) {
+    initialState.app.title = payload.title;
+  }
 
-    // build the app' store and reference it to the module
-    appStore = makeStore(initialState);
+  // build the app' store and reference it to the module
+  appStore = makeStore(initialState);
 
-    ReactDOM.render((
-        <Main
-            app={App}
-            store={appStore}
-            />
-    ), targetEl);
+  ReactDOM.render((
+      <Main
+          app={App}
+          store={appStore}
+          />
+  ), targetEl);
 }
 
 export function dispatch(action) {
-    appStore.dispatch(action);
+  appStore.dispatch(action);
 }
