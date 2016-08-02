@@ -18,13 +18,11 @@ export function loadData(){
 
 export function loadHistory(company){
   return (dispatch, getState) => {
+    dispatch(setHistory(company, 'No history'));
     fetch('/api/stocks/' + company + '.json')
     .then(data => { return data.json(); })
     .then(data => {
       dispatch(setHistory(company, data))
-    })
-    .catch(err => {
-      dispatch(setHistory(company, 'No history'))
     });
   };
 }
