@@ -11,7 +11,9 @@ export default class AppInfo extends React.Component {
 
   buildAdd() {
     if(window.location.hostname.indexOf('kortapositioner.se') === -1 && false){
-      return <p>The website has moved to <a href="http://kortapositioner.se">kortapositioner.se</a></p>
+      return (<p>
+        The website has moved to <a href="http://kortapositioner.se">kortapositioner.se</a>
+      </p>);
     }
     return;
     return <p>
