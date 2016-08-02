@@ -130,7 +130,7 @@ export default class CompanyList extends React.Component {
     return (<th style={ { cursor: 'pointer' } }
       onClick={ ()=> {
         this.setSorting({ column: name, direction: newDirection });
-      } }>;
+      } }>
       {label}
       <span className="order-indicator">{glyph}</span>
     </th>);

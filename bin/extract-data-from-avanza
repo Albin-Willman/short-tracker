@@ -4,7 +4,7 @@ require 'json'
 require 'date'
 require_relative "../ruby/DateList.rb"
 
-stock = 'alfa-laval'
+stock = 'arcam'
 
 file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 
