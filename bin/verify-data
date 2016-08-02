@@ -11,7 +11,7 @@ json =  JSON.parse(File.read(file_path))
 
 companies = json['companies'].keys
 
-companies.each do |company|
+companies.reverse.each do |company|
   stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{company}.json")
   puts "**** #{company} ****"
   unless Pathname.new(stock_path).exist?

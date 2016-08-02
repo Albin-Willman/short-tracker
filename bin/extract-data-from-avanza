@@ -4,7 +4,7 @@ require 'json'
 require 'date'
 require_relative "../ruby/DateList.rb"
 
-stock = 'boliden'
+stock = 'alfa-laval'
 
 file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 
@@ -12,8 +12,6 @@ dates = DateList.new.run(stock, file_path)
 
 avanza_path = File.join(File.dirname(__FILE__), "avanza-data.json")
 avanza_data = JSON.parse(File.read(avanza_path))
-puts avanza_data.keys
-return
 
 dataPoints = avanza_data['dataPoints']
 
