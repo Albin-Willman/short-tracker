@@ -13,10 +13,10 @@ last = ARGV[3]
 date = ARGV[4] || (Date.today.prev_day).to_s
 
 data['history'][date] = {
-  high: high,
-  low: low
+  high: high.to_f,
+  low: low.to_f
 }
-data['last'] = last if last
+data['last'] = last.to_f if last
 
 File.open(stock_path, "w") do |f|
   f.write(data.to_json)

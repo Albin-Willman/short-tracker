@@ -3,6 +3,7 @@ import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
+import Button from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router';
 import { Chart } from 'react-google-charts';
 import ActorList from 'components/ActorList';
@@ -21,6 +22,11 @@ export default class Company extends React.Component {
 
   static defaultProps = {
     company: {},
+    history: {},
+  }
+
+  state = {
+    detailed: true,
   }
 
   transformPositionChartData(actors) {
@@ -84,10 +90,10 @@ export default class Company extends React.Component {
     }).sort();
   }
 
-  buildHistoryChart() {
+  computeHistoryData() {
     var { history } = this.props;
     if(!history.data || history.data === 'No history') {
-      return 'No historic data available yet';
+      return [];
     }
     var historyData = history.data.history;
     var data = [['Date', 'Day low', 'Day high']];
@@ -97,7 +103,13 @@ export default class Company extends React.Component {
         data.push([date, dayData.low, dayData.high]);
       }
     }
+    return data;
+  }
 
+  buildHistoryChart(data) {
+    if(data.length === 0) {
+      return 'No historic data available yet';
+    }
     var options = {
       hAxis: { title: 'Date' },
       vAxis: { title: 'Stock Price' },
@@ -110,45 +122,99 @@ export default class Company extends React.Component {
                   legend_toggle={true}/>);
   }
 
-
-  render() {
-    var { company } = this.props;
-
-    var positionChartData = this.transformPositionChartData(company.actors);
-
-    var actors = positionChartData[0];
-    var lastRow = positionChartData[positionChartData.length - 1];
-
+  buildPositionChart(data){
     var options = {
       hAxis: { title: 'Date' },
       vAxis: { title: 'Short position' },
     };
 
-    var historyChart = this.buildHistoryChart();
+    return <Chart chartType="LineChart"
+                data={data}
+                options={options}
+                width={"100%"}
+                height={"400px"}
+                legend_toggle={true}/>
+  }
+
+  toggleDetails(val) {
+    this.setState({ detailed: val });
+  }
+
+  buildCaseExplanation() {
+    if(!this.state.detailed){
+      return;
+    }
+    return (<Well>
+          <h2>Explanation of scenarios</h2>
+          <p>
+            The cases in the table are break even prices for different scenarios.
+            Note that non of the scenarios are probable and that they do not
+            take interest in to account.
+          </p>
+          <strong>* Best case</strong>
+          <p>
+            This case assumes that every share shorted has been sold at the highest
+            possible price and repurchaces has been made at the lowest possible price
+            of the day.
+          </p>
+          <strong>* Mid case</strong>
+          <p>
+            This case assumes that every share shorted has been sold and repurchaces
+            at the midpoint of the day.
+          </p>
+          <strong>* Worst case</strong>
+          <p>This case assumes the opposite of the best case.</p>
+        </Well>);
+  }
+
+  render() {
+    var { company } = this.props;
+    var { detailed } = this.state;
+
+    var positionChartData = this.transformPositionChartData(company.actors);
+
+    var positionChart = this.buildPositionChart(positionChartData);
+
+    var historyData = this.computeHistoryData();
+    var historyChart = this.buildHistoryChart(historyData);
+
+    var listWidth = detailed ? 12 : 5;
+    var buttonLabel = detailed ? 'Hide details' : 'Show details';
+
+    var caseExplanation = this.buildCaseExplanation();
 
     return (
-      <Row>
-        <Col lg={5}>
-          <Well>
-            <h1>{company.name}</h1>
-            <h3>Current positions</h3>
-            <ActorList labels={actors} positions={lastRow} />
-            <Link to="/">Back</Link>
-          </Well>
-          <AppInfo/>
-        </Col>
-        <Col lg={7}>
-          <Well>
-            <Chart chartType="LineChart"
-              data={positionChartData}
-              options={options}
-              width={"100%"}
-              height={"400px"}
-              legend_toggle={true}/>
-            {historyChart}
-          </Well>
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col lg={listWidth}>
+            <Well>
+              <h1>{company.name}</h1>
+              <h3>
+                Current positions
+                <Button
+                  onClick={ ()=>{
+                    this.toggleDetails(!detailed)
+                  } }
+                  style={{ float: 'right' }}>
+                    {buttonLabel}
+                </Button>
+              </h3>
+              <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
+              <Link to="/">Back</Link>
+            </Well>
+          </Col>
+          <Col lg={7}>
+            <Well>
+              {positionChart}
+              {historyChart}
+            </Well>
+          </Col>
+          <Col lg={5}>
+            {caseExplanation}
+            <AppInfo/>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
