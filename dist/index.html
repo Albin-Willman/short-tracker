@@ -3,10 +3,16 @@
     <head>
         <title>Korta positioner</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="keywords" content="finance, swedish-stocks, nasdaq, short, shorting, trading">
+        <meta name="description" content="A small service providing historic data over short positions in swedish stocks.">
+        <meta name="robots" content="index,follow">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
         <link rel="shortcut icon" type="image/png" href="/favicon.ico">
     </head>
     <body>
+        <script>
+          history.pushState({}, "entry page", location.hash.substring(1));
+        </script>
         <div id="app"></div>
         <script src="/react/dist/react.min.js"></script>
         <script src="/react/dist/react-dom.min.js"></script>

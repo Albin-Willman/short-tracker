@@ -27,23 +27,29 @@ class XlsParser
     amount = file.cell(line, 5).to_f
     amount = 0 if amount <= 0.5
     date = Date.parse(file.cell(line, 6).to_s)
-
-    @result[company] = {
-      name: company_name,
-      lastChange: date,
-      actors: {},
-    } unless @result[company]
-
-    @result[company][:lastChange] = date if @result[company][:lastChange] < date
+    company(company, company_name, date)
 
     actor_key = actor.partition(" ").first.downcase
 
-    @result[company][:actors][actor_key] = {
+    actor(company, actor_key, actor)[:positions][date.to_s] = amount
+  end
+
+  def actor(company_key, actor_key, actor = nil)
+    company(company_key)[:actors][actor_key] = {
       name: actor,
       positions: {}
-    } unless @result[company][:actors][actor_key]
+    } unless company(company_key)[:actors][actor_key]
+    company(company_key)[:actors][actor_key]
+  end
 
-    @result[company][:actors][actor_key][:positions][date.to_s] = amount
+  def company(company_key, company_name = nil, date = nil)
+    @result[company_key] = {
+      name: company_name,
+      lastChange: date,
+      actors: {},
+    } unless @result[company_key]
+    @result[company_key][:lastChange] = date if date && @result[company_key][:lastChange] < date
+    @result[company_key]
   end
 
   def file
