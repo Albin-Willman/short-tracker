@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+file_path = File.join(File.dirname(__FILE__), "../dist/api/data.json")
+map_path = File.join(File.dirname(__FILE__), "../dist/sitemap.txt")
+
+data = JSON.parse(File.read(file_path))
+
+domain = 'http://kortapositioner.se'
+pages = []
+pages << "#{domain}/"
+pages << "#{domain}/about"
+pages << "#{domain}/cookies"
+
+pages += data['companies'].keys.map { |company| "#{domain}/stocks/#{company}" }
+
+File.open(map_path,"w") do |f|
+  f.puts(pages)
+end

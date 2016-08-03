@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /api
+Disallow: /bootstrap
+Disallow: /react
+
+Sitemap: http://kortapositioner.se/sitemap.txt
