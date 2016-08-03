@@ -16,6 +16,7 @@ data['history'][date] = {
   high: high,
   low: low
 }
+data['last'] = last if last
 
 File.open(stock_path, "w") do |f|
   f.write(data.to_json)

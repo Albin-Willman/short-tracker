@@ -5,7 +5,7 @@ class DateList
 
     actors = json['companies'][stock]['actors']
     dates = []
-    actors.each do |key, data|
+    actors.each do |_key, data|
       dates += data['positions'].keys if data['positions']
     end
     dates

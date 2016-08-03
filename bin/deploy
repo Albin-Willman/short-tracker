@@ -10,20 +10,32 @@ bucket = s3.bucket(bucket_name)
 
 dist_path = File.join(File.dirname(__FILE__), "../dist/")
 
-if ARGV.include?('--full')
+def content_type(file_path)
+  return 'applicaton/json' if file_path.end_with?('.json')
+  return 'applicaton/x-javascript' if file_path.end_with?('.js')
+  return 'text/html' if file_path.end_with?('.html')
+end
+
+def upload_file(bucket, file_path)
+  bucket.object(file_path).upload_file(file_path, {content_type: content_type(file_path)})
+end
+
+if ARGV.include?('--full') || ARGV.include?('--app-only')
   root_path = File.join(File.dirname(__FILE__), "../")
   Dir.chdir root_path do
     `npm run build`
   end
   Dir.chdir dist_path do
     Dir.glob("*.*").each do |dist_file|
-      bucket.object(dist_file).upload_file(dist_file)
+      upload_file(bucket, dist_file)
     end
   end
 end
 
-Dir.chdir dist_path do
-  Dir.glob("api/**/*.*").each do |dist_file|
-    bucket.object(dist_file).upload_file(dist_file, {content_type: 'application/json'})
+unless ARGV.include?('--app-only')
+  Dir.chdir dist_path do
+    Dir.glob("api/**/*.*").each do |dist_file|
+      upload_file(bucket, dist_file)
+    end
   end
 end
