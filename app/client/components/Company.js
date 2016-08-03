@@ -91,7 +91,7 @@ export default class Company extends React.Component {
     }
     var historyData = history.data.history;
     var data = [['Date', 'Day low', 'Day high']];
-    for (var date in history) {
+    for (var date in historyData) {
       if (historyData.hasOwnProperty(date)) {
         var dayData = historyData[date];
         data.push([date, dayData.low, dayData.high]);
