@@ -1,20 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @Albin-Willman
- Unwatch 3
-  Star 0
-  Fork 4 Albin-Willman/booster
-forked from boosterconf/booster
- Code  Issues 4  Pull requests 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathbooster/LICENSE
-8195917  on Apr 5, 2013
- kjerstibb Added a license
-0 contributors
-RawBlameHistory     46 lines (24 sloc)  10 KB
 Academic Free License ("AFL") v. 3.0
 This Academic Free License (the "License") applies to any original work of authorship (the "Original Work") whose owner (the "Licensor") has placed the following licensing notice adjacent to the copyright notice for the Original Work:
 
