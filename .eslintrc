@@ -11,7 +11,6 @@
         "mocha": true,
     },
     "plugins" : [
-        "nodeca",
         "react"
     ],
     "ecmaFeatures": {
@@ -39,8 +38,6 @@
         "jsx": true
     },
     "rules" : {
-        "nodeca/indent": [ 2, "spaces", 2 ], // 2 spaces indentation
-
         //
         //Possible Errors
         //
