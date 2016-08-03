@@ -11,9 +11,11 @@
  */
 
 import { appReducer } from 'reducers/app-reducer';
+import { cookieReducer } from 'reducers/cookie-reducer';
 /* reapp: import new reducer */
 
 export const reducers = {
   app: appReducer,
+  cookies: cookieReducer,
   /* reapp: append new reducer */
 };

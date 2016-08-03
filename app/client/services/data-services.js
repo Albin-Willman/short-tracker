@@ -2,10 +2,10 @@ import { setCompanies, setUpdated, setLoading, setLoaded, setHistory } from 'act
 
 const requestConfig = {
   headers: {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-}
+};
 
 export function loadData() {
   return (dispatch) => {
