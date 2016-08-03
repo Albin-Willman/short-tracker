@@ -6,6 +6,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Table from 'react-bootstrap/lib/Table';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 
 export default class CompanyList extends React.Component {
@@ -110,7 +111,21 @@ export default class CompanyList extends React.Component {
           </tbody>
         </Table>
       </Col>
-      <Col md={3}><AppInfo/></Col>
+      <Col md={3}>
+        <Well>
+          <p>
+            This is a list of all stocks where any one reported having a
+            short position above 0.5% since november 1th 2012.
+          </p>
+          <p>
+            This is the date when the current rules where adopted.
+          </p>
+          <p>
+            Click on a row to see more details.
+          </p>
+        </Well>
+        <AppInfo/>
+      </Col>
     </Row>);
   }
 
