@@ -9,6 +9,7 @@ export class Main extends React.Component {
     routes: React.PropTypes.object,
     store: React.PropTypes.object,
     logPageView: React.PropTypes.func,
+    logEvent: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -16,6 +17,7 @@ export class Main extends React.Component {
     routes: null,
     store: null,
     logPageView: ()=>{},
+    logEvent: ()=>{},
   }
 
   render() {

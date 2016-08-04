@@ -13,6 +13,8 @@ import AppInfo from 'containers/AppInfo';
 import computeHistoryData from 'utils/formaters/history-chart-formater';
 import computeActorData from 'utils/formaters/actor-chart-formater';
 
+import { logEvent } from 'utils/ga';
+
 export default class Company extends React.Component {
 
   static propTypes = {
@@ -41,6 +43,7 @@ export default class Company extends React.Component {
   }
 
   toggleDetails(val) {
+    logEvent('Company page', 'details', (val ? 'show' : 'hide'));
     this.setState({ detailed: val });
   }
 

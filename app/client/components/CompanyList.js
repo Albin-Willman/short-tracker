@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 
+import { logEvent } from 'utils/ga';
+
 export default class CompanyList extends React.Component {
 
   static propTypes = {
@@ -32,10 +34,12 @@ export default class CompanyList extends React.Component {
   }
 
   setFilter(filter) {
+    logEvent('Company list', 'filter', filter);
     this.setState({ filter });
   }
 
   setSorting(sortBy) {
+    logEvent('Company list', 'sorting', sortBy.column);
     this.setState({ sortBy });
   }
 
