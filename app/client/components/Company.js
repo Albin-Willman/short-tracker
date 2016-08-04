@@ -5,9 +5,13 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router';
-import { Chart } from 'react-google-charts';
 import ActorList from 'components/ActorList';
+import LineChart from 'components/LineChart';
+import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
+
+import computeHistoryData from 'utils/formaters/history-chart-formater';
+import computeActorData from 'utils/formaters/actor-chart-formater';
 
 export default class Company extends React.Component {
 
@@ -26,162 +30,30 @@ export default class Company extends React.Component {
   }
 
   state = {
-    detailed: true,
-  }
-
-  transformPositionChartData(actors) {
-    var rows = [];
-    rows.push(this.buildLabels(actors));
-    var allDates = this.findAllDates(actors);
-
-    var lastRow = new Array(Object.keys(actors).length + 1);
-    lastRow.fill(0);
-    for (var i = 0; i < allDates.length; i += 1) {
-      var row = this.buildRow(actors, allDates[i], lastRow);
-      rows.push(row);
-      lastRow = row;
-    }
-    return rows;
-  }
-
-  buildRow(actors, date, lastRow) {
-    var row = [];
-
-    for (var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        var value = actors[actor].positions[date];
-        if(typeof value === 'undefined') {
-          value = lastRow[row.length + 1];
-        }
-        row.push(value);
-      }
-    }
-    row.push(this.sumArray(row));
-    row.unshift(date);
-    return row;
-  }
-
-  buildLabels(actors) {
-    var labels = ['Date'];
-    for (var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        labels.push(actors[actor].name);
-      }
-    }
-    labels.push('Total');
-    return labels;
-  }
-
-  sumArray(row) {
-    return row.reduce(function (pv, cv) {
-      return pv + cv;
-    }, 0);
-  }
-
-  findAllDates(actors) {
-    var res = [];
-    for(var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        res = res.concat(Object.keys(actors[actor].positions));
-      }
-    }
-    return res.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    }).sort();
-  }
-
-  computeHistoryData() {
-    var { history } = this.props;
-    if(!history.data || history.data === 'No history') {
-      return [];
-    }
-    var historyData = history.data.history;
-    var data = [['Date', 'Day low', 'Day high']];
-    for (var date in historyData) {
-      if (historyData.hasOwnProperty(date)) {
-        var dayData = historyData[date];
-        data.push([date, dayData.low, dayData.high]);
-      }
-    }
-    return data;
+    detailed: false,
   }
 
   buildHistoryChart(data) {
     if(data.length === 0) {
       return 'No historic data available yet';
     }
-    var options = {
-      hAxis: { title: 'Date' },
-      vAxis: { title: 'Stock Price' },
-    };
-    return (<Chart chartType="LineChart"
-                  data={data}
-                  options={options}
-                  width={"100%"}
-                  height={"400px"}
-                  legend_toggle={true}/>);
-  }
-
-  buildPositionChart(data){
-    var options = {
-      hAxis: { title: 'Date' },
-      vAxis: { title: 'Short position' },
-    };
-
-    return <Chart chartType="LineChart"
-                data={data}
-                options={options}
-                width={"100%"}
-                height={"400px"}
-                legend_toggle={true}/>
+    return <LineChart hAxis="Date" vAxis="Stock Price" data={data} />;
   }
 
   toggleDetails(val) {
     this.setState({ detailed: val });
   }
 
-  buildCaseExplanation() {
-    if(!this.state.detailed){
-      return;
-    }
-    return (<Well>
-          <h2>Explanation of scenarios</h2>
-          <p>
-            The cases in the table are break even prices for different scenarios.
-            Note that non of the scenarios are probable and that they do not
-            take interest in to account.
-          </p>
-          <strong>* Best case</strong>
-          <p>
-            This case assumes that every share shorted has been sold at the highest
-            possible price and repurchaces has been made at the lowest possible price
-            of the day.
-          </p>
-          <strong>* Mid case</strong>
-          <p>
-            This case assumes that every share shorted has been sold and repurchaces
-            at the midpoint of the day.
-          </p>
-          <strong>* Worst case</strong>
-          <p>This case assumes the opposite of the best case.</p>
-        </Well>);
-  }
-
   render() {
-    var { company } = this.props;
+    var { company, history } = this.props;
     var { detailed } = this.state;
 
-    var positionChartData = this.transformPositionChartData(company.actors);
-
-    var positionChart = this.buildPositionChart(positionChartData);
-
-    var historyData = this.computeHistoryData();
+    var historyData = computeHistoryData(history);
     var historyChart = this.buildHistoryChart(historyData);
+    var positionChartData = computeActorData(company.actors);
 
     var listWidth = detailed ? 12 : 5;
     var buttonLabel = detailed ? 'Hide details' : 'Show details';
-
-    var caseExplanation = this.buildCaseExplanation();
 
     return (
       <div>
@@ -193,7 +65,7 @@ export default class Company extends React.Component {
                 Current positions
                 <Button
                   onClick={ ()=>{
-                    this.toggleDetails(!detailed)
+                    this.toggleDetails(!detailed);
                   } }
                   style={{ float: 'right' }}>
                     {buttonLabel}
@@ -202,16 +74,16 @@ export default class Company extends React.Component {
               <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
               <Link to="/">Back</Link>
             </Well>
+            <AppInfo/>
           </Col>
           <Col lg={7}>
             <Well>
-              {positionChart}
+              <LineChart hAxis="Date" vAxis="Short position" data={positionChartData} />
               {historyChart}
             </Well>
           </Col>
           <Col lg={5}>
-            {caseExplanation}
-            <AppInfo/>
+            <CaseExplain visible={detailed}/>
           </Col>
         </Row>
       </div>
