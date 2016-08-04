@@ -54,7 +54,8 @@ function updateActor(actor, position, dateData) {
   actor.bestMean = calculateNewMean(oldPos, actor.bestMean, change, bestPrice);
   actor.worstMean = calculateNewMean(oldPos, actor.worstMean, change, worstPrice);
   actor.currentPos = position;
-  actor.lastChange = dateData[0];
+  actor.lastChange = change;
+  actor.lastChanged = dateData[0];
   return actor;
 }
 
@@ -65,7 +66,8 @@ function defaultActorCase(label, date = '-') {
     bestMean: 0,
     midMean: 0,
     worstMean: 0,
-    lastChange: date,
+    lastChange: 0,
+    lastChanged: date,
   };
 }
 

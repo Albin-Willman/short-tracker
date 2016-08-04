@@ -96,7 +96,7 @@ export default class CompanyList extends React.Component {
     return (<Row>
       <Col md={9}>
         <FormControl
-          placeholder="Filter"
+          placeholder="Start typing to find company"
           onChange={(e)=>{
             this.setFilter(e.target.value);
           }}

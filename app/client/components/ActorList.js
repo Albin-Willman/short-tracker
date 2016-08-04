@@ -20,20 +20,22 @@ export default class ActorList extends React.Component {
   }
 
   buildRow(actorCase, detailed) {
-    var cases, lastChanged;
+    var cases, lastChanged, lastChange;
     if(detailed) {
       cases = [
         <td key="best">{actorCase.bestMean.toFixed(2)}</td>,
         <td key="mid">{actorCase.midMean.toFixed(2)}</td>,
         <td key="worst">{actorCase.worstMean.toFixed(2)}</td>,
       ];
-      lastChanged = <td>{actorCase.lastChange}</td>;
+      lastChange = <td>{actorCase.lastChange.toFixed(2)} %</td>;
+      lastChanged = <td>{actorCase.lastChanged}</td>;
     }
 
     return (<tr key={actorCase.name}>
         <td>{actorCase.name}</td>
         {cases}
         <td>{actorCase.currentPos.toFixed(2)} %</td>
+        {lastChange}
         {lastChanged}
       </tr>);
   }
@@ -49,6 +51,7 @@ export default class ActorList extends React.Component {
         <th>Worst case*</th>
         <th>Current</th>
         <th>Last change</th>
+        <th>Last changed</th>
       </tr></thead>);
   }
 
@@ -64,8 +67,13 @@ export default class ActorList extends React.Component {
 
     var headers = this.buildHeaders();
 
+    var className = "actor-list";
+    if(detailed) {
+      className += ' responsive detailed';
+    }
+
     return (
-      <Table >
+      <Table className={className}>
         {headers}
         <tbody>
           {rows}

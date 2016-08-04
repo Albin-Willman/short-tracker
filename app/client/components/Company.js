@@ -64,10 +64,12 @@ export default class Company extends React.Component {
               <h3>
                 Current positions
                 <Button
+                  bsStyle="primary"
+                  bsSize="small"
                   onClick={ ()=>{
                     this.toggleDetails(!detailed);
                   } }
-                  style={{ float: 'right' }}>
+                  style={{ float: 'right', marginTop: "-2px", }}>
                     {buttonLabel}
                 </Button>
               </h3>
