@@ -72,7 +72,7 @@ export default class Company extends React.Component {
                   onClick={ ()=>{
                     this.toggleDetails(!detailed);
                   } }
-                  style={{ float: 'right', marginTop: "-2px", }}>
+                  style={{ float: 'right', marginTop: '-2px' }}>
                     {buttonLabel}
                 </Button>
               </h3>

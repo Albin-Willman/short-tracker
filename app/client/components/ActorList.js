@@ -67,7 +67,7 @@ export default class ActorList extends React.Component {
 
     var headers = this.buildHeaders();
 
-    var className = "actor-list";
+    var className = 'actor-list';
     if(detailed) {
       className += ' responsive detailed';
     }
