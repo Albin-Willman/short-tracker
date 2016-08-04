@@ -7,6 +7,9 @@
 // TwitterBoostrap:
 // @import "./styles/_bootstrap";
 
+@import './styles/_responsive-tables';
+@import './styles/_responsive-tweaks';
+
 $footer-height: 52px;
 
 .order-indicator {
@@ -29,4 +32,9 @@ html, body {
 
 .footer, .app-area:after {
   height: $footer-height;
+}
+
+.footer .nav > li {
+    position: relative;
+    display: inline-block;
 }

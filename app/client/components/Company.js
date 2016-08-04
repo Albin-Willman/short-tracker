@@ -3,10 +3,17 @@ import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
+import Button from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router';
-import { Chart } from 'react-google-charts';
 import ActorList from 'components/ActorList';
+import LineChart from 'components/LineChart';
+import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
+
+import computeHistoryData from 'utils/formaters/history-chart-formater';
+import computeActorData from 'utils/formaters/actor-chart-formater';
+
+import { logEvent } from 'utils/ga';
 
 export default class Company extends React.Component {
 
@@ -21,134 +28,70 @@ export default class Company extends React.Component {
 
   static defaultProps = {
     company: {},
+    history: {},
   }
 
-  transformPositionChartData(actors) {
-    var rows = [];
-    rows.push(this.buildLabels(actors));
-    var allDates = this.findAllDates(actors);
-
-    var lastRow = new Array(Object.keys(actors).length + 1);
-    lastRow.fill(0);
-    for (var i = 0; i < allDates.length; i += 1) {
-      var row = this.buildRow(actors, allDates[i], lastRow);
-      rows.push(row);
-      lastRow = row;
-    }
-    return rows;
+  state = {
+    detailed: false,
   }
 
-  buildRow(actors, date, lastRow) {
-    var row = [];
-
-    for (var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        var value = actors[actor].positions[date];
-        if(typeof value === 'undefined') {
-          value = lastRow[row.length + 1];
-        }
-        row.push(value);
-      }
-    }
-    row.push(this.sumArray(row));
-    row.unshift(date);
-    return row;
-  }
-
-  buildLabels(actors) {
-    var labels = ['Date'];
-    for (var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        labels.push(actors[actor].name);
-      }
-    }
-    labels.push('Total');
-    return labels;
-  }
-
-  sumArray(row) {
-    return row.reduce(function (pv, cv) {
-      return pv + cv;
-    }, 0);
-  }
-
-  findAllDates(actors) {
-    var res = [];
-    for(var actor in actors) {
-      if (actors.hasOwnProperty(actor)) {
-        res = res.concat(Object.keys(actors[actor].positions));
-      }
-    }
-    return res.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    }).sort();
-  }
-
-  buildHistoryChart() {
-    var { history } = this.props;
-    if(!history.data || history.data === 'No history') {
+  buildHistoryChart(data) {
+    if(data.length === 0) {
       return 'No historic data available yet';
     }
-    var historyData = history.data.history;
-    var data = [['Date', 'Day low', 'Day high']];
-    for (var date in historyData) {
-      if (historyData.hasOwnProperty(date)) {
-        var dayData = historyData[date];
-        data.push([date, dayData.low, dayData.high]);
-      }
-    }
-
-    var options = {
-      hAxis: { title: 'Date' },
-      vAxis: { title: 'Stock Price' },
-    };
-    return (<Chart chartType="LineChart"
-                  data={data}
-                  options={options}
-                  width={"100%"}
-                  height={"400px"}
-                  legend_toggle={true}/>);
+    return <LineChart hAxis="Date" vAxis="Stock Price" data={data} />;
   }
 
+  toggleDetails(val) {
+    logEvent('Company page', 'details', (val ? 'show' : 'hide'));
+    this.setState({ detailed: val });
+  }
 
   render() {
-    var { company } = this.props;
+    var { company, history } = this.props;
+    var { detailed } = this.state;
 
-    var positionChartData = this.transformPositionChartData(company.actors);
+    var historyData = computeHistoryData(history);
+    var historyChart = this.buildHistoryChart(historyData);
+    var positionChartData = computeActorData(company.actors);
 
-    var actors = positionChartData[0];
-    var lastRow = positionChartData[positionChartData.length - 1];
-
-    var options = {
-      hAxis: { title: 'Date' },
-      vAxis: { title: 'Short position' },
-    };
-
-    var historyChart = this.buildHistoryChart();
+    var listWidth = detailed ? 12 : 5;
+    var buttonLabel = detailed ? 'Hide details' : 'Show details';
 
     return (
-      <Row>
-        <Col lg={5}>
-          <Well>
-            <h1>{company.name}</h1>
-            <h3>Current positions</h3>
-            <ActorList labels={actors} positions={lastRow} />
-            <Link to="/">Back</Link>
-          </Well>
-          <AppInfo/>
-        </Col>
-        <Col lg={7}>
-          <Well>
-            <Chart chartType="LineChart"
-              data={positionChartData}
-              options={options}
-              width={"100%"}
-              height={"400px"}
-              legend_toggle={true}/>
-            {historyChart}
-          </Well>
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col lg={listWidth}>
+            <Well>
+              <h1>{company.name}</h1>
+              <h3>
+                Current positions
+                <Button
+                  bsStyle="primary"
+                  bsSize="small"
+                  onClick={ ()=>{
+                    this.toggleDetails(!detailed);
+                  } }
+                  style={{ float: 'right', marginTop: '-2px' }}>
+                    {buttonLabel}
+                </Button>
+              </h3>
+              <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
+              <Link to="/">Back</Link>
+            </Well>
+            <AppInfo/>
+          </Col>
+          <Col lg={7}>
+            <Well>
+              <LineChart hAxis="Date" vAxis="Short position" data={positionChartData} />
+              {historyChart}
+            </Well>
+          </Col>
+          <Col lg={5}>
+            <CaseExplain visible={detailed}/>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
