@@ -2,34 +2,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// ReactBoostrap components:
-import Grid from 'react-bootstrap/lib/Grid';
 import CompanyListPage from 'containers/CompanyListPage';
 import CompanyPage from 'containers/CompanyPage';
-import AboutPage from 'containers/AboutPage';
-import TopBar from 'components/TopBar';
-import Footer from 'components/Footer';
-import CookiePage from 'components/CookiePage';
-import CookieNotice from 'components/CookieNotice';
+import AboutPage from 'components/Pages/AboutPage';
+import TopBar from 'components/Layout/TopBar';
+import Footer from 'components/Layout/Footer';
+import CookiePage from 'components/Pages/CookiePage';
+import CookieNotice from 'components/Layout/CookieNotice';
+import WelcomePage from 'components/Pages/WelcomePage';
+import NoPage from 'components/Pages/NoPage';
 
-import { loadData } from 'services/data-services';
 import { acceptCookies } from 'services/cookie-services';
 import { setAccepted } from 'actions/cookie-actions';
 
 import { Router, Route, browserHistory } from 'react-router';
 
-const STYLES = {
-  grid: {
-    marginTop: 50,
-  },
-};
-
 const routes = [
-  <Route key={1} path="/" component={CompanyListPage} />,
+  <Route key={0} path="/" component={WelcomePage} />,
+  <Route key={1} path="/stocks" component={CompanyListPage} />,
   <Route key={2} path="/stock/:name" component={CompanyPage} />,
   <Route key={3} path="/about" component={AboutPage} />,
   <Route key={4} path="/cookies" component={CookiePage} />,
-  <Route key={5} path="*" component={CompanyListPage} />,
+  <Route key={5} path="/*" component={NoPage} />,
 ];
 
 @connect(s => {
@@ -50,23 +44,15 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    this.loadInitialState();
     if(document.cookie.indexOf('cookie-accept=true') > -1) {
       this.props.dispatch(setAccepted(true));
     }
   }
 
-  loadInitialState() {
-    var { dispatch, loaded, loading } = this.props;
-    if(!loaded && !loading) {
-      dispatch(loadData());
-    }
-  }
-
   buildContent() {
-    var { loaded, loading, logPageView } = this.props;
+    var { loading, logPageView } = this.props;
 
-    if (loading || !loaded) {
+    if (loading) {
       return 'loading...';
     }
 
@@ -89,9 +75,7 @@ export default class App extends React.Component {
           }}
           accepted={cookies.accepted}/>
         <TopBar />
-        <Grid style={STYLES.grid}>
-          {content}
-        </Grid>
+        {content}
         </div>
         <Footer />
       </div>

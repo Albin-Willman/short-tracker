@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import Footer from 'components/Footer';
+import Footer from 'components/Layout/Footer';
 
 export default class FooterGuideComponent extends React.Component {
     render() {

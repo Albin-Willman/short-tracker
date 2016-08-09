@@ -62,7 +62,7 @@ export default class Company extends React.Component {
       <div>
         <Row>
           <Col lg={listWidth}>
-            <Well>
+            <Well className="highlight">
               <h1>{company.name}</h1>
               <h3>
                 Current positions
@@ -82,7 +82,7 @@ export default class Company extends React.Component {
             <AppInfo/>
           </Col>
           <Col lg={7}>
-            <Well>
+            <Well className="accent">
               <LineChart hAxis="Date" vAxis="Short position" data={positionChartData} />
               {historyChart}
             </Well>

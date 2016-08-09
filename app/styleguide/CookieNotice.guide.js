@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import CookieNotice from 'components/CookieNotice';
+import CookieNotice from 'components/Layout/CookieNotice';
 
 export default class CookieNoticeGuideComponent extends React.Component {
     render() {

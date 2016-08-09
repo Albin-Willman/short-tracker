@@ -1,0 +1,14 @@
+$purple: #b385d0;
+$blue: #8d8df5;
+$green: #78c578;
+
+.well {
+  border-bottom: 3px solid $purple;
+
+  &.accent {
+    border-bottom-color: $blue;
+  }
+  &.highlight {
+    border-bottom-color: $green;
+  }
+}

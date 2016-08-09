@@ -99,24 +99,26 @@ export default class CompanyList extends React.Component {
 
     return (<Row>
       <Col md={9}>
-        <FormControl
-          placeholder="Start typing to find company"
-          onChange={(e)=>{
-            this.setFilter(e.target.value);
-          }}
-          value={filter} />
-        <Table>
-          <thead><tr>
-            {this.buildHeader('Company', 'name')}
-            {this.buildHeader('Last change', 'lastChange')}
-          </tr></thead>
-          <tbody>
-            {rows}
-          </tbody>
-        </Table>
+        <Well className="accent">
+          <FormControl
+            placeholder="Start typing to find company"
+            onChange={(e)=>{
+              this.setFilter(e.target.value);
+            }}
+            value={filter} />
+          <Table>
+            <thead><tr>
+              {this.buildHeader('Company', 'name')}
+              {this.buildHeader('Last change', 'lastChange')}
+            </tr></thead>
+            <tbody>
+              {rows}
+            </tbody>
+          </Table>
+        </Well>
       </Col>
       <Col md={3}>
-        <Well>
+        <Well className="highlight">
           <p>
             This is a list of all stocks where any one reported having a
             short position above 0.5% since november 1th 2012.

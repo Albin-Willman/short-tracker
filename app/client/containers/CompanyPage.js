@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Company from 'components/Company';
+import MyGrid from 'components/Layout/MyGrid';
 
 import { loadHistory } from 'services/data-services';
 
@@ -28,6 +29,9 @@ export default class CompanyPage extends React.Component {
   render() {
     var { company } = this.state;
     var { history } = this.props;
-    return <Company company={company} history={history}/>;
+    return (
+      <MyGrid>
+        <Company company={company} history={history}/>
+      </MyGrid>);
   }
 }

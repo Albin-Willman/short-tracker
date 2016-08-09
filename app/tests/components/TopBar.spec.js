@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 
-import TopBar from 'components/TopBar';
+import TopBar from 'components/Layout/TopBar';
 
 describe('TopBar Component', () => {
     it('should render without exceptions', () => {

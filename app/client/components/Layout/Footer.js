@@ -21,7 +21,7 @@ export default class Footer extends React.Component {
       <Navbar className="footer" style={{ borderRadius: '0px', marginBottom: '0px', }}>
         <Col sm={12}>
         <Nav pullRight>
-          <NavItem eventKey={1} onClick={ this.buildClickHandler('/') } href="/">Stocks</NavItem>
+          <NavItem eventKey={1} onClick={ this.buildClickHandler('/') } href="/stocks">Stocks</NavItem>
           <NavItem eventKey={1} onClick={ this.buildClickHandler('/about') } href="/about">About</NavItem>
           <NavItem eventKey={1} onClick={ this.buildClickHandler('/cookies') } href="/cookies">Cookies</NavItem>
         </Nav>

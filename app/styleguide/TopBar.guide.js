@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import TopBar from 'components/TopBar';
+import TopBar from 'components/Layout/TopBar';
 
 export default class TopBarGuideComponent extends React.Component {
     render() {

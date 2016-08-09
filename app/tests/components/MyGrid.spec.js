@@ -4,10 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 
-import CookieNotice from 'components/Layout/CookieNotice';
+import MyGrid from 'components/Layout/MyGrid';
 
-describe('CookieNotice Component', () => {
+describe('MyGrid Component', () => {
     it('should render without exceptions', () => {
-        ReactTestUtils.renderIntoDocument(<CookieNotice />);
+        ReactTestUtils.renderIntoDocument(<MyGrid />);
     });
 });

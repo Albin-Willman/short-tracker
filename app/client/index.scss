@@ -9,6 +9,7 @@
 
 @import './styles/_responsive-tables';
 @import './styles/_responsive-tweaks';
+@import './styles/_wells';
 
 $footer-height: 52px;
 
@@ -37,4 +38,11 @@ html, body {
 .footer .nav > li {
     position: relative;
     display: inline-block;
+}
+
+body > div,
+body > div > div,
+body > div > div > div {
+  height: 100%;
+  min-height: 100%;
 }
