@@ -25,8 +25,12 @@ export class Main extends React.Component {
 
     return (
       <Provider store={this.props.store}>
-        {routes ? routes : React.createElement(app, { logPageView: logPageView })}
+        <div>
+          {routes ? routes : React.createElement(app, { logPageView: logPageView })}
+        </div>
       </Provider>
     );
   }
 }
+
+

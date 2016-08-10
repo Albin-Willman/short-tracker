@@ -5,6 +5,18 @@ require 'json'
 require 'pathname'
 require 'set'
 
+def fill_date(company, date)
+  puts "Enter day high: "
+  high = gets.chomp
+  puts "Enter day low: "
+  low = gets.chomp
+  puts "Enter day close: "
+  close = gets.chomp
+  Dir.chdir File.dirname(__FILE__) do
+    `./append-to-history #{company} #{high} #{low} #{close} #{date}`
+  end
+end
+
 file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 
 json =  JSON.parse(File.read(file_path))
@@ -29,8 +41,9 @@ companies.reverse.each do |company|
         puts "Missing dates"
       end
       puts date
+      puts "Do you want to submit the data? (Y/N)"
+      fill_date(company, date) if gets.chomp.upcase == 'Y'
     end
   end
-
   puts "Ok" if all_dates
 end
