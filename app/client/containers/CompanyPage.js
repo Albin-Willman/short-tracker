@@ -16,6 +16,13 @@ export default class CompanyPage extends React.Component {
     dispatch: React.PropTypes.func,
   }
 
+  static defaultProps = {
+    companies: {},
+    history: {},
+    params: {},
+    dispatch: ()=>{},
+  }
+
   componentWillMount() {
     var { companies, params, history, dispatch } = this.props;
     if(history.company !== params.name) {

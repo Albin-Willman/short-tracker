@@ -3,19 +3,11 @@ import { connect } from 'react-redux';
 
 import CompanyList from 'components/CompanyList';
 import MyGrid from 'components/Layout/MyGrid';
-import { loadData } from 'services/data-services';
 
 import { browserHistory } from 'react-router';
 
 @connect(s => s.app)
 export default class CompanyListPage extends React.Component {
-
-  componentWillMount() {
-    var { dispatch, loaded, loading } = this.props;
-    if(!loaded && !loading) {
-      dispatch(loadData());
-    }
-  }
 
   static propTypes = {
     companies: React.PropTypes.object,

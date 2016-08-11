@@ -77,7 +77,7 @@ export default class Company extends React.Component {
                 </Button>
               </h3>
               <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
-              <Link to="/">Back</Link>
+              <Link to="/stocks">Back</Link>
             </Well>
             <AppInfo/>
           </Col>

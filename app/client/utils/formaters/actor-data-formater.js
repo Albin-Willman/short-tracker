@@ -3,6 +3,9 @@
 export default function buildActorData(history, positions, detailed) {
   var actors = [];
   var labels = positions[0];
+  if(!labels) {
+    return actors;
+  }
   for (var i = 0; i < labels.length; i += 1) {
     actors.push(defaultActorCase(labels[i]));
   }

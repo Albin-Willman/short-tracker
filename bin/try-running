@@ -7,7 +7,11 @@ cd $DIR
 until ./run
 do
   echo "Try again"
-  sleep 2
+  sleep 15
 done
+say 'Updated short data'
+./verify-data
+./deploy
+
 
 cd $ORIG_DIR

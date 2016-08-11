@@ -1,5 +1,8 @@
 export default function computeActorData(actors) {
   var rows = [];
+  if(!actors) {
+    return rows;
+  }
   rows.push(buildLabels(actors));
   var allDates = findAllDates(actors);
 

@@ -14,6 +14,7 @@ import NoPage from 'components/Pages/NoPage';
 
 import { acceptCookies } from 'services/cookie-services';
 import { setAccepted } from 'actions/cookie-actions';
+import { loadData } from 'services/data-services';
 
 import { Router, Route, browserHistory } from 'react-router';
 
@@ -50,10 +51,14 @@ export default class App extends React.Component {
   }
 
   buildContent() {
-    var { loading, logPageView } = this.props;
+    var { dispatch, loading, loaded, logPageView } = this.props;
 
     if (loading) {
       return 'loading...';
+    }
+
+    if(!loaded && !loading) {
+      dispatch(loadData());
     }
 
     return (
