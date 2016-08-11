@@ -131,15 +131,16 @@ export default class WelcomePage extends React.Component {
               <ContentWell title="Share" type="accent" glyph="share">
                 <p>
                   If you find this site worthwhile or if you think that someone you know might do so:
-                  Please share this site on social media.
-                </p>
-                <p>
-                  It makes me really happy and proud when I see that people use what I built.
+                  Please share this site in your preferred social media.
                 </p>
               </ContentWell>
             </Col>
             <Col md={4} sm={12}>
-              <ContentWell title="Find" type="highlight" glyph="search">
+              <ContentWell title="Performance" type="highlight" glyph="share">
+                <p>
+                  If you find this site worthwhile or if you think that someone you know might do so:
+                  Please share this site in your preferred social media.
+                </p>
               </ContentWell>
             </Col>
           </Row>
