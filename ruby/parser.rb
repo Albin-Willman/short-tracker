@@ -23,13 +23,16 @@ class XlsParser
     return if actor.gsub(/[^0-9a-z]/i, '') == 'IngapublikapositionerpubliceradesNopublicpositionswerepublished'
     company_name = file.cell(line, 3)
 
-    company = company_name.partition(" ").first.downcase
+    company = company_name.split(" ").first.downcase
+
+    company += company_name.split(" ")[1].downcase if company == 'swedish'
+
     amount = file.cell(line, 5).to_f
     amount = 0 if amount <= 0.5
     date = Date.parse(file.cell(line, 6).to_s)
     company(company, company_name, date)
 
-    actor_key = actor.partition(" ").first.downcase
+    actor_key = actor.split(" ").first.downcase
 
     actor(company, actor_key, actor)[:positions][date.to_s] = amount
   end
