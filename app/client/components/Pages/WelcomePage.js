@@ -128,18 +128,23 @@ export default class WelcomePage extends React.Component {
               </ContentWell>
             </Col>
             <Col md={4} sm={6}>
-              <ContentWell title="Share" type="accent" glyph="share">
+              <ContentWell title="Share" type="highlight" glyph="share">
                 <p>
-                  If you find this site worthwhile or if you think that someone you know might do so:
-                  Please share this site in your preferred social media.
+                  If you find this site worthwhile or if you think that someone you know might do
+                  so: Please share this site in your preferred social media.
                 </p>
               </ContentWell>
             </Col>
             <Col md={4} sm={12}>
-              <ContentWell title="Performance" type="highlight" glyph="share">
+              <ContentWell title="Performance" type="accent" glyph="signal">
                 <p>
-                  If you find this site worthwhile or if you think that someone you know might do so:
-                  Please share this site in your preferred social media.
+                  This site runs on the cheapest possible hardware. This means that there might
+                  be performance issues and/or downtime. I will do my best to avoid this but
+                  please bear in mind that this is a 100% free web service I am providing.
+                </p>
+                <p>
+                  If you are experiencing a lot problems with pages not loading please let me know
+                  and I will try to fix the issues.
                 </p>
               </ContentWell>
             </Col>

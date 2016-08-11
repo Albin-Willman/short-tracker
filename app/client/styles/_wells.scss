@@ -1,6 +1,9 @@
 @mixin well-styling($color) {
   border-bottom: 3px solid $color;
-  .head-icon { color: $color; }
+  .head-icon {
+    color: $color;
+    font-size: 40px;
+  }
   .btn { @include button-variant($white, $color, $color); }
 }
 

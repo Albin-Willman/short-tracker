@@ -85,7 +85,8 @@ export default class CompanyList extends React.Component {
     for(var key in companies) {
       if (companies.hasOwnProperty(key)) {
         var company = companies[key];
-        if(filter.length === 0 || company.name.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+        if(
+          filter.length === 0 || company.name.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
           filteredCompanies.push({
             key: key,
             company: company,
@@ -125,7 +126,11 @@ export default class CompanyList extends React.Component {
               {rows}
             </tbody>
           </Table>
-          <Pagination page={page} pageLength={pageLength} totalCount={sortedCompanies.length} goToPage={this.buildGoToPage()} />
+          <Pagination
+            page={page}
+            pageLength={pageLength}
+            totalCount={sortedCompanies.length}
+            goToPage={this.buildGoToPage()} />
         </Well>
       </Col>
       <Col md={3}>

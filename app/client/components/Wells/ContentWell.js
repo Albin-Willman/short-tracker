@@ -48,7 +48,12 @@ export default class ContentWell extends React.Component {
     if(!glyph || glyph.length ===0) {
       return false;
     }
-    return <div style={{ textAlign: 'center', fontSize: '40px' }}><Glyphicon className="head-icon" glyph={glyph}/></div>;
+    return (
+      <div
+        style={{ textAlign: 'center' }}>
+        <Glyphicon className="head-icon" glyph={glyph}/>
+      </div>
+    );
   }
 
   render() {
