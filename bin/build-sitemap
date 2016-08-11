@@ -10,6 +10,7 @@ data = JSON.parse(File.read(file_path))
 domain = 'http://kortapositioner.se'
 pages = []
 pages << "#{domain}/"
+pages << "#{domain}/stocks"
 pages << "#{domain}/about"
 pages << "#{domain}/cookies"
 

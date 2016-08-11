@@ -18,19 +18,17 @@
   display: -ms-flexbox;
   display: flex;
 
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-
   > div {
     margin-bottom: 30px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
 
   .well {
     height: 100%;
   }
 }
-
 
 .content-well {
   padding-bottom: 64px;
@@ -41,5 +39,19 @@
     position: absolute;
     right: 0;
     text-align: center;
+  }
+}
+
+// Safari only override
+_::-webkit-full-page-media, _:future, :root {
+  .well-row {
+    display: block;
+
+    > div {
+      margin-bottom: 30px;
+    }
+  }
+  .content-well .button-box {
+    bottom: 40px;
   }
 }

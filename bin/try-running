@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ORIG_DIR=`pwd`
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+
+until ./run
+do
+  echo "Try again"
+  sleep 2
+done
+
+cd $ORIG_DIR
