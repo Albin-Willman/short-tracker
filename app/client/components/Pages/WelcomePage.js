@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Grid from 'react-bootstrap/lib/Grid';
@@ -8,9 +7,7 @@ import ContentWell from 'components/Wells/ContentWell';
 
 const STYLES = {
   jumbo: {
-    backgroundImage: 'url(/img/chart1.jpg)',
     minHeight: '300px',
-    backgroundPosition: 'center',
   },
 };
 
@@ -33,7 +30,7 @@ export default class WelcomePage extends React.Component {
           </Grid>
         </Jumbotron>
         <Grid>
-          <Row>
+          <Row className="well-row">
             <Col md={4} sm={6}>
               <ContentWell
                 title="Intro"
@@ -43,9 +40,16 @@ export default class WelcomePage extends React.Component {
                 moreText="Get going">
                 <p>
                   On this site you will find how all major short positions on the swedish
-                  stock exchange has changed over time. My goal is to make the positions a
+                  stock exchange has changed over time since november 2012.
+                </p>
+                <p>
+                  My goal is to make the positions a
                   little bit more visible and accessible than the 5000 line excell sheet that FI
                   publishes on a daily basis.
+                </p>
+                <p>
+                  This site was first concieved in july of 2016 and is intended to be a living
+                  and growing project.
                 </p>
               </ContentWell>
             </Col>
@@ -77,7 +81,12 @@ export default class WelcomePage extends React.Component {
               </ContentWell>
             </Col>
             <Col md={4} sm={12}>
-              <ContentWell title="Contribute" glyph="thumbs-up">
+              <ContentWell
+                title="Contribute"
+                glyph="thumbs-up"
+                morePage={repoLink}
+                moreText="View code"
+                moreExternal={true}>
                 <p>
                   I am a fan of the open web and this site is 100% open source. The code is hosted
                   at <a href={repoLink} target="_blank">github</a>. Feel free to look around and
@@ -94,6 +103,43 @@ export default class WelcomePage extends React.Component {
                     twitter
                   </a> or <a href={'mailto:' + email}>{email}</a>.
                 </p>
+              </ContentWell>
+            </Col>
+          </Row>
+        </Grid>
+        <Jumbotron>
+          <Grid>
+            <p>
+              Keep up with the latest changes
+            </p>
+          </Grid>
+        </Jumbotron>
+        <Grid>
+          <Row className="well-row">
+            <Col md={4} sm={6}>
+              <ContentWell title="Updates" glyph="refresh">
+                <p>
+                  If you are interested in updates about this project please follow med on
+                  twitter <a href={twitterLink} target="_blank">@SvenssonAlbin</a>.
+                </p>
+                <p>
+                  I will post there whenever I post new content or publish new features.
+                </p>
+              </ContentWell>
+            </Col>
+            <Col md={4} sm={6}>
+              <ContentWell title="Share" type="accent" glyph="share">
+                <p>
+                  If you find this site worthwhile or if you think that someone you know might do so:
+                  Please share this site on social media.
+                </p>
+                <p>
+                  It makes me really happy and proud when I see that people use what I built.
+                </p>
+              </ContentWell>
+            </Col>
+            <Col md={4} sm={12}>
+              <ContentWell title="Find" type="highlight" glyph="search">
               </ContentWell>
             </Col>
           </Row>

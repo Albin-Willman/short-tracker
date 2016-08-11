@@ -1,14 +1,42 @@
-$purple: #b385d0;
-$blue: #8d8df5;
-$green: #78c578;
+@mixin well-styling($color) {
+  border-bottom: 3px solid $color;
+  .head-icon { color: $color; }
+  .btn { @include button-variant($white, $color, $color); }
+}
 
 .well {
-  border-bottom: 3px solid $purple;
+  @include well-styling($purple);
+  &.accent { @include well-styling($blue); }
+  &.highlight { @include well-styling($green); }
+}
 
-  &.accent {
-    border-bottom-color: $blue;
+.well-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  > div {
+    margin-bottom: 30px;
   }
-  &.highlight {
-    border-bottom-color: $green;
+
+  .well {
+    height: 100%;
+  }
+}
+
+
+.content-well {
+  padding-bottom: 64px;
+
+  .button-box {
+    bottom: 30px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
   }
 }

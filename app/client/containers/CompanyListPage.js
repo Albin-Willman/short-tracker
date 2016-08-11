@@ -30,10 +30,10 @@ export default class CompanyListPage extends React.Component {
     return (
       <MyGrid>
         <CompanyList
-        companies={companies}
-        viewCompany={ id => {
-          browserHistory.push(`/stock/${id}`);
-        } } />
+          companies={companies}
+          viewCompany={ id => {
+            browserHistory.push(`/stock/${id}`);
+          } } />
       </MyGrid>);
   }
 }

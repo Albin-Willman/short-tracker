@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
+import Pagination from 'components/Tables/Pagination';
 
 import { logEvent } from 'utils/ga';
 
@@ -27,6 +28,7 @@ export default class CompanyList extends React.Component {
 
   state = {
     filter: '',
+    page: 1,
     sortBy: {
       column: 'lastChange',
       direction: 'asc',
@@ -35,12 +37,18 @@ export default class CompanyList extends React.Component {
 
   setFilter(filter) {
     logEvent('Company list', 'filter', filter);
-    this.setState({ filter });
+    this.setState({ filter, page: 1 });
   }
 
   setSorting(sortBy) {
     logEvent('Company list', 'sorting', sortBy.column);
-    this.setState({ sortBy });
+    this.setState({ sortBy, page: 1 });
+  }
+
+  buildGoToPage() {
+    return (page) => {
+      this.setState({ page });
+    };
   }
 
   buildCompare() {
@@ -73,7 +81,7 @@ export default class CompanyList extends React.Component {
     var { companies, viewCompany } = this.props;
     var filteredCompanies = [];
 
-    var { filter } = this.state;
+    var { filter, page } = this.state;
     for(var key in companies) {
       if (companies.hasOwnProperty(key)) {
         var company = companies[key];
@@ -90,16 +98,18 @@ export default class CompanyList extends React.Component {
 
     var rows = [];
 
-    for(var i in sortedCompanies) {
-      if (sortedCompanies.hasOwnProperty(i)) {
-        var sortedCompany = sortedCompanies[i];
-        rows.push(this.buildCompanyRow(sortedCompany.key, sortedCompany.company, viewCompany));
-      }
+    var pageLength = 20;
+    var first = (page-1) * pageLength;
+    var last = Math.min(page * pageLength, sortedCompanies.length);
+
+    for(var i = first; i < last; i += 1) {
+      var sortedCompany = sortedCompanies[i];
+      rows.push(this.buildCompanyRow(sortedCompany.key, sortedCompany.company, viewCompany));
     }
 
     return (<Row>
       <Col md={9}>
-        <Well className="accent">
+        <Well className="highlight">
           <FormControl
             placeholder="Start typing to find company"
             onChange={(e)=>{
@@ -115,10 +125,11 @@ export default class CompanyList extends React.Component {
               {rows}
             </tbody>
           </Table>
+          <Pagination page={page} pageLength={pageLength} totalCount={sortedCompanies.length} goToPage={this.buildGoToPage()} />
         </Well>
       </Col>
       <Col md={3}>
-        <Well className="highlight">
+        <Well className="accent">
           <p>
             This is a list of all stocks where any one reported having a
             short position above 0.5% since november 1th 2012.

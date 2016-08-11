@@ -62,7 +62,7 @@
     "redux-devtools-dock-monitor": "^1.0.x",
     "redux-devtools-log-monitor": "^1.0.x",
     "redux-thunk": "^1.0.x",
-    "sass-loader": "^3.1.x",
+    "sass-loader": "^3.2.x",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.x",
     "url-loader": "^0.5.x",

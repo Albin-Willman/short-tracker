@@ -15,6 +15,7 @@ export default class ContentWell extends React.Component {
     type: React.PropTypes.string,
     morePage: React.PropTypes.string,
     moreText: React.PropTypes.string,
+    moreExternal: React.PropTypes.bool,
   }
 
   static defaultProps = {
@@ -24,16 +25,22 @@ export default class ContentWell extends React.Component {
     type: '',
     morePage: '',
     moreText: 'Read more',
+    moreExternal: false,
   }
 
   buildMoreButton() {
-    var { morePage, moreText } = this.props;
+    var { morePage, moreText, moreExternal } = this.props;
     if(!morePage || morePage.length ===0) {
       return false;
     }
-    return (<div style={{ textAlign: 'center' }}>
-          <Link className="btn btn-primary" to={morePage}>{moreText}</Link>
-        </div>);
+    var link;
+    if(moreExternal) {
+      link = <a className="btn" href={morePage} target="_blank">{moreText}</a>;
+    } else {
+      link = <Link className="btn" to={morePage}>{moreText}</Link>;
+    }
+
+    return <div className="button-box" >{link}</div>;
   }
 
   buildGlyph() {
@@ -41,13 +48,15 @@ export default class ContentWell extends React.Component {
     if(!glyph || glyph.length ===0) {
       return false;
     }
-    return <div style={{ textAlign: 'center', fontSize: '40px' }}><Glyphicon glyph={glyph}/></div>;
+    return <div style={{ textAlign: 'center', fontSize: '40px' }}><Glyphicon className="head-icon" glyph={glyph}/></div>;
   }
 
   render() {
     var { title, children, type } = this.props;
     var glyph = this.buildGlyph();
     var more = this.buildMoreButton();
+    type = type ? type + ' ' : '';
+    type += 'content-well';
     return (
       <Well className={type}>
         {glyph}
