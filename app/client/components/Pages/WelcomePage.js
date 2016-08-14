@@ -5,12 +5,6 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import ContentWell from 'components/Wells/ContentWell';
 
-const STYLES = {
-  jumbo: {
-    minHeight: '300px',
-  },
-};
-
 const repoLink = 'https://github.com/Albin-Willman/short-tracker';
 const email = 'albin@kortapositioner.se';
 const twitterLink = 'https://twitter.com/SvenssonAlbin';
@@ -21,7 +15,7 @@ export default class WelcomePage extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron className="welcome" style={STYLES.jumbo}>
+        <Jumbotron className="welcome">
           <Grid>
             <h1>Welcome to kortapositioner.se</h1>
             <p>
@@ -116,14 +110,21 @@ export default class WelcomePage extends React.Component {
         </Jumbotron>
         <Grid>
           <Row className="well-row">
-            <Col md={4} sm={6}>
-              <ContentWell title="Updates" glyph="refresh">
+            <Col md={4} sm={12}>
+              <ContentWell
+                title="Blog"
+                type="accent"
+                glyph="font"
+                morePage="/blog">
                 <p>
-                  If you are interested in updates about this project please follow med on
-                  twitter <a href={twitterLink} target="_blank">@SvenssonAlbin</a>.
+                  I have started writing a small blog as a part of this project. The topics of
+                  the posts may vary but they will mainly be concerning investments and web
+                  development.
                 </p>
                 <p>
-                  I will post there whenever I post new content or publish new features.
+                  There is not reason for the blog to be written solely by me so if you would like
+                  to write a post please reach out to me and I am certain that we can figure
+                  something out.
                 </p>
               </ContentWell>
             </Col>
@@ -135,16 +136,14 @@ export default class WelcomePage extends React.Component {
                 </p>
               </ContentWell>
             </Col>
-            <Col md={4} sm={12}>
-              <ContentWell title="Performance" type="accent" glyph="signal">
+            <Col md={4} sm={6}>
+              <ContentWell title="Updates" glyph="refresh">
                 <p>
-                  This site runs on the cheapest possible hardware. This means that there might
-                  be performance issues and/or downtime. I will do my best to avoid this but
-                  please bear in mind that this is a 100% free web service I am providing.
+                  If you are interested in updates about this project please follow med on
+                  twitter <a href={twitterLink} target="_blank">@SvenssonAlbin</a>.
                 </p>
                 <p>
-                  If you are experiencing a lot problems with pages not loading please let me know
-                  and I will try to fix the issues.
+                  I will post there whenever I post new content or publish new features.
                 </p>
               </ContentWell>
             </Col>

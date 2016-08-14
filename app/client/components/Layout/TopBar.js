@@ -29,6 +29,7 @@ export default class TopBar extends React.Component {
           <Nav pullRight>
             <NavItem eventKey={1} onClick={ this.buildClickHandler('/stocks') } href="/stocks">Stocks</NavItem>
             <NavItem eventKey={1} onClick={ this.buildClickHandler('/about') } href="/about">About</NavItem>
+            <NavItem eventKey={1} onClick={ this.buildClickHandler('/blog') } href="/blog">Blog</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

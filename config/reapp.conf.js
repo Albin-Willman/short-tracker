@@ -17,6 +17,7 @@ module.exports = {
     proxyUrls: [
         '/api*',
         '/img*',
+        '/blogposts*',
     ],
 
     // forward following rules

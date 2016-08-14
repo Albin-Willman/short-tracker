@@ -10,8 +10,5 @@ do
   sleep 15
 done
 say 'Updated short data'
-./verify-data
-./deploy
-
 
 cd $ORIG_DIR

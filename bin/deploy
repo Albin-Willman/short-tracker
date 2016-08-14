@@ -39,3 +39,11 @@ unless ARGV.include?('--app-only')
     end
   end
 end
+
+if ARGV.include?('--full') || ARGV.include?('--blog')
+  Dir.chdir dist_path do
+    Dir.glob("blogposts/**/*.*").each do |dist_file|
+      upload_file(bucket, dist_file)
+    end
+  end
+end

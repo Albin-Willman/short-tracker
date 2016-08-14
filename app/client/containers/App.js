@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CompanyListPage from 'containers/CompanyListPage';
+import BlogPage from 'containers/BlogPage';
+import BlogPostPage from 'containers/BlogPostPage';
 import CompanyPage from 'containers/CompanyPage';
 import AboutPage from 'components/Pages/AboutPage';
 import TopBar from 'components/Layout/TopBar';
@@ -24,7 +26,9 @@ const routes = [
   <Route key={2} path="/stock/:name" component={CompanyPage} />,
   <Route key={3} path="/about" component={AboutPage} />,
   <Route key={4} path="/cookies" component={CookiePage} />,
-  <Route key={5} path="/*" component={NoPage} />,
+  <Route key={5} path="/blog" component={BlogPage} />,
+  <Route key={6} path="/blog/:id" component={BlogPostPage} />,
+  <Route key={10} path="/*" component={NoPage} />,
 ];
 
 @connect(s => {
