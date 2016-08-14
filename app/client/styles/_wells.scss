@@ -8,6 +8,7 @@
 }
 
 .well {
+  background: $white;
   @include well-styling($purple);
   &.accent { @include well-styling($blue); }
   &.highlight { @include well-styling($green); }

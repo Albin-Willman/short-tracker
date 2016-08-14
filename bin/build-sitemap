@@ -13,6 +13,12 @@ pages << "#{domain}/"
 pages << "#{domain}/stocks"
 pages << "#{domain}/about"
 pages << "#{domain}/cookies"
+pages << "#{domain}/blog"
+
+blog_index_path = File.join(File.dirname(__FILE__), "../dist/blogposts/index.json")
+posts = JSON.parse(File.read(blog_index_path))
+
+pages += posts.keys.map { |post| "#{domain}/blog/#{post}" }
 
 pages += data['companies'].keys.map { |company| "#{domain}/stocks/#{company}" }
 
