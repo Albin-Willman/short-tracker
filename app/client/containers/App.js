@@ -52,17 +52,17 @@ export default class App extends React.Component {
     if(document.cookie.indexOf('cookie-accept=true') > -1) {
       this.props.dispatch(setAccepted(true));
     }
+    var { dispatch, loaded } = this.props;
+    if(!loaded) {
+      dispatch(loadData());
+    }
   }
 
   buildContent() {
-    var { dispatch, loading, loaded, logPageView } = this.props;
+    var { loading, logPageView } = this.props;
 
     if (loading) {
       return 'loading...';
-    }
-
-    if(!loaded && !loading) {
-      dispatch(loadData());
     }
 
     return (
