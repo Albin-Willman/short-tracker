@@ -11,7 +11,14 @@ data_path = Downloader.new.run(file_name, date)
 
 data = XlsParser.new.run(data_path)
 
-file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
+file_path = File.join(File.dirname(__FILE__), "../dist/api/data.json")
+
+old_data = JSON.parse(File.read(file_path))
+old_data['companies'].each do |company, values|
+  puts values['nn_id']
+  data[company]['nn_id'] = values['nn_id']
+end
+
 File.open(file_path,"w") do |f|
   f.write({
     companies: data,
