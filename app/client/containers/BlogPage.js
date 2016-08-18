@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
+import ChitikaAdd from 'containers/ChitikaAdd';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
@@ -64,6 +65,9 @@ export default class Blog extends React.Component {
               </p>
               {articleList}
             </Well>
+          </Col>
+          <Col md={3}>
+            <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
           </Col>
         </Row>
       </MyGrid>);

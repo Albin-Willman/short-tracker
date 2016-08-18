@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import FormControl from 'react-bootstrap/lib/FormControl';
@@ -9,6 +8,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 import Pagination from 'components/Tables/Pagination';
+import ChitikaAdd from 'containers/ChitikaAdd';
 
 import { logEvent } from 'utils/ga';
 
@@ -146,6 +146,7 @@ export default class CompanyList extends React.Component {
             Click on a row to see more details.
           </p>
         </Well>
+        <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
         <AppInfo/>
       </Col>
     </Row>);

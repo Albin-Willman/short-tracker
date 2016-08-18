@@ -53,8 +53,16 @@ body > div > div > div {
   min-height: 100%;
 }
 
+.chitikaAdContainer {
+  text-align: center;
+}
+
 .navbar-default {
   background: $white;
+}
+
+.related-link {
+  display: block;
 }
 
 .jumbotron {

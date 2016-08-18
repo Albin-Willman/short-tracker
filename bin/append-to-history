@@ -2,15 +2,25 @@
 
 require 'date'
 require 'json'
+require 'pathname'
 
 
 stock = ARGV[0]
 stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{stock}.json")
+
+unless Pathname.new(stock_path).exist?
+  File.open(stock_path, "w") do |f|
+    f.write({'history' => {}, 'last' => 0.0}.to_json)
+  end
+end
+
 data = JSON.parse(File.read(stock_path))
 high = ARGV[1]
 low = ARGV[2]
 last = ARGV[3]
 date = ARGV[4] || (Date.today.prev_day).to_s
+
+
 
 data['history'][date] = {
   high: high.to_f,

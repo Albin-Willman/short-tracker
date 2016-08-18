@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link, browserHistory } from 'react-router';
 import { loadBlogPost, loadIndex } from 'services/blog-services';
+import ChitikaAdd from 'containers/ChitikaAdd';
 
 @connect(s => s.blog)
 export default class Blog extends React.Component {
@@ -65,6 +66,7 @@ export default class Blog extends React.Component {
                 dispatch(loadBlogPost(id));
                 browserHistory.push('/blog/' + id);
               }}/>
+              <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
               <Disclaimer />
           </Col>
         </Row>
