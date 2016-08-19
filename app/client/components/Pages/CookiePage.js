@@ -65,7 +65,7 @@ export default class CookiePage extends React.Component {
                   http://www.google.com/privacypolicy.html
                 </a>.
               </p>
-              <h4>Google ads</h4>
+              <h3>Ads</h3>
               <ul>
                 <li>
                   Third party vendors, including Google, use cookies to serve ads based on
