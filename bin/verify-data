@@ -95,16 +95,13 @@ def check_company(company, data, file_path)
   historic_dates = fetch_historic_data(company)
 
   nn_data = {}
-  all_dates = true
   relevant_dates.each do |date|
     unless historic_dates.include?(date)
-      puts "Missing dates" if all_dates
-      all_dates = false
       nn_data = fetch_nn_data(nn_id) if nn_id
       if nn_data[date]
         fill_date(company, nn_data[date], date)
       else
-        puts "No data for date: #{date}"
+        puts "No data for: #{date}"
       end
     end
   end
