@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from "react-helmet";
 
 import MyGrid from 'components/Layout/MyGrid';
 import Row from 'react-bootstrap/lib/Row';
@@ -12,6 +13,7 @@ export default class AboutPage extends React.Component {
 
     return (
       <MyGrid>
+        <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
         <Row>
           <Col md={8}>
             <Well className="highlight">

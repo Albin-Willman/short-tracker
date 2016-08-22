@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from "react-helmet";
 import { connect } from 'react-redux';
 
 import MyGrid from 'components/Layout/MyGrid';
@@ -44,6 +45,9 @@ export default class Blog extends React.Component {
     var article = articles[params.id] || {};
     return (
       <MyGrid>
+        <Helmet
+          title={article.title}
+          mete={[{ name: 'description', content: article.metaTags }]}/>
         <Row>
           <Col md={9}>
             <Well className="blog-post">

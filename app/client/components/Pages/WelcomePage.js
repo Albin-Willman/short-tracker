@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from "react-helmet";
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -15,6 +16,7 @@ export default class WelcomePage extends React.Component {
   render() {
     return (
       <div>
+        <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
         <Jumbotron className="welcome">
           <Grid>
             <h1>Welcome to kortapositioner.se</h1>

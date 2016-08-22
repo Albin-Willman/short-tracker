@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Helmet from "react-helmet";
 
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
@@ -52,6 +53,7 @@ export default class Blog extends React.Component {
     }
     return (
       <MyGrid>
+        <Helmet title="Blog" />
         <Row>
           <Col md={9}>
             <Well>

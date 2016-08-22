@@ -5,7 +5,9 @@ require 'date'
 require_relative "../ruby/downloader.rb"
 require_relative "../ruby/parser.rb"
 
-date = Date.today.to_s
+ending = '_NY'
+date = Date.today.to_s + ending
+puts date
 file_name = 'tmp/data.xls'
 data_path = Downloader.new.run(file_name, date)
 
@@ -15,7 +17,7 @@ file_path = File.join(File.dirname(__FILE__), "../dist/api/data.json")
 
 old_data = JSON.parse(File.read(file_path))
 old_data['companies'].each do |company, values|
-  puts values['nn_id']
+  next unless data[company]
   data[company]['nn_id'] = values['nn_id']
 end
 

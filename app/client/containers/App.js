@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Helmet from "react-helmet";
 import { connect } from 'react-redux';
 
 import CompanyListPage from 'containers/CompanyListPage';
@@ -77,6 +78,7 @@ export default class App extends React.Component {
     var content = this.buildContent();
     return (
       <div>
+        <Helmet titleTemplate="%s - Kortapositioner" />
         <div className="app-area">
         <CookieNotice
           accept={ ()=>{

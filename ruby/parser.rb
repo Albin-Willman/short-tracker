@@ -20,14 +20,13 @@ class XlsParser
   def parse_line(line)
     return unless valid_date?(file.cell(line, 1))
     actor = file.cell(line, 2)
-    return if actor.gsub(/[^0-9a-z]/i, '') == 'IngapublikapositionerpubliceradesNopublicpositionswerepublished'
+    return if !actor || actor.gsub(/[^0-9a-z]/i, '') == 'IngapublikapositionerpubliceradesNopublicpositionswerepublished'
     company_name = file.cell(line, 3)
 
-    company = company_name.split(" ").first.downcase
+    company = find_company_key(company_name)
 
-    company += company_name.split(" ")[1].downcase if company == 'swedish'
-
-    amount = file.cell(line, 5).to_f
+    amount = file.cell(line, 5)
+    amount = amount.gsub(',', '.').to_f if amount.is_a?(String)
     amount = 0 if amount <= 0.5
     date = Date.parse(file.cell(line, 6).to_s)
     company(company, company_name, date)
@@ -35,6 +34,26 @@ class XlsParser
     actor_key = actor.split(" ").first.downcase
 
     actor(company, actor_key, actor)[:positions][date.to_s] = amount
+  end
+
+  def find_company_key(company_name)
+    company = company_name.split(" ").first.downcase
+    case company
+    when 'swedish'
+      return company + company_name.split(" ")[1].downcase
+    when 'h'
+      return 'h&m'
+    when 'billerudkorsnäs', 'billerudkorsnas'
+      return 'billerud'
+    when 'cdon'
+      return 'qliro'
+    when 'gränges'
+      return 'granges'
+    when 'alfa'
+      return 'alfa-laval'
+    else
+      return company
+    end
   end
 
   def actor(company_key, actor_key, actor = nil)
