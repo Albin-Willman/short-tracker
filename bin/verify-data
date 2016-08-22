@@ -7,7 +7,7 @@ require 'set'
 require 'open-uri'
 require 'watir'
 
-def find_nn_id(company, company_name)
+def find_nn_id(company_name)
   browser = Watir::Browser.new
   browser.goto 'https://www.nordnet.se/mux/web/nordnet/index.html'
   browser.text_field(id: 'searchQuery').set company_name
@@ -54,7 +54,7 @@ def fetch_historic_data(company)
   stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{company}.json")
   return [] unless Pathname.new(stock_path).exist?
   historic_data = JSON.parse(File.read(stock_path))
-  historic_dates = historic_data['history'].keys
+  historic_data['history'].keys
 end
 
 file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
@@ -68,28 +68,33 @@ def save_nn_id(nn_id, company, file_path)
   end
 end
 
+def fetch_nn_id(data, company)
+  nn_id = data['nn_id']
+  return nn_id if nn_id && nn_id.length > 0
+  nn_id_data = find_nn_id(data['name'])
+  puts nn_id_data[:text]
+  puts "Is this correct?"
+  if gets.chomp.upcase == 'Y'
+    nn_id = nn_id_data[:nn_id]
+  else
+    puts "Submit NN id: "
+    nn_id = gets.chomp
+  end
+  save_nn_id(nn_id, company, file_path)
+  nn_id
+end
+
 def check_company(company, data, file_path)
   puts "**** #{company} ****"
-  nn_id = data['nn_id']
-  nn_data = {}
-  if !nn_id || nn_id.length == 0
-    nn_id_data = find_nn_id(company, data['name'])
-    puts nn_id_data[:text]
-    puts "Is this correct?"
-    if gets.chomp.upcase == 'Y'
-      nn_id = nn_id_data[:nn_id]
-    else
-      puts "Submit NN id: "
-      nn_id = gets.chomp
-    end
-    save_nn_id(nn_id, company, file_path)
-  end
-  return if !nn_id || nn_id == '-'
+
+  nn_id = fetch_nn_id(data, company)
+  return unless nn_id && nn_id != '-'
 
   relevant_dates = DateList.new.run(company, file_path)
   relevant_dates.uniq!
   historic_dates = fetch_historic_data(company)
 
+  nn_data = {}
   all_dates = true
   relevant_dates.each do |date|
     unless historic_dates.include?(date)

@@ -6,6 +6,14 @@ file_path = File.join(File.dirname(__FILE__), "../dist/api/data.json")
 
 data = JSON.parse(File.read(file_path))
 
+def check_if_duplicate(nn_ids, id, key)
+  if nn_ids[id]
+    puts "id: #{nn_id} taken by #{nn_ids[id]} and again by #{key}"
+  end
+  nn_ids[id] = key
+  nn_ids
+end
+
 nn_ids = {}
 data['companies'].each do |key, val|
   nn_id = val['nn_id']
@@ -13,9 +21,5 @@ data['companies'].each do |key, val|
     puts "skipping #{key}"
     next
   end
-  if nn_ids[nn_id]
-    puts "id: #{nn_id} taken by #{nn_ids[nn_id]} and again by #{key}"
-  else
-    nn_ids[nn_id] = key
-  end
+  nn_ids = check_if_duplicate(nn_ids, nn_id, key)
 end

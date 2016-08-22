@@ -26,7 +26,7 @@ class XlsParser
     company = find_company_key(company_name)
 
     amount = file.cell(line, 5)
-    amount = amount.gsub(',', '.').to_f if amount.is_a?(String)
+    amount = amount.tr(',', '.').to_f if amount.is_a?(String)
     amount = 0 if amount <= 0.5
     date = Date.parse(file.cell(line, 6).to_s)
     company(company, company_name, date)
