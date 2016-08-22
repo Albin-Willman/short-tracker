@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Helmet from "react-helmet";
+import Helmet from 'react-helmet';
 
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
@@ -69,7 +69,7 @@ export default class Blog extends React.Component {
             </Well>
           </Col>
           <Col md={3}>
-            <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
+            <ChitikaAdd config={{ width: 160, height: 600 }}/>
           </Col>
         </Row>
       </MyGrid>);

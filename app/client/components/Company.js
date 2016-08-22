@@ -90,7 +90,7 @@ export default class Company extends React.Component {
           </Col>
           <Col lg={5}>
             <CaseExplain visible={detailed}/>
-            <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
+            <ChitikaAdd config={{ width: 160, height: 600 }}/>
           </Col>
         </Row>
       </div>

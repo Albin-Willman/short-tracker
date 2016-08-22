@@ -146,7 +146,7 @@ export default class CompanyList extends React.Component {
             Click on a row to see more details.
           </p>
         </Well>
-        <ChitikaAdd config={{ width: 160, height: 600, color_button: '#78c578' }}/>
+        <ChitikaAdd config={{ width: 160, height: 600 }}/>
         <AppInfo/>
       </Col>
     </Row>);

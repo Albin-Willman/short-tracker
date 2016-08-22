@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Helmet from "react-helmet";
+import Helmet from 'react-helmet';
 
 import MyGrid from 'components/Layout/MyGrid';
 import Row from 'react-bootstrap/lib/Row';

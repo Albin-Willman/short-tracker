@@ -19,8 +19,12 @@ export default function computeHistoryData(history) {
 }
 
 
- function Comparator(a, b) {
-   if (a[0] < b[0]) return -1;
-   if (a[0] > b[0]) return 1;
-   return 0;
- }
+function Comparator(a, b) {
+  if (a[0] < b[0]) {
+    return -1;
+  }
+  if (a[0] > b[0]) {
+    return 1;
+  }
+  return 0;
+}

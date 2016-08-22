@@ -6,13 +6,13 @@ import Well from 'react-bootstrap/lib/Well';
 
 const scriptContainerId = 'ad-scripts';
 const unitBase = {
-  'calltype':'async[2]',
-  'publisher':'Littlefinger',
-  'sid':'Chitika Default',
-  'width': 550,
-  'height': 250,
-  'color_button': '#b385d0',
-  'color_button_text': 'ffffff',
+  calltype: 'async[2]',
+  publisher: 'Littlefinger',
+  sid: 'Chitika Default',
+  width: 550,
+  height: 250,
+  color_button: '#78c578', // eslint-disable-line
+  color_button_text: 'ffffff', // eslint-disable-line
 };
 
 @connect(s => s.app)
@@ -34,16 +34,18 @@ export default class ChitikaAdd extends React.Component {
     script.src = '//cdn.chitika.net/getads.js';
     script.async = true;
 
-    window.CHITIKA = { 'units' : [] };
+    window.CHITIKA = { units : [] };
     var unit = { ...unitBase, ...config };
     window.CHITIKA.units.push(unit);
     scriptContainer.appendChild(script);
   }
 
   componentWillUnmount() {
-    try{
+    try {
       document.getElementById(scriptContainerId).innerHTML = '';
-    } catch (e) {};
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
