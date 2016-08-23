@@ -46,19 +46,34 @@ html, body {
     display: inline-block;
 }
 
-body > div,
-body > div > div,
-body > div > div > div {
+#app,
+#app > div,
+#app > div > div {
   height: 100%;
   min-height: 100%;
 }
 
+.add-well,
 .chitikaAdContainer {
   text-align: center;
+  overflow: hidden;
+
+  &.in-content {
+    margin: 30px 0 10px;
+  }
 }
 
 .navbar-default {
   background: $white;
+}
+
+.adsoptimal-slot {
+  display: inline-block;
+}
+
+#ad-scripts {
+  min-height: 0;
+  height: auto;
 }
 
 .related-link {

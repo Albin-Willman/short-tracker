@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 
 export default class AboutPage extends React.Component {
 
@@ -89,7 +91,13 @@ export default class AboutPage extends React.Component {
               </p>
             </Well>
           </Col>
-          <Col md={4}><AppInfo /></Col>
+          <Col md={4}>
+            <AppInfo />
+            <Well className="add-well">
+              <OptimalAd config={{ width: 300, height: 250 }}/>
+              <ChitikaAd config={{ width: 250, height: 250 }}/>
+            </Well>
+          </Col>
         </Row>
       </MyGrid>
       );

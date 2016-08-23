@@ -4,7 +4,10 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Well from 'react-bootstrap/lib/Well';
 import ContentWell from 'components/Wells/ContentWell';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 
 const repoLink = 'https://github.com/Albin-Willman/short-tracker';
 const email = 'albin@kortapositioner.se';
@@ -103,13 +106,12 @@ export default class WelcomePage extends React.Component {
             </Col>
           </Row>
         </Grid>
-        <Jumbotron>
-          <Grid>
-            <p>
-              Keep up with the latest changes
-            </p>
-          </Grid>
-        </Jumbotron>
+        <Grid>
+          <Well className="add-well">
+            <ChitikaAd config={{ width: 728, height: 90 }}/>
+            <OptimalAd config={{ width: 728, height: 90 }}/>
+          </Well>
+        </Grid>
         <Grid>
           <Row className="well-row">
             <Col md={4} sm={12}>
@@ -150,6 +152,11 @@ export default class WelcomePage extends React.Component {
               </ContentWell>
             </Col>
           </Row>
+        </Grid>
+        <Grid>
+          <Well className="add-well">
+            <OptimalAd config={{ width: 728, height: 90 }}/>
+          </Well>
         </Grid>
       </div>
       );

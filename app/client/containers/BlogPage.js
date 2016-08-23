@@ -4,7 +4,8 @@ import Helmet from 'react-helmet';
 
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
-import ChitikaAdd from 'containers/ChitikaAdd';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
@@ -55,9 +56,12 @@ export default class Blog extends React.Component {
       <MyGrid>
         <Helmet title="Blog" />
         <Row>
-          <Col md={9}>
+          <Col md={8}>
             <Well>
               <h1>Kortapositioner.se: The blog</h1>
+              <div className="add-well in-content">
+                <OptimalAd config={{ width: 728, height: 90 }}/>
+              </div>
               <p>
                 <strong>
                   A blog containing post more or less related to the main content of
@@ -68,8 +72,11 @@ export default class Blog extends React.Component {
               {articleList}
             </Well>
           </Col>
-          <Col md={3}>
-            <ChitikaAdd config={{ width: 160, height: 600 }}/>
+          <Col md={4}>
+            <Well className="add-well">
+              <OptimalAd config={{ width: 300, height: 250 }}/>
+              <ChitikaAd config={{ width: 300, height: 250 }}/>
+            </Well>
           </Col>
         </Row>
       </MyGrid>);

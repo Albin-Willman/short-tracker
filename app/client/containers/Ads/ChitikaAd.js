@@ -16,7 +16,7 @@ const unitBase = {
 };
 
 @connect(s => s.app)
-export default class ChitikaAdd extends React.Component {
+export default class ChitikaAd extends React.Component {
 
   static propTypes = {
     config: React.PropTypes.object,
@@ -49,6 +49,6 @@ export default class ChitikaAdd extends React.Component {
   }
 
   render() {
-    return <Well className="add-well"><div id="chitikaAdBlock-0"></div></Well>;
+    return <div id="chitikaAdBlock-0"></div>;
   }
 }

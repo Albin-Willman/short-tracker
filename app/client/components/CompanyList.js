@@ -8,7 +8,8 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 import Pagination from 'components/Tables/Pagination';
-import ChitikaAdd from 'containers/ChitikaAdd';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 
 import { logEvent } from 'utils/ga';
 
@@ -117,6 +118,9 @@ export default class CompanyList extends React.Component {
               this.setFilter(e.target.value);
             }}
             value={filter} />
+          <div className="add-well in-content">
+            <OptimalAd config={{ width: 728, height: 90 }}/>
+          </div>
           <Table>
             <thead><tr>
               {this.buildHeader('Company', 'name')}
@@ -131,6 +135,9 @@ export default class CompanyList extends React.Component {
             pageLength={pageLength}
             totalCount={sortedCompanies.length}
             goToPage={this.buildGoToPage()} />
+            <div className="add-well in-content">
+              <OptimalAd config={{ width: 728, height: 90 }}/>
+            </div>
         </Well>
       </Col>
       <Col md={3}>
@@ -146,7 +153,9 @@ export default class CompanyList extends React.Component {
             Click on a row to see more details.
           </p>
         </Well>
-        <ChitikaAdd config={{ width: 160, height: 600 }}/>
+        <Well className="add-well">
+          <ChitikaAd config={{ width: 160, height: 600 }}/>
+        </Well>
         <AppInfo/>
       </Col>
     </Row>);

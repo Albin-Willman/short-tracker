@@ -9,7 +9,8 @@ import ActorList from 'components/ActorList';
 import LineChart from 'components/LineChart';
 import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
-import ChitikaAdd from 'containers/ChitikaAdd';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 
 import computeHistoryData from 'utils/formaters/history-chart-formater';
 import computeActorData from 'utils/formaters/actor-chart-formater';
@@ -56,7 +57,7 @@ export default class Company extends React.Component {
     var historyChart = this.buildHistoryChart(historyData);
     var positionChartData = computeActorData(company.actors);
 
-    var listWidth = detailed ? 12 : 5;
+    var listWidth = detailed ? 12 : 6;
     var buttonLabel = detailed ? 'Hide details' : 'Show details';
 
     return (
@@ -78,19 +79,25 @@ export default class Company extends React.Component {
                 </Button>
               </h3>
               <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
+              <div className="add-well in-content">
+                <OptimalAd config={{ width: 300, height: 250 }}/>
+              </div>
               <Link to="/stocks">Back</Link>
             </Well>
             <AppInfo/>
           </Col>
-          <Col lg={7}>
+          <Col lg={6}>
             <Well className="accent">
               <LineChart hAxis="Date" vAxis="Short position" data={positionChartData} />
               {historyChart}
             </Well>
           </Col>
-          <Col lg={5}>
+          <Col lg={6}>
             <CaseExplain visible={detailed}/>
-            <ChitikaAdd config={{ width: 160, height: 600 }}/>
+            <Well className="add-well">
+              <OptimalAd config={{ width: 300, height: 250 }}/>
+              <ChitikaAd config={{ width: 300, height: 250 }}/>
+            </Well>
           </Col>
         </Row>
       </div>

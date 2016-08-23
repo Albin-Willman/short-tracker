@@ -10,7 +10,8 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link, browserHistory } from 'react-router';
 import { loadBlogPost, loadIndex } from 'services/blog-services';
-import ChitikaAdd from 'containers/ChitikaAdd';
+import ChitikaAd from 'containers/Ads/ChitikaAd';
+import OptimalAd from 'containers/Ads/OptimalAd';
 
 @connect(s => s.blog)
 export default class Blog extends React.Component {
@@ -49,7 +50,7 @@ export default class Blog extends React.Component {
           title={article.title}
           mete={[{ name: 'description', content: article.metaTags }]}/>
         <Row>
-          <Col md={9}>
+          <Col md={8}>
             <Well className="blog-post">
               <h1>{article.title}</h1>
               <span className="author">{article.author}</span>
@@ -57,11 +58,17 @@ export default class Blog extends React.Component {
               <p><strong>
                 {article.abstract}
               </strong></p>
+              <div className="add-well in-content">
+                <OptimalAd config={{ width: 728, height: 90 }}/>
+              </div>
               <div dangerouslySetInnerHTML={{ __html: article.content }}/>
+              <div className="add-well in-content">
+                <OptimalAd config={{ width: 728, height: 90 }}/>
+              </div>
               <Link to="/blog" className="btn">Back</Link>
             </Well>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <RelatedArticles
               articles={articles}
               id={params.id}
@@ -70,7 +77,10 @@ export default class Blog extends React.Component {
                 dispatch(loadBlogPost(id));
                 browserHistory.push('/blog/' + id);
               }}/>
-              <ChitikaAdd config={{ width: 160, height: 600 }}/>
+              <Well className="add-well">
+                <OptimalAd config={{ width: 300, height: 250 }}/>
+                <ChitikaAd config={{ width: 300, height: 250 }}/>
+              </Well>
               <Disclaimer />
           </Col>
         </Row>
