@@ -1,23 +1,34 @@
 {
+  "cefour": {
+    "title": "Cefour AB",
+    "abstract": "The worst investment I've done so far. How I dearly purchased a constant reminder of my own stupidity.",
+    "published": "2016-08-17",
+    "author": "Albin Willman",
+    "tags": ["investment", "personal", "cefour"],
+    "metaTags": "Cefour, Easywine"
+  },
   "cinnober": {
     "title": "Cinnober Financial Technology",
     "abstract": "How I found out about Cinnober and why I decided to buy.",
     "published": "2016-08-16",
     "author": "Albin Willman",
-    "tags": ["investment", "cinnober", "cinnober financial technology", "stocks", "real time"]
+    "tags": ["investment", "cinnober", "cinnober financial technology", "stocks", "real time"],
+    "metaTags": "Cinnober, Cinnober financial technology"
   },
   "fingerprint": {
     "title": "Fingerprint Cards AB",
     "abstract": "The reasoning behind my descision to invest in Fingerprint Cards and the history of my ownership of this stock",
     "published": "2016-08-12",
     "author": "Albin Willman",
-    "tags": ["investment", "fingerprint", "fingerprint card ab", "stocks"]
+    "tags": ["investment", "fingerprint", "fingerprint card ab", "stocks"],
+    "metaTags": "Fingerprint cards, FPC, fing b, finance"
   },
   "investment-profile": {
     "title": "Me as an Investor",
     "abstract": "A description of how I see myself as an investor and how I view my investments as part of my life.",
     "published": "2016-08-11",
     "author": "Albin Willman",
-    "tags": ["investment", "personal"]
+    "tags": ["investment", "personal"],
+    "metaTags": "investment philosophy, lifestyle, finance"
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import Company from 'components/Company';
@@ -38,6 +39,9 @@ export default class CompanyPage extends React.Component {
     var { history } = this.props;
     return (
       <MyGrid>
+        <Helmet
+          title={company.name}
+          mete={[{ name: 'description', content: company.name + ', short, finance' }]}/>
         <Company company={company} history={history}/>
       </MyGrid>);
   }

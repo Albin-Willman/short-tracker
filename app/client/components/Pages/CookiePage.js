@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import MyGrid from 'components/Layout/MyGrid';
 import Row from 'react-bootstrap/lib/Row';
@@ -13,6 +14,7 @@ export default class CookiePage extends React.Component {
   render() {
     return (
       <MyGrid>
+        <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
         <Row>
           <Col md={8}>
             <Well className="highlight">
@@ -65,7 +67,7 @@ export default class CookiePage extends React.Component {
                   http://www.google.com/privacypolicy.html
                 </a>.
               </p>
-              <h4>Google ads</h4>
+              <h3>Ads</h3>
               <ul>
                 <li>
                   Third party vendors, including Google, use cookies to serve ads based on

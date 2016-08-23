@@ -74,6 +74,7 @@
     "react-ga": "^2.1.1",
     "react-google-ad": "^1.0.2",
     "react-google-charts": "^1.0.2",
+    "react-helmet": "^3.1.0",
     "react-router": "^2.6.0",
     "whatwg-fetch": "^1.0.0"
   }

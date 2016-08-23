@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import CompanyList from 'components/CompanyList';
@@ -21,6 +22,7 @@ export default class CompanyListPage extends React.Component {
 
     return (
       <MyGrid>
+        <Helmet title="Companies" />
         <CompanyList
           companies={companies}
           viewCompany={ id => {

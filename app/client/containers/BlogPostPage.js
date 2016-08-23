@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import MyGrid from 'components/Layout/MyGrid';
@@ -9,6 +10,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link, browserHistory } from 'react-router';
 import { loadBlogPost, loadIndex } from 'services/blog-services';
+import ChitikaAdd from 'containers/ChitikaAdd';
 
 @connect(s => s.blog)
 export default class Blog extends React.Component {
@@ -43,6 +45,9 @@ export default class Blog extends React.Component {
     var article = articles[params.id] || {};
     return (
       <MyGrid>
+        <Helmet
+          title={article.title}
+          mete={[{ name: 'description', content: article.metaTags }]}/>
         <Row>
           <Col md={9}>
             <Well className="blog-post">
@@ -65,6 +70,7 @@ export default class Blog extends React.Component {
                 dispatch(loadBlogPost(id));
                 browserHistory.push('/blog/' + id);
               }}/>
+              <ChitikaAdd config={{ width: 160, height: 600 }}/>
               <Disclaimer />
           </Col>
         </Row>

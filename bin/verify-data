@@ -4,46 +4,110 @@ require_relative "../ruby/DateList.rb"
 require 'json'
 require 'pathname'
 require 'set'
+require 'open-uri'
+require 'watir'
 
-def fill_date(company, date)
-  puts "Enter day high: "
-  high = gets.chomp
-  puts "Enter day low: "
-  low = gets.chomp
-  puts "Enter day close: "
-  close = gets.chomp
+def find_nn_id(company_name)
+  browser = Watir::Browser.new
+  browser.goto 'https://www.nordnet.se/mux/web/nordnet/index.html'
+  browser.text_field(id: 'searchQuery').set company_name
+  browser.form(id: 'searchQueryForm').submit
+  div = browser.div(class: 'search-result-item')
+  return {} unless div.exists?
+  res = {
+    text:  div.text,
+    nn_id: div.attribute_value('data-identifier')
+  }
+  browser.close
+  res
+end
+
+def fill_date(company, data, date)
+  puts date
+  puts data
   Dir.chdir File.dirname(__FILE__) do
-    `./append-to-history #{company} #{high} #{low} #{close} #{date}`
+    `./append-to-history "#{company}" #{data[:high]} #{data[:low]} #{data[:close]} #{date}`
   end
 end
 
-file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
+def fetch_nn_data(nn_id)
+  return {} unless nn_id && nn_id.length > 0
+  url = "https://www.nordnet.se/graph/instrument/11/#{nn_id}?from=2012-11-01&to=#{Date.today}&fields=last,high,low"
+  begin
+    historic_data = JSON.parse(open(url).read)
+    return historic_data.inject({}) do |res, day_data|
+      date = Time.at(day_data['time']/1000).to_date.to_s
+      res[date] = {
+        high: day_data['high'],
+        low: day_data['low'],
+        close: day_data['last']
+      }
+      res
+    end
+  rescue
+    puts 'exception'
+    return {}
+  end
+end
 
+def fetch_historic_data(company)
+  stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{company}.json")
+  return [] unless Pathname.new(stock_path).exist?
+  historic_data = JSON.parse(File.read(stock_path))
+  historic_data['history'].keys
+end
+
+file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 json =  JSON.parse(File.read(file_path))
 
-companies = json['companies'].keys
-
-companies.reverse.each do |company|
-  stock_path = File.join(File.dirname(__FILE__), "../dist/api/stocks/#{company}.json")
-  puts "**** #{company} ****"
-  unless Pathname.new(stock_path).exist?
-    puts "No historic data"
-    next
+def save_nn_id(nn_id, company, file_path)
+  data =  JSON.parse(File.read(file_path))
+  data['companies'][company]['nn_id'] = nn_id
+  File.open(file_path,"w") do |f|
+    f.write(data.to_json)
   end
+end
+
+def fetch_nn_id(data, company)
+  nn_id = data['nn_id']
+  return nn_id if nn_id && nn_id.length > 0
+  nn_id_data = find_nn_id(data['name'])
+  puts nn_id_data[:text]
+  puts "Is this correct?"
+  if gets.chomp.upcase == 'Y'
+    nn_id = nn_id_data[:nn_id]
+  else
+    puts "Submit NN id: "
+    nn_id = gets.chomp
+  end
+  save_nn_id(nn_id, company, file_path)
+  nn_id
+end
+
+def check_company(company, data, file_path)
+  puts "**** #{company} ****"
+
+  nn_id = fetch_nn_id(data, company)
+  return unless nn_id && nn_id != '-'
+
   relevant_dates = DateList.new.run(company, file_path)
-  historic_data = JSON.parse(File.read(stock_path))
-  historic_dates = historic_data['history'].keys
-  all_dates = true
+  relevant_dates.uniq!
+  historic_dates = fetch_historic_data(company)
+
+  nn_data = {}
   relevant_dates.each do |date|
     unless historic_dates.include?(date)
-      if(all_dates)
-        all_dates = false
-        puts "Missing dates"
+      nn_data = fetch_nn_data(nn_id) if nn_id
+      if nn_data[date]
+        fill_date(company, nn_data[date], date)
+      else
+        puts "No data for: #{date}"
       end
-      puts date
-      puts "Do you want to submit the data? (Y/N)"
-      fill_date(company, date) if gets.chomp.upcase == 'Y'
     end
   end
-  puts "Ok" if all_dates
+end
+
+
+json['companies'].each do |company, data|
+  check_company(company, data, file_path)
 end

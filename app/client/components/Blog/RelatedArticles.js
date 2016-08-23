@@ -44,7 +44,11 @@ export default class RelatedArticles extends React.Component {
   buildLink() {
     var { viewPost } = this.props;
     return (article) => {
-      return (<a href={'/blog/' + article.key} key={article.key} onClick={(e) => {
+      return (<a
+        className="related-link"
+        href={'/blog/' + article.key}
+        key={article.key}
+        onClick={(e) => {
           e.preventDefault();
           viewPost(article.key);
         }}>{article.title}</a>

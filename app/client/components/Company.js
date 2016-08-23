@@ -9,6 +9,7 @@ import ActorList from 'components/ActorList';
 import LineChart from 'components/LineChart';
 import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
+import ChitikaAdd from 'containers/ChitikaAdd';
 
 import computeHistoryData from 'utils/formaters/history-chart-formater';
 import computeActorData from 'utils/formaters/actor-chart-formater';
@@ -89,6 +90,7 @@ export default class Company extends React.Component {
           </Col>
           <Col lg={5}>
             <CaseExplain visible={detailed}/>
+            <ChitikaAdd config={{ width: 160, height: 600 }}/>
           </Col>
         </Row>
       </div>

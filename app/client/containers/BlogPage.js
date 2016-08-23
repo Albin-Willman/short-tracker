@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
+import ChitikaAdd from 'containers/ChitikaAdd';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
@@ -51,6 +53,7 @@ export default class Blog extends React.Component {
     }
     return (
       <MyGrid>
+        <Helmet title="Blog" />
         <Row>
           <Col md={9}>
             <Well>
@@ -64,6 +67,9 @@ export default class Blog extends React.Component {
               </p>
               {articleList}
             </Well>
+          </Col>
+          <Col md={3}>
+            <ChitikaAdd config={{ width: 160, height: 600 }}/>
           </Col>
         </Row>
       </MyGrid>);
