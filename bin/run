@@ -5,11 +5,10 @@ require 'date'
 require_relative "../ruby/downloader.rb"
 require_relative "../ruby/parser.rb"
 
-ending = '_NY'
-date = Date.today.to_s + ending
-puts date
+ending = ''
+date = Date.today.to_s
 file_name = 'tmp/data.xls'
-data_path = Downloader.new.run(file_name, date)
+data_path = Downloader.new.run(file_name, date + ending)
 
 data = XlsParser.new.run(data_path)
 

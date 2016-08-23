@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'aws-sdk'
+require 'digest'
 
 bucket_name = 'kortapositioner.se'
 
@@ -9,6 +10,7 @@ s3 = Aws::S3::Resource.new(region:'eu-west-1')
 bucket = s3.bucket(bucket_name)
 
 dist_path = File.join(File.dirname(__FILE__), "../dist/")
+last_deploy_path = File.join(File.dirname(__FILE__), "last_deploy.json")
 
 def content_type(file_path)
   return 'applicaton/json' if file_path.end_with?('.json')
@@ -20,30 +22,33 @@ def upload_file(bucket, file_path)
   bucket.object(file_path).upload_file(file_path, {content_type: content_type(file_path)})
 end
 
-if ARGV.include?('--full') || ARGV.include?('--app-only')
-  root_path = File.join(File.dirname(__FILE__), "../")
-  Dir.chdir root_path do
-    `npm run build`
+files = []
+Dir.chdir dist_path do
+  if ARGV.include?('--full') || ARGV.include?('--app-only')
+    files += Dir.glob("*.*")
   end
-  Dir.chdir dist_path do
-    Dir.glob("*.*").each do |dist_file|
-      upload_file(bucket, dist_file)
-    end
+
+  unless ARGV.include?('--app-only')
+    files += Dir.glob("api/**/*.*")
+  end
+
+  if ARGV.include?('--full') || ARGV.include?('--blog')
+    files += Dir.glob("blogposts/**/*.*")
   end
 end
 
-unless ARGV.include?('--app-only')
-  Dir.chdir dist_path do
-    Dir.glob("api/**/*.*").each do |dist_file|
-      upload_file(bucket, dist_file)
-    end
+shas = JSON.parse(File.read(last_deploy_path))
+
+Dir.chdir dist_path do
+  files.each do |file|
+    sha256 = Digest::SHA256.file(file).hexdigest
+    next if shas[file] && shas[file] == sha256
+    shas[file] = sha256
+    puts "Deploying #{file}"
+    upload_file(bucket, file)
   end
 end
 
-if ARGV.include?('--full') || ARGV.include?('--blog')
-  Dir.chdir dist_path do
-    Dir.glob("blogposts/**/*.*").each do |dist_file|
-      upload_file(bucket, dist_file)
-    end
-  end
+File.open(last_deploy_path,"w") do |f|
+  f.write(shas.to_json)
 end
