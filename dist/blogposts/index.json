@@ -1,4 +1,12 @@
 {
+  "novo": {
+    "title": "Novo Nordisk",
+    "abstract": "A quick overview of my stance in regards to the largest company in the nordic countries.",
+    "published": "2016-08-25",
+    "author": "Albin Willman",
+    "tags": ["investment", "personal", "Novo Nordisk"],
+    "metaTags": "Novo Nordisk, Diabetes, finance"
+  },
   "cefour": {
     "title": "Cefour AB",
     "abstract": "The worst investment I've done so far. How I dearly purchased a constant reminder of my own stupidity.",
