@@ -3,6 +3,7 @@ import React from 'react';
 
 import Table from 'react-bootstrap/lib/Table';
 import buildActorData from 'utils/formaters/actor-data-formater';
+import { logEvent } from 'utils/ga';
 
 export default class ActorList extends React.Component {
 
@@ -17,6 +18,10 @@ export default class ActorList extends React.Component {
     positions: [],
     history: [],
     detailed: false,
+  }
+
+  state = {
+    orderBy: { column: 'lastChanged', direction: 1 },
   }
 
   buildRow(actorCase, detailed) {
@@ -40,29 +45,62 @@ export default class ActorList extends React.Component {
       </tr>);
   }
 
+  setOrderBy = (newColumn) => {
+    var { column, direction } = this.state.orderBy;
+    var newDirection = 1;
+    if(column === newColumn) {
+      newDirection = -direction;
+    }
+    logEvent('Company page', 'sort', newColumn);
+    this.setState({ orderBy: { column: newColumn, direction: newDirection } });
+  }
+
   buildHeaders() {
     if(!this.props.detailed) {
       return false;
     }
     return (<thead><tr>
-        <th>Company</th>
-        <th>Best case*</th>
-        <th>Mid case*</th>
-        <th>Worst case*</th>
-        <th>Current</th>
-        <th>Last change</th>
-        <th>Last changed</th>
+        <th onClick={() => { this.setOrderBy('name') }}>Company</th>
+        <th onClick={() => { this.setOrderBy('bestMean') }}>Best case*</th>
+        <th onClick={() => { this.setOrderBy('midMean') }}>Mid case*</th>
+        <th onClick={() => { this.setOrderBy('worstMean') }}>Worst case*</th>
+        <th onClick={() => { this.setOrderBy('currentPos') }}>Current</th>
+        <th onClick={() => { this.setOrderBy('lastChange') }}>Last change</th>
+        <th onClick={() => { this.setOrderBy('lastChanged') }}>Last changed</th>
       </tr></thead>);
+  }
+
+  buildCompare = () => {
+    var { column, direction } = this.state.orderBy;
+    return (a, b) => {
+      if(a.name === 'Total') {
+        return 1;
+      }
+      if(b.name === 'Total') {
+        return -1;
+      }
+      if(a[column] < b[column]) {
+        return direction;
+      }
+      if(a[column] > b[column]) {
+        return -direction;
+      }
+      return 0;
+    };
   }
 
   render() {
     var { positions, detailed, history } = this.props;
     var rows = [];
-
     var cases = buildActorData(history, positions, detailed);
 
-    for(var i = 1; i < cases.length; i += 1) {
-      rows.push(this.buildRow(cases[i], detailed));
+    var sortedCases = cases.sort(this.buildCompare());
+
+    for(var i = 0; i < sortedCases.length; i += 1) {
+      var caseData = sortedCases[i];
+      if(caseData.name !== 'Date') {
+        rows.push(this.buildRow(sortedCases[i], detailed));
+      }
     }
 
     var headers = this.buildHeaders();

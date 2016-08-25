@@ -6,22 +6,13 @@
     <meta name="description" content="A small service providing historic data over short positions in swedish stocks.">
     <meta name="robots" content="index,follow">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" type="text/css">
+    <script type="text/javascript">window._trackJs = { token: 'c15bc030438c431b942e4c543d285eee' };</script>
+    <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
     <script>
       if(!document.styleSheets[0].cssRules || document.styleSheets[0].cssRules.length === 0){
         //<![CDATA[
         document.write('<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">');//]]>
       }
-    </script>
-    <script type='text/javascript'>
-      (function(w) {
-        if(navigator.userAgent.match(/iPhone|iPod|Android/i)==null)return;
-        var d=document,h=d.getElementsByTagName('head')[0],s=d.createElement('style'),j=d.createElement('script'),k=d.createElement('script');
-        s.setAttribute('rel','mw-page-block');s.innerHTML='body > * {display:none !important}';
-        j.setAttribute('src','//cdn.adsoptimal.com/advertisement/settings/37659.js');
-        k.setAttribute('src','//cdn.adsoptimal.com/advertisement/dispatcher.js');
-        j.onerror=k.onerror=function(){h.removeChild(s);h.removeChild(j);h.removeChild(k);};
-        h.appendChild(s);h.appendChild(j);h.appendChild(k);
-        })(window);
     </script>
     <link rel="shortcut icon" type="image/png" href="http://kortapositioner.se/favicon.ico">
   </head>
@@ -42,14 +33,24 @@
       //<![CDATA[
       (window.ReactDOM)||document.write('<script src="/react/dist/react-dom.min.js"><\/script>');//]]>
     </script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script src="/app.min.js?cache=7"></script>
+    <script src="/app.min.js?cache=11"></script>
     <script>
       (function(app) {
         var target = document.getElementById('app');
         var payload = {title: 'short-tracker - prod'};
         app.start(target, payload);
       })(app);
+    </script>
+
+    <script type='text/javascript'>
+    (function(w) {
+      if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)==null)return;
+      var d=document,h=d.getElementsByTagName('head')[0],j=d.createElement('script'),k=d.createElement('script');
+      j.setAttribute('src','//cdn.adsoptimal.com/advertisement/settings/37659.js');
+      k.setAttribute('src','//cdn.adsoptimal.com/advertisement/dispatcher.js');
+      j.onerror=k.onerror=function(){h.removeChild(j);h.removeChild(k);};
+      h.appendChild(j);h.appendChild(k);
+      })(window);
     </script>
   </body>
 </html>

@@ -37,11 +37,12 @@ export default class CompanyPage extends React.Component {
   render() {
     var { company } = this.state;
     var { history } = this.props;
+    var title = company ? company.name : '';
     return (
       <MyGrid>
         <Helmet
-          title={company.name}
-          mete={[{ name: 'description', content: company.name + ', short, finance' }]}/>
+          title={title}
+          mete={[{ name: 'description', content: title + ', short, finance' }]}/>
         <Company company={company} history={history}/>
       </MyGrid>);
   }

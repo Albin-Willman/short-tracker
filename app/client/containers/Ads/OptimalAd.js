@@ -12,6 +12,9 @@ export default class OptimalAd extends React.Component {
   }
 
   componentWillMount() {
+    if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)!==null) {
+      return;
+    }
     const script1 = document.createElement('script');
     script1.setAttribute('src','//cdn.adsoptimal.com/advertisement/settings/37659.js');
     const script2 = document.createElement('script');
@@ -24,16 +27,10 @@ export default class OptimalAd extends React.Component {
   }
 
   render() {
+    if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)!==null) {
+      return false;
+    }
     var { config } = this.props;
     return <div className="adsoptimal-slot" style={config}></div>;
   }
 }
-
-
-/*
-
-<script type='text/javascript'>
-
-</script>
-
-*/

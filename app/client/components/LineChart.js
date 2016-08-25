@@ -24,6 +24,10 @@ export default class LineChart extends React.Component {
       vAxis: { title: vAxis },
     };
 
+    if(!data || data.length == 0) {
+      return false;
+    }
+
     return (<Chart chartType="LineChart"
                 data={data}
                 options={options}

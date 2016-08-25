@@ -6,8 +6,10 @@ export default function computeActorData(actors) {
   rows.push(buildLabels(actors));
   var allDates = findAllDates(actors);
 
-  var lastRow = new Array(Object.keys(actors).length + 1);
-  lastRow.fill(0);
+  var lastRow = [];
+  for(var i = 0; i < Object.keys(actors).length + 1; i += 1) {
+    lastRow.push(0);
+  }
   for (var i = 0; i < allDates.length; i += 1) {
     var row = buildRow(actors, allDates[i], lastRow);
     rows.push(row);
