@@ -1,0 +1,63 @@
+<h2>Starting over</h2>
+<p>
+  If you haven't read my post from last night I recommend that you start with that.
+</p>
+<p>
+  This is day two of my experiments with machine learning. I have actually jumped the gun a little bit and been working with the code for an hour before I started writing here. I fiddled a little bit with the ideas I had when I left of yesterday but I have not managed to get to any kind of results worth mentioning. Time to take a step back. It might be that predicting the movements in the stock market might be a hard problem and that it takes more than a few hours of experimenting to crack that nut. Maybe I should try to take a stroll before I go running.
+</p>
+<p>
+  I think i will look for some already solved problems and try to reproduce them to get a little bit of a feel for working with neural networks.
+</p>
+ <h2>XOR</h2>
+ <p>
+   After a bit of googling I found what I think is a better starting point. Building the neural networks that can work as the basic building stones of <a target="_blank" href="https://en.wikipedia.org/wiki/Boolean_algebra">boolean algebra</a>. It has been way too long since I was playing with boolean algebra anyway. In boolean algebra we only with true and false usually represented by zero and one.
+ </p>
+ <p>
+   The first rule I will implement is debatable if it actually belongs but I will start there anyway. Haters gonna hate, you know. I am gonna try to get XOR working. XOR is short for exclusive or, meaning that if either of the inputs, but not both, is true it will return true yielding the following training data for the neural network:
+ </p>
+ <table class="table">
+   <thead>
+     <tr>
+       <th>Input 1</th>
+       <th>Input 2</th>
+       <th>Output</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <td>True</td>
+       <td>True</td>
+       <td>False</td>
+     </tr>
+     <tr>
+       <td>True</td>
+       <td>False</td>
+       <td>True</td>
+     </tr>
+     <tr>
+       <td>False</td>
+       <td>True</td>
+       <td>True</td>
+     </tr>
+     <tr>
+       <td>False</td>
+       <td>False</td>
+       <td>False</td>
+     </tr>
+   </tbody>
+ </table>
+
+ <p>
+   I will set this network up using a simple network with a single hidden layer containing two nodes. Based on what I read that should be sufficient. I will be right back once this has been tested :)
+ </p>
+
+ <h2>Success</h2>
+ <p>
+   At last! Something actually gave me the expected results. It was quite easy for the neural network gem I installed solved this super easy so I went ahead and tried AND and OR as well. Both of them work splendidly. But I feel a little bit like I haven't done anything myslef yet. All I've done is formating input data and fiddle with parameters designing the shape of the Neural network. In order to understand this stuff a little better I think i is time to build it myself.
+ </p>
+<p>
+  Building a neural net from scratch should be quite easy. It is just a directional graph after all each layer taking input from the previous layers until you reach the output layer. The tricky thing is finding the relevant input parameters and a good shape for the network as well as a good training algorithm. But I think it will be easier to get a good grasp on these things if you have done the basics yourself. I will probable go back to using the gem after I am satisfied that my own stuff is working. Since theirs is running using a bunch of optimised native code it will be way faster than anything I can throw together in a reasonable amount of time.
+</p>
+<p>
+  But I think I will leave of here for tonight. I intend to be in the office in slightly less than eight hours so it probably is a good idea to quit playing around.
+</p>

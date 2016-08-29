@@ -1,0 +1,38 @@
+<p>
+  I enjoy learning new things and I enjoy coding. This means that I usually is on the look out for experiments that I can throw a litle bit of code at. One thing I have been looking at for quite a while but haven't gotten around to is machine learning and neural networks. I have watched a few lectures about it on youtube and it seems like a neat thing. After <a target="_blank" href="https://gogameguru.com/tag/deepmind-alphago-lee-sedol/">Alphgo v Lee Sedol</a> it moved up my list and now it has made it all the way to the top.
+</p>
+<h2>Combining interests</h2>
+<p>
+  The first step is deciding what to teach my computer. I figured it would be interesting to try to teach it to estimate tomorrows change in the stock market. In that way I get to play with two of my interests at once and also there is quite a lot of data available.
+</p>
+<p>
+  Since I mainly trade on the swedish market I have downloaded the daily closing price for omxs30 for the last 10 years. I am going to start with that data set and start reading about how to manipulate that data in to a workable format. That is exactly how far I have gotten writing this. I'll be back in an hour or two and hopefully I know a little bit more by then.
+</p>
+<h2>How did other people do</h2>
+<p>
+  It has been 15-20 min since I wrote the last time. I have been doing some research and trying to see how other people have done. I found a quite slim <a target="_blank" href="https://github.com/gbuesing/neural-net-ruby">project</a> that does stuff similar to what I am trying to achieve. I have mainly been looking at the miles per gallon example since that also is about predicting a number. I still have not written any code but now I have a starting point. I think I will start by borrowing the algortihm from that project and just work with formating data to start with. And then I'll take it from there.
+</p>
+<h2>Formating the data</h2>
+<p>
+  I have been working for an hour or so on getting the my data on nice format. My goal has been to build a script that can format the data for my in a nice way so that if I change my mind about what might be an nice way then I can quickly reformat the data and keep working. I did however compromise with the flexibility of the script I limited it to work with data from a single source, OMXS30 to start with. Later I might go back and add multiple data sources I think that S&P500 might be relevant as well as some Asian markets.
+</p>
+<p>
+  I decided to use the closing values from the previous 10 days as input data to start with. While I was doing this I read a little bit more online and I found <a target="_blank" href="https://github.com/tangledpath/ruby-fann">this project</a> which seemed a little bit more mature and much better documented than the one I started out with. So I am swtiching.
+</p>
+
+<h2>First try</h2>
+<p>
+  Ok... So I made an initial quite crude attempt based on the data format I described above. Based on this run the market will be down 17.5% on monday. So either I should go all in in some crazy Bear X15 ETF first thing monday morning or I should try moving some parameters around.
+</p>
+<p>
+  I think that one issue I might have in my data is the trend. Since the stock market has been moving generally higher and higher and much of my training data is from the past the the algorithm will think it is liklier that a low value is correct. Instead of investigating actual closing values I will move on to looking at the day to day change. the growth effect should have smaller impact on that data set.
+</p>
+
+<h2>Second try</h2>
+
+<p>
+  I did not have much more luck with this experiment. Now it keeps guessing that the change of each future day will be zero. I am not sure why it does this at the moment and I think I will need to think a little bit about this. So I will try a different aproach. I am going to try to classify days. To start with I am going to use three different types of days: Type 1 represented by -1 are all days the index has gone down more than 0.5% type 3 is represented by 1 and is all days the index has advanced more than 0.5% and type 2 represented by 0 is all the other days.
+</p>
+<p>
+  But I think that experiment will have to wait have to wait until tommorrow since the clock is drawing closer to 2 in the morning and I have none coding stuff to do tomorrow.
+</p>
