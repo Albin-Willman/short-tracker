@@ -1,0 +1,27 @@
+<p>
+  So I started building my own neural net. I'm doing this in <a target="_blank" href="https://www.ruby-lang.org/en/">ruby</a> mainly because I like programming in ruby and I at the moment I do not get to do it on a daily basis. It is also very easy to make a nice setup so you can TDD a solution with almost no overhead. I enjoy getting in to a nice TDD flow, you usually end up understanding what you built and how you can change and improve it on a much deeper level than if you just start beating at your solution untill it looks like it works.
+</p>
+<h2>Bottom up</h2>
+<p>
+  Let's strat with building the nodes. Once we have those all we need to do is connect them :) first test case: When I create a node I want the result to be a node. Fairly obvious but it is a nice starting point. When that is done I figure out what I want to use the node for. All I really want is to know their value. Lets make it easy for us and calculate the value of the node as soon as it is created, that way we know we never happen to calculate the same node twice. In order to calculate a node we need to get the values of all nodes earlier in the net and the weight of each of those. Done! We now have nodes.
+</p>
+<h2>Building a net</h2>
+<p>
+  What do I need to define a net? I need to know the shape of the net, I think I will borrow how this is defined from the other solutions I played around with. An array where each element defines how many nodes is in the corresponding level of the net. I also need to know the weights, let's define this by an array of arrays of arrays :) Each node will have an array of weights.
+</p>
+<p>
+  I will start my tests from more or less the same point as with nodes. I want to be able to create a net given the definition I stated above and I want to be able to calculate it's value given an input. This time I do not want to calculate everyting upfront. The reason I do not want that is that when training the net I want to calculate the value for the same net given multiple inputs.
+</p>
+<p>
+  This is why I love ruby. 30 minutes, 34 lines of spacious code, 40 lines of test code and we have a neaural net. Now it is just a matter of training it and using it.
+</p>
+<h2>Training utilities</h2>
+<p>
+  Before I can start implementing the actual training I need to figure out what kind of algorithm I shall use. After a litle bit of reading reading I think I will do a simplistic version of a genetic algorithm. It might not be the optimal solution for my kind of problem but I think it will be good enough and I have been thinking about implementing one for quite som time.
+</p>
+<p>
+  The basic idea of a genetic algorithm is that you have a "gene-pool" of potential solutions. Then you allow the solutions in that pool to "mate" producing offspring. The offspring of two soultions is a mix between its two parents with a little chance of random mutations. After each time offspring has been produced all of the members of the "gene-pool" will be evaluated based on the training data and the weakest ones will be eliminated. Then you itterate untill you are happy with the result or you get stuck.
+</p>
+<p>
+  In order to easily mate solutions I want the solutions to be represented by a flat array instead of the nested ones I currently use to store my weights. Instead of changing my implementation of the neural net I will build a utility taking a shape and a nested array and transforming that in to a flat array and the other way around. Once I implemented this I think I will be happy for tonight and leave the implentation of the training and genetic algorithm till next time.
+</p>

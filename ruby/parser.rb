@@ -79,6 +79,12 @@ class XlsParser
   end
 
   def valid_date?(date)
-    date.is_a? Date
+    return true if date.is_a? Date
+    begin
+      Date.parse(date)
+      return true
+    rescue
+      return false
+    end
   end
 end

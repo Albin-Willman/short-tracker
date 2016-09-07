@@ -1,4 +1,12 @@
 {
+  "machine-learning-3": {
+    "title": "Machine learning: Day 3",
+    "abstract": "Time to implement my own neural network!",
+    "published": "2016-08-28",
+    "author": "Albin Willman",
+    "tags": ["code", "tech", "machine learning", "AI", "computerized investment"],
+    "metaTags": "Machine learning, code, experimental, AI, neural network"
+  },
   "machine-learning-2": {
     "title": "Machine learning: Day 2",
     "abstract": "My second take in understanding neural networks.",

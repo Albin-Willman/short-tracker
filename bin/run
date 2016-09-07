@@ -6,7 +6,7 @@ require_relative "../ruby/downloader.rb"
 require_relative "../ruby/parser.rb"
 
 ending = ''
-date = Date.today.to_s
+date = (Date.today.prev_day).to_s
 file_name = 'tmp/data.xls'
 data_path = Downloader.new.run(file_name, date + ending)
 
