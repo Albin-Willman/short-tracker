@@ -1,4 +1,4 @@
-
+import buildCompanyData from 'utils/formaters/company-data-builder';
 import {
   SET_LOADED,
   SET_LOADING,
@@ -17,6 +17,7 @@ export const INITIAL_STATE = {
 };
 
 
+
 export function appReducer(state = INITIAL_STATE, action) {
   var { type, payload } = action;
   switch (type) {
@@ -33,8 +34,14 @@ export function appReducer(state = INITIAL_STATE, action) {
         updated: payload,
       };
     case SET_COMPANIES:
+      var companies = {};
+      for(var name in payload) {
+        if (payload.hasOwnProperty(name)) {
+          companies[name] = buildCompanyData(payload[name]);
+        }
+      }
       return { ...state,
-        companies: payload,
+        companies,
       };
     case SET_HISTORY:
       return { ...state,

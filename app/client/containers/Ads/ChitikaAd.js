@@ -2,8 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Well from 'react-bootstrap/lib/Well';
-
 const scriptContainerId = 'ad-scripts';
 const unitBase = {
   calltype: 'async[2]',

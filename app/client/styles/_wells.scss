@@ -13,21 +13,22 @@
   &.accent { @include well-styling($blue); }
   &.highlight { @include well-styling($green); }
 }
-
-.well-row {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
-  > div {
-    margin-bottom: 30px;
+@media screen and (min-width: 620px) {
+  .well-row {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-  }
 
-  .well {
-    height: 100%;
+    > div {
+      margin-bottom: 30px;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .well {
+      height: 100%;
+    }
   }
 }
 
