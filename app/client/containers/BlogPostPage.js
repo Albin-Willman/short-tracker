@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import MyGrid from 'components/Layout/MyGrid';
 import RelatedArticles from 'components/Blog/RelatedArticles';
 import Disclaimer from 'components/Blog/Disclaimer';
+import Introduction from 'components/Blog/Introduction';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
@@ -69,6 +70,7 @@ export default class Blog extends React.Component {
             </Well>
           </Col>
           <Col md={4}>
+            <Introduction />
             <RelatedArticles
               articles={articles}
               id={params.id}

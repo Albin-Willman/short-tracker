@@ -10,8 +10,8 @@ export default function computeActorData(actors) {
   for(var i = 0; i < Object.keys(actors).length + 1; i += 1) {
     lastRow.push(0);
   }
-  for (var i = 0; i < allDates.length; i += 1) {
-    var row = buildRow(actors, allDates[i], lastRow);
+  for (var j = 0; j < allDates.length; j += 1) {
+    var row = buildRow(actors, allDates[j], lastRow);
     rows.push(row);
     lastRow = row;
   }

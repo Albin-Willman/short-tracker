@@ -60,13 +60,27 @@ export default class ActorList extends React.Component {
       return false;
     }
     return (<thead><tr>
-        <th onClick={() => { this.setOrderBy('name') }}>Company</th>
-        <th onClick={() => { this.setOrderBy('bestMean') }}>Best case*</th>
-        <th onClick={() => { this.setOrderBy('midMean') }}>Mid case*</th>
-        <th onClick={() => { this.setOrderBy('worstMean') }}>Worst case*</th>
-        <th onClick={() => { this.setOrderBy('currentPos') }}>Current</th>
-        <th onClick={() => { this.setOrderBy('lastChange') }}>Last change</th>
-        <th onClick={() => { this.setOrderBy('lastChanged') }}>Last changed</th>
+        <th onClick={() => {
+          this.setOrderBy('name');
+        }}>Company</th>
+        <th onClick={() => {
+          this.setOrderBy('bestMean');
+        }}>Best case*</th>
+        <th onClick={() => {
+          this.setOrderBy('midMean');
+        }}>Mid case*</th>
+        <th onClick={() => {
+          this.setOrderBy('worstMean');
+        }}>Worst case*</th>
+        <th onClick={() => {
+          this.setOrderBy('currentPos');
+        }}>Current</th>
+        <th onClick={() => {
+          this.setOrderBy('lastChange');
+        }}>Last change</th>
+        <th onClick={() => {
+          this.setOrderBy('lastChanged');
+        }}>Last changed</th>
       </tr></thead>);
   }
 

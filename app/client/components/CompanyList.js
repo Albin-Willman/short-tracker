@@ -66,7 +66,8 @@ export default class CompanyList extends React.Component {
     };
   }
 
-  buildCompanyRow(key, company, viewCompany) {
+  buildCompanyRow = (key, company) => {
+    var { viewCompany } = this.props;
     return (<tr
       key={key}
       onClick={()=>{
@@ -74,12 +75,14 @@ export default class CompanyList extends React.Component {
       }}
       style={{ cursor: 'pointer' }}>
         <td>{company.name}</td>
+        <td>{company.total.toFixed(2)} %</td>
+        <td>{company.change30Days.toFixed(2)} %</td>
         <td>{company.lastChange}</td>
       </tr>);
   }
 
   render() {
-    var { companies, viewCompany } = this.props;
+    var { companies } = this.props;
     var filteredCompanies = [];
 
     var { filter, page } = this.state;
@@ -106,7 +109,7 @@ export default class CompanyList extends React.Component {
 
     for(var i = first; i < last; i += 1) {
       var sortedCompany = sortedCompanies[i];
-      rows.push(this.buildCompanyRow(sortedCompany.key, sortedCompany.company, viewCompany));
+      rows.push(this.buildCompanyRow(sortedCompany.key, sortedCompany.company));
     }
 
     return (<Row>
@@ -124,6 +127,8 @@ export default class CompanyList extends React.Component {
           <Table>
             <thead><tr>
               {this.buildHeader('Company', 'name')}
+              {this.buildHeader('Total short', 'total')}
+              {this.buildHeader('Change 30 days', 'change30Days')}
               {this.buildHeader('Last change', 'lastChange')}
             </tr></thead>
             <tbody>

@@ -23,7 +23,6 @@ export default class Company extends React.Component {
     company: React.PropTypes.shape({
       name: React.PropTypes.string,
       actors: React.PropTypes.object,
-
     }),
     history: React.PropTypes.object,
   }
@@ -60,12 +59,20 @@ export default class Company extends React.Component {
     var listWidth = detailed ? 12 : 6;
     var buttonLabel = detailed ? 'Hide details' : 'Show details';
 
+    var changeSign = company.change30Days > 0 ? '+' : '';
+
     return (
       <div>
         <Row>
           <Col lg={listWidth}>
             <Well className="highlight">
               <h1>{company.name}</h1>
+              <div>
+                Change last 30 days: <strong>
+                  {changeSign}{(company.change30Days || 0).toFixed(2)} %
+                </strong>
+              </div>
+
               <h3>
                 Current positions
                 <Button

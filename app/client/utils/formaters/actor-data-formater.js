@@ -30,12 +30,20 @@ function computeDetails(actors, history, positions, labels) {
 
 function evaluateChange(actors, positions, history, i, j) {
   var actor = actors[j];
-  var position = positions[i][j];
-  if(position !== actor.currentPos) {
+  var position = findDateData(history[i][0], positions, j);
+  if(position && position !== actor.currentPos) {
     if (position === 0) {
       actors[j] = defaultActorCase(actor.name, history[i][0]);
     } else {
       updateActor(actor, position, history[i]);
+    }
+  }
+}
+
+function findDateData(date, positions, index) {
+  for(var i = 0; i< positions.length; i += 1) {
+    if(positions[i][0] === date) {
+      return positions[i][index];
     }
   }
 }

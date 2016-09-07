@@ -24,12 +24,8 @@ end
 
 files = []
 Dir.chdir dist_path do
-  if ARGV.include?('--full') || ARGV.include?('--app-only')
+  if ARGV.include?('--full') || ARGV.include?('--app')
     files += Dir.glob("*.*")
-  end
-
-  unless ARGV.include?('--app-only')
-    files += Dir.glob("api/**/*.*")
   end
 
   if ARGV.include?('--full') || ARGV.include?('--blog')
