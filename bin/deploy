@@ -27,7 +27,7 @@ Dir.chdir dist_path do
   if ARGV.include?('--full') || ARGV.include?('--app')
     files += Dir.glob("*.*")
   end
-
+  files += Dir.glob("api/**/*.*")
   if ARGV.include?('--full') || ARGV.include?('--blog')
     files += Dir.glob("blogposts/**/*.*")
   end

@@ -1,5 +1,3 @@
-
-
 export default function buildActorData(history, positions, detailed) {
   var actors = [];
   var labels = positions[0];
@@ -11,13 +9,25 @@ export default function buildActorData(history, positions, detailed) {
   }
   if(detailed) {
     computeDetails(actors, history, positions, labels);
-  } else {
-    var lastRow = positions[positions.length - 1];
-    for (i = 1; i < labels.length; i += 1) {
-      actors[i].currentPos = lastRow[i];
-    }
+  }
+  for (i = 1; i < labels.length; i += 1) {
+    findLastChange(i, positions, actors);
   }
   return actors;
+}
+
+function findLastChange(i, positions, actors) {
+  for(var j = positions.length - 1; j > 1; j -= 1) {
+    if(positions[j][i] !== positions[j-1][i]) {
+      actors[i].lastChanged = positions[j][0];
+      actors[i].lastChange = positions[j][i] - positions[j-1][i];
+      actors[i].currentPos = positions[j][i];
+      return;
+    }
+  }
+  actors[i].lastChanged = positions[1][0];
+  actors[i].lastChange = positions[1][i] - positions[j-1][i];
+  actors[i].currentPos = positions[1][i];
 }
 
 function computeDetails(actors, history, positions, labels) {

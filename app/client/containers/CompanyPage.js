@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Company from 'components/Company';
 import MyGrid from 'components/Layout/MyGrid';
+import Description from 'components/Meta/Description';
 
 import { loadHistory } from 'services/data-services';
 
@@ -40,9 +41,10 @@ export default class CompanyPage extends React.Component {
     var title = company ? company.name : '';
     return (
       <MyGrid>
-        <Helmet
-          title={title}
-          mete={[{ name: 'description', content: title + ', short, finance' }]}/>
+        <Helmet title={title} />
+        <Description
+          description={`Data describing who is shorting ${title}`}
+          keywords={`${title}, short, shorts, finance, stock, investment`} />
         <Company company={company} history={history}/>
       </MyGrid>);
   }

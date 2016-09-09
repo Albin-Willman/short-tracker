@@ -1,4 +1,12 @@
 {
+  "tobii": {
+    "title": "Tobii",
+    "abstract": "How I found Tobii and why I'm keeping it.",
+    "published": "2016-09-09",
+    "author": "Albin Willman",
+    "tags": ["investment", "tobii", "tobii ab", "stocks", "eye tracking"],
+    "metaTags": "Tobii, investments, eytracking"
+  },
   "machine-learning-3": {
     "title": "Machine learning: Day 3",
     "abstract": "Time to implement my own neural network!",

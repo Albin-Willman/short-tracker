@@ -8,6 +8,7 @@ import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
+import Description from 'components/Meta/Description';
 
 export default class AboutPage extends React.Component {
 
@@ -15,7 +16,10 @@ export default class AboutPage extends React.Component {
 
     return (
       <MyGrid>
-        <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
+        <Helmet title="Kortapositioner.se"/>
+        <Description
+      description="A small service providing historic data over short positions in swedish stocks."
+      keywords="finance, swedish-stocks, nasdaq, short, shorting, trading" />
         <Row>
           <Col md={8}>
             <Well className="highlight">

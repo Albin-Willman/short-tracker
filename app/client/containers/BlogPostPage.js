@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
+import Description from 'components/Meta/Description';
 import MyGrid from 'components/Layout/MyGrid';
 import RelatedArticles from 'components/Blog/RelatedArticles';
 import Disclaimer from 'components/Blog/Disclaimer';
@@ -47,9 +48,8 @@ export default class Blog extends React.Component {
     var article = articles[params.id] || {};
     return (
       <MyGrid>
-        <Helmet
-          title={article.title}
-          mete={[{ name: 'description', content: article.metaTags }]}/>
+        <Helmet title={article.title} />
+        <Description description={article.abstract} keywords={article.metaTags} />
         <Row>
           <Col md={8}>
             <Well className="blog-post">

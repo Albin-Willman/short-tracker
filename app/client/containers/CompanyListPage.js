@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
+import Description from 'components/Meta/Description';
 import CompanyList from 'components/CompanyList';
 import MyGrid from 'components/Layout/MyGrid';
 
@@ -23,6 +24,9 @@ export default class CompanyListPage extends React.Component {
     return (
       <MyGrid>
         <Helmet title="Companies" />
+        <Description
+        description="Data on all companies with major short positions on stockholm stock exchange."
+        keywords="finance, investments, shorting, investment-data" />
         <CompanyList
           companies={companies}
           viewCompany={ id => {

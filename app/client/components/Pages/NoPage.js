@@ -5,12 +5,18 @@ import MyGrid from 'components/Layout/MyGrid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
+import Description from 'components/Meta/Description';
+import Helmet from 'react-helmet';
 
 export default class NoPage extends React.Component {
 
   render() {
     return (
       <MyGrid>
+        <Helmet title="Kortapositioner.se"/> 
+        <Description
+      description="A small service providing historic data over short positions in swedish stocks."
+      keywords="finance, swedish-stocks, nasdaq, short, shorting, trading" />
         <Row>
           <Col md={6} mdOffset={3}>
             <Well className="testing">

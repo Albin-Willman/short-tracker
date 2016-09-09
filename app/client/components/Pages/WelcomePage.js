@@ -8,6 +8,7 @@ import Well from 'react-bootstrap/lib/Well';
 import ContentWell from 'components/Wells/ContentWell';
 import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
+import Description from 'components/Meta/Description';
 
 const repoLink = 'https://github.com/Albin-Willman/short-tracker';
 const email = 'albin@kortapositioner.se';
@@ -20,6 +21,9 @@ export default class WelcomePage extends React.Component {
     return (
       <div>
         <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
+        <Description
+      description="A small service providing historic data over short positions in swedish stocks."
+      keywords="finance, swedish-stocks, nasdaq, short, shorting, trading" />
         <Jumbotron className="welcome">
           <Grid>
             <h1>Welcome to kortapositioner.se</h1>

@@ -6,6 +6,7 @@ import MyGrid from 'components/Layout/MyGrid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
+import Description from 'components/Meta/Description';
 
 import AppInfo from 'containers/AppInfo';
 
@@ -14,7 +15,10 @@ export default class CookiePage extends React.Component {
   render() {
     return (
       <MyGrid>
-        <Helmet titleTemplate="Kortapositioner.se" title="Kortapositioner.se"/>
+        <Helmet title="Kortapositioner.se"/>
+        <Description
+      description="A small service providing historic data over short positions in swedish stocks."
+      keywords="finance, swedish-stocks, nasdaq, short, shorting, trading" />
         <Row>
           <Col md={8}>
             <Well className="highlight">

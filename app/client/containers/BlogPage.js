@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
+import Description from 'components/Meta/Description';
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
 import ChitikaAd from 'containers/Ads/ChitikaAd';
@@ -55,6 +56,9 @@ export default class Blog extends React.Component {
     return (
       <MyGrid>
         <Helmet title="Blog" />
+        <Description
+          description="A blog with my view on investments, coding, and other things."
+          keywords="finance, investments, technology, machine learning, ai" />
         <Row>
           <Col md={8}>
             <Well>
