@@ -5,6 +5,7 @@ import {
   SET_UPDATED,
   SET_COMPANIES,
   SET_HISTORY,
+  SET_MESSAGE,
 } from 'actions/data-actions';
 
 export const INITIAL_STATE = {
@@ -14,6 +15,7 @@ export const INITIAL_STATE = {
   companies: {},
   history: {},
   updated: '',
+  message: '',
 };
 
 
@@ -24,6 +26,11 @@ export function appReducer(state = INITIAL_STATE, action) {
     case SET_LOADING:
       return { ...state,
         loading: payload,
+      };
+    case SET_MESSAGE:
+      return {
+        ...state,
+        message: payload,
       };
     case SET_LOADED:
       return { ...state,

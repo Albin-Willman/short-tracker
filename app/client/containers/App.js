@@ -12,6 +12,7 @@ import TopBar from 'components/Layout/TopBar';
 import Footer from 'components/Layout/Footer';
 import CookiePage from 'components/Pages/CookiePage';
 import CookieNotice from 'components/Layout/CookieNotice';
+import VacationNotice from 'components/Layout/VacationNotice';
 import WelcomePage from 'components/Pages/WelcomePage';
 import NoPage from 'components/Pages/NoPage';
 
@@ -74,7 +75,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    var { dispatch, cookies } = this.props;
+    var { dispatch, cookies, message } = this.props;
     var content = this.buildContent();
     return (
       <div>
@@ -85,6 +86,7 @@ export default class App extends React.Component {
             dispatch(acceptCookies());
           }}
           accepted={cookies.accepted}/>
+        <VacationNotice message={message}/>
         <TopBar />
         {content}
         </div>

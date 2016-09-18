@@ -1,4 +1,4 @@
-import { setCompanies, setUpdated, setLoading, setLoaded, setHistory } from 'actions/data-actions';
+import { setCompanies, setUpdated, setLoading, setLoaded, setHistory, setMessage } from 'actions/data-actions';
 
 const requestConfig = {
   headers: {
@@ -15,6 +15,7 @@ export function loadData() {
     .then(data => {
       dispatch(setUpdated(data.updated));
       dispatch(setCompanies(data.companies));
+      dispatch(setMessage(data.message));
     })
     .then(() => {
       dispatch(setLoaded(true));

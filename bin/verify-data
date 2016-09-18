@@ -8,7 +8,7 @@ require 'open-uri'
 require 'watir'
 
 def find_nn_id(company_name)
-  browser = Watir::Browser.new
+  browser = Watir::Browser.new :chrome
   browser.goto 'https://www.nordnet.se/mux/web/nordnet/index.html'
   browser.text_field(id: 'searchQuery').set company_name
   browser.form(id: 'searchQueryForm').submit
@@ -60,7 +60,8 @@ end
 file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
 json =  JSON.parse(File.read(file_path))
 
-def save_nn_id(nn_id, company, file_path)
+def save_nn_id(nn_id, company)
+  file_path ||= File.join(File.dirname(__FILE__), "../dist/api/data.json")
   data =  JSON.parse(File.read(file_path))
   data['companies'][company]['nn_id'] = nn_id
   File.open(file_path,"w") do |f|
@@ -80,7 +81,7 @@ def fetch_nn_id(data, company)
     puts "Submit NN id: "
     nn_id = gets.chomp
   end
-  save_nn_id(nn_id, company, file_path)
+  save_nn_id(nn_id, company)
   nn_id
 end
 
