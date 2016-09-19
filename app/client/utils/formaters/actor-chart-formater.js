@@ -1,6 +1,7 @@
 export default function computeActorData(actors) {
+  console.log(actors);
   var rows = [];
-  if(!actors) {
+  if(Object.keys(actors).length === 0) {
     return rows;
   }
   rows.push(buildLabels(actors));

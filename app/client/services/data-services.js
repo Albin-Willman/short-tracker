@@ -1,4 +1,16 @@
-import { setCompanies, setUpdated, setLoading, setLoaded, setHistory, setMessage } from 'actions/data-actions';
+import {
+  setCompanies,
+  setUpdated,
+  setLoading,
+  setLoaded,
+  setMessage,
+} from 'actions/data-actions';
+
+import {
+  setHistory,
+  setPositions,
+  setCompanyKey,
+} from 'actions/company-actions'
 
 const requestConfig = {
   headers: {
@@ -10,7 +22,7 @@ const requestConfig = {
 export function loadData() {
   return (dispatch) => {
     dispatch(setLoading(true));
-    fetch('/api/data.json', requestConfig)
+    fetch('/api/v2/stocks.json', requestConfig)
     .then(transformToJson)
     .then(data => {
       dispatch(setUpdated(data.updated));
@@ -26,11 +38,14 @@ export function loadData() {
 
 export function loadHistory(company) {
   return (dispatch) => {
-    dispatch(setHistory(company, 'No history'));
-    fetch('/api/stocks/' + company + '.json', requestConfig)
+    dispatch(setHistory({}));
+    dispatch(setPositions({}));
+    dispatch(setCompanyKey(company));
+    fetch('/api/v2/stocks/' + company + '.json', requestConfig)
     .then(transformToJson)
     .then(data => {
-      dispatch(setHistory(company, data));
+      dispatch(setHistory(data.history));
+      dispatch(setPositions(data.positions));
     });
   };
 }

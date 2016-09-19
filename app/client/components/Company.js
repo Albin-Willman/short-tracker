@@ -22,13 +22,14 @@ export default class Company extends React.Component {
   static propTypes = {
     company: React.PropTypes.shape({
       name: React.PropTypes.string,
-      actors: React.PropTypes.object,
     }),
+    positions: React.PropTypes.object,
     history: React.PropTypes.object,
   }
 
   static defaultProps = {
     company: {},
+    positions: {},
     history: {},
   }
 
@@ -49,12 +50,12 @@ export default class Company extends React.Component {
   }
 
   render() {
-    var { company, history } = this.props;
+    var { company, history, positions } = this.props;
     var { detailed } = this.state;
 
     var historyData = computeHistoryData(history);
     var historyChart = this.buildHistoryChart(historyData);
-    var positionChartData = computeActorData(company.actors);
+    var positionChartData = computeActorData(positions);
 
     var listWidth = detailed ? 12 : 6;
     var buttonLabel = detailed ? 'Hide details' : 'Show details';

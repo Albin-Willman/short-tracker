@@ -8,12 +8,17 @@ import Description from 'components/Meta/Description';
 
 import { loadHistory } from 'services/data-services';
 
-@connect(s => s.app)
+@connect(s => {
+  return { ...s.company,
+    companies: s.app.companies,
+  };
+})
 export default class CompanyPage extends React.Component {
 
   static propTypes = {
     companies: React.PropTypes.object,
     history: React.PropTypes.object,
+    positions: React.PropTypes.object,
     params: React.PropTypes.object,
     dispatch: React.PropTypes.func,
   }
@@ -21,6 +26,7 @@ export default class CompanyPage extends React.Component {
   static defaultProps = {
     companies: {},
     history: {},
+    positions: {},
     params: {},
     dispatch: ()=>{},
   }
@@ -37,7 +43,8 @@ export default class CompanyPage extends React.Component {
 
   render() {
     var { company } = this.state;
-    var { history } = this.props;
+    var { history, positions } = this.props;
+
     var title = company ? company.name : '';
     return (
       <MyGrid>
@@ -45,7 +52,7 @@ export default class CompanyPage extends React.Component {
         <Description
           description={`Data describing who is shorting ${title}`}
           keywords={`${title}, short, shorts, finance, stock, investment`} />
-        <Company company={company} history={history}/>
+        <Company company={company} history={history} positions={positions} />
       </MyGrid>);
   }
 }

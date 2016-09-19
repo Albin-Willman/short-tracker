@@ -13,11 +13,13 @@
 import { appReducer } from 'reducers/app-reducer';
 import { cookieReducer } from 'reducers/cookie-reducer';
 import { blogReducer } from 'reducers/blog-reducer';
+import { companyReducer } from 'reducers/company-reducer';
 /* reapp: import new reducer */
 
 export const reducers = {
   app: appReducer,
   cookies: cookieReducer,
   blog: blogReducer,
+  company: companyReducer,
   /* reapp: append new reducer */
 };

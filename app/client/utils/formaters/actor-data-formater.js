@@ -17,16 +17,18 @@ export default function buildActorData(history, positions, detailed) {
 }
 
 function findLastChange(i, positions, actors) {
+  console.log(positions)
   for(var j = positions.length - 1; j > 1; j -= 1) {
     if(positions[j][i] !== positions[j-1][i]) {
       actors[i].lastChanged = positions[j][0];
       actors[i].lastChange = positions[j][i] - positions[j-1][i];
       actors[i].currentPos = positions[j][i];
+      console.log(actors[i]);
       return;
     }
   }
   actors[i].lastChanged = positions[1][0];
-  actors[i].lastChange = positions[1][i] - positions[j-1][i];
+  actors[i].lastChange = positions[1][i];
   actors[i].currentPos = positions[1][i];
 }
 
