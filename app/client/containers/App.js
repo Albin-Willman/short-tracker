@@ -30,6 +30,8 @@ const routes = [
   <Route key={4} path="/cookies" component={CookiePage} />,
   <Route key={5} path="/blog" component={BlogPage} />,
   <Route key={6} path="/blog/:id" component={BlogPostPage} />,
+  <Route key={7} path="/shorters" component={CompanyListPage} />,
+  <Route key={8} path="/shorter/:key" component={CompanyListPage} />,
   <Route key={10} path="/*" component={NoPage} />,
 ];
 

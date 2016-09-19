@@ -84,6 +84,21 @@ html, body {
   cursor: pointer;
 }
 
+$light-red: #ffe6e6;
+.new-feature {
+  position: relative;
+  background: $light-red;
+}
+.new-feature:after {
+  content: 'new';
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  top: 10px;
+  transform: rotate(-45deg);
+  font-weight: bold;
+}
+
 .jumbotron {
   background: rgba(50,153,204,0.38);
   background: -moz-radial-gradient(center, ellipse cover, rgba(50,153,204,0.38) 0%, rgba(50,153,204,1) 100%);

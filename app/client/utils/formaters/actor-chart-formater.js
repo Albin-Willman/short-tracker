@@ -1,5 +1,4 @@
 export default function computeActorData(actors) {
-  console.log(actors);
   var rows = [];
   if(Object.keys(actors).length === 0) {
     return rows;
