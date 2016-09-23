@@ -16,17 +16,19 @@ import { loadHistory } from 'services/data-services';
 export default class CompanyPage extends React.Component {
 
   static propTypes = {
-    companies: React.PropTypes.object,
-    history: React.PropTypes.object,
-    positions: React.PropTypes.object,
+    companies: React.PropTypes.array,
+    history: React.PropTypes.array,
+    positions: React.PropTypes.array,
+    actorCases: React.PropTypes.array,
     params: React.PropTypes.object,
     dispatch: React.PropTypes.func,
   }
 
   static defaultProps = {
-    companies: {},
-    history: {},
-    positions: {},
+    companies: [],
+    history: [],
+    positions: [],
+    actorCases: [],
     params: {},
     dispatch: ()=>{},
   }
@@ -37,13 +39,23 @@ export default class CompanyPage extends React.Component {
       dispatch(loadHistory(params.name));
     }
     this.setState({
-      company: companies[params.name],
+      company: this.findCompany(companies, params.name),
     });
+  }
+
+  findCompany(companies, key) {
+    for(var i = 0; i < companies.length; i += 1) {
+      var company = companies[i];
+      if(company.key === key) {
+        return company;
+      }
+    }
+    return {};
   }
 
   render() {
     var { company } = this.state;
-    var { history, positions } = this.props;
+    var { history, positions, actorCases } = this.props;
 
     var title = company ? company.name : '';
     return (
@@ -52,7 +64,7 @@ export default class CompanyPage extends React.Component {
         <Description
           description={`Data describing who is shorting ${title}`}
           keywords={`${title}, short, shorts, finance, stock, investment`} />
-        <Company company={company} history={history} positions={positions} />
+        <Company company={company} history={history} positions={positions} actorCases={actorCases} />
       </MyGrid>);
   }
 }

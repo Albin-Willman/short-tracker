@@ -4,6 +4,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import CompanyListPage from 'containers/CompanyListPage';
+import ActorListPage from 'containers/ActorListPage';
+import ActorPage from 'containers/ActorPage';
 import BlogPage from 'containers/BlogPage';
 import BlogPostPage from 'containers/BlogPostPage';
 import CompanyPage from 'containers/CompanyPage';
@@ -30,8 +32,8 @@ const routes = [
   <Route key={4} path="/cookies" component={CookiePage} />,
   <Route key={5} path="/blog" component={BlogPage} />,
   <Route key={6} path="/blog/:id" component={BlogPostPage} />,
-  <Route key={7} path="/shorters" component={CompanyListPage} />,
-  <Route key={8} path="/shorter/:key" component={CompanyListPage} />,
+  <Route key={7} path="/shorters" component={ActorListPage} />,
+  <Route key={8} path="/shorter/:key" component={ActorPage} />,
   <Route key={10} path="/*" component={NoPage} />,
 ];
 

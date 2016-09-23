@@ -12,7 +12,6 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link, browserHistory } from 'react-router';
 import { loadBlogPost, loadIndex } from 'services/blog-services';
-import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
 
 @connect(s => s.blog)
@@ -59,9 +58,7 @@ export default class Blog extends React.Component {
               <p><strong>
                 {article.abstract}
               </strong></p>
-              <div className="add-well in-content">
-                <OptimalAd config={{ width: 728, height: 90 }}/>
-              </div>
+              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <div dangerouslySetInnerHTML={{ __html: article.content }}/>
               <div className="add-well in-content">
                 <OptimalAd config={{ width: 728, height: 90 }}/>
@@ -79,10 +76,7 @@ export default class Blog extends React.Component {
                 dispatch(loadBlogPost(id));
                 browserHistory.push('/blog/' + id);
               }}/>
-              <Well className="add-well">
-                <OptimalAd config={{ width: 300, height: 250 }}/>
-                <ChitikaAd config={{ width: 300, height: 250 }}/>
-              </Well>
+              <OptimalAd config={{ width: 300, height: 250 }}/>
               <Disclaimer />
           </Col>
         </Row>

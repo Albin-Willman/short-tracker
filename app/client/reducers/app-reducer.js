@@ -10,7 +10,7 @@ export const INITIAL_STATE = {
   title: 'React Client',
   loading: false,
   loaded: false,
-  companies: {},
+  companies: [],
   updated: '',
   message: '',
 };
@@ -36,8 +36,15 @@ export function appReducer(state = INITIAL_STATE, action) {
         updated: payload,
       };
     case SET_COMPANIES:
+      var companies = [];
+      for(var key in payload) {
+        if (payload.hasOwnProperty(key)) {
+          companies.push({ ...payload[key], key });
+        }
+      }
+
       return { ...state,
-        companies: payload,
+        companies,
       };
     default: return state;
   }

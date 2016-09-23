@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import ContentWell from 'components/Wells/ContentWell';
-import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
 import Description from 'components/Meta/Description';
 
@@ -111,10 +110,7 @@ export default class WelcomePage extends React.Component {
           </Row>
         </Grid>
         <Grid>
-          <Well className="add-well">
-            <ChitikaAd config={{ width: 728, height: 90 }}/>
-            <OptimalAd config={{ width: 728, height: 90 }}/>
-          </Well>
+          <OptimalAd config={{ width: 728, height: 90 }}/>
         </Grid>
         <Grid>
           <Row className="well-row">
@@ -158,9 +154,7 @@ export default class WelcomePage extends React.Component {
           </Row>
         </Grid>
         <Grid>
-          <Well className="add-well">
-            <OptimalAd config={{ width: 728, height: 90 }}/>
-          </Well>
+          <OptimalAd config={{ width: 728, height: 90 }}/>
         </Grid>
       </div>
       );

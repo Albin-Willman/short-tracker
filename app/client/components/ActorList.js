@@ -2,21 +2,18 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/lib/Table';
-import buildActorData from 'utils/formaters/actor-data-formater';
+import { Link } from 'react-router';
 import { logEvent } from 'utils/ga';
 
 export default class ActorList extends React.Component {
 
   static propTypes = {
-    positions: React.PropTypes.array,
-    history: React.PropTypes.array,
+    actorCases: React.PropTypes.array,
     detailed: React.PropTypes.bool,
   }
 
   static defaultProps = {
-    labels: [],
-    positions: [],
-    history: [],
+    actorCases: [],
     detailed: false,
   }
 
@@ -36,8 +33,13 @@ export default class ActorList extends React.Component {
       lastChanged = <td>{actorCase.lastChanged}</td>;
     }
 
+    var nameContent = actorCase.name;
+    if(actorCase.key) {
+      nameContent = <Link to={`/shorter/${actorCase.key}`}>{nameContent}</Link>
+    }
+
     return (<tr key={actorCase.name}>
-        <td>{actorCase.name}</td>
+        <td>{nameContent}</td>
         {cases}
         <td>{actorCase.currentPos.toFixed(2)} %</td>
         {lastChange}
@@ -104,17 +106,14 @@ export default class ActorList extends React.Component {
   }
 
   render() {
-    var { positions, detailed, history } = this.props;
+    var { actorCases, detailed } = this.props;
     var rows = [];
-    var cases = buildActorData(history, positions, detailed);
 
-    var sortedCases = cases.sort(this.buildCompare());
+    var sortedCases = actorCases.sort(this.buildCompare());
 
     for(var i = 0; i < sortedCases.length; i += 1) {
       var caseData = sortedCases[i];
-      if(caseData.name !== 'Date') {
-        rows.push(this.buildRow(sortedCases[i], detailed));
-      }
+      rows.push(this.buildRow(sortedCases[i], detailed));
     }
 
     var headers = this.buildHeaders();

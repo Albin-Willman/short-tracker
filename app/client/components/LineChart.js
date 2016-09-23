@@ -48,7 +48,6 @@ export default class LineChart extends React.Component {
       }
       transformedData.push(row);
     }
-    console.log(transformedData);
 
     return (<Chart chartType="LineChart"
                 data={transformedData}

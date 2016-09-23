@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import Description from 'components/Meta/Description';
-import CompanyList from 'components/CompanyList';
+import CompanyIndex from 'components/CompanyIndex';
 import MyGrid from 'components/Layout/MyGrid';
 
 import { browserHistory } from 'react-router';
@@ -12,7 +12,7 @@ import { browserHistory } from 'react-router';
 export default class CompanyListPage extends React.Component {
 
   static propTypes = {
-    companies: React.PropTypes.object,
+    companies: React.PropTypes.array,
     dispatch: React.PropTypes.func,
     loaded: React.PropTypes.bool,
     loading: React.PropTypes.bool,
@@ -27,7 +27,7 @@ export default class CompanyListPage extends React.Component {
         <Description
         description="Data on all companies with major short positions on stockholm stock exchange."
         keywords="finance, investments, shorting, investment-data" />
-        <CompanyList
+        <CompanyIndex
           companies={companies}
           viewCompany={ id => {
             browserHistory.push(`/stock/${id}`);

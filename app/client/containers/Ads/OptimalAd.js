@@ -1,14 +1,18 @@
 import React from 'react';
 
+import Well from 'react-bootstrap/lib/Well';
+
 const optimalScriptContainer = 'ads-optimal-scripts-container';
 export default class OptimalAd extends React.Component {
 
   static propTypes = {
     config: React.PropTypes.object,
+    inContent: React.PropTypes.bool,
   }
 
   static defaultProps = {
     config: {},
+    inContent: false,
   }
 
   componentWillMount() {
@@ -30,7 +34,12 @@ export default class OptimalAd extends React.Component {
     if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)!==null) {
       return false;
     }
-    var { config } = this.props;
-    return <div className="adsoptimal-slot" style={config}></div>;
+    var className = "add-well";
+    var { config, inContent } = this.props;
+    if(inContent) {
+      className += ' in-content';
+    }
+
+    return <Well className={className}><div className="adsoptimal-slot" style={config}></div></Well>;
   }
 }
