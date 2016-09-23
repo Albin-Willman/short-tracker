@@ -1,16 +1,15 @@
 
 
 export default function computeHistoryData(history) {
-  if(!history.data || history.data === 'No history') {
+  if(!history || Object.keys(history).length === 0) {
     return [];
   }
-  var historyData = history.data.history;
-  var labels = ['Date', 'Day low', 'Day high'];
+  var labels = ['Date', 'Day low', 'Day high', 'Day close'];
   var data = [];
-  for (var date in historyData) {
-    if (historyData.hasOwnProperty(date)) {
-      var dayData = historyData[date];
-      data.push([date, dayData.low, dayData.high]);
+  for (var date in history) {
+    if (history.hasOwnProperty(date)) {
+      var dayData = history[date];
+      data.push([date, dayData.low, dayData.high, dayData.close]);
     }
   }
   var sortedData = data.sort(Comparator);

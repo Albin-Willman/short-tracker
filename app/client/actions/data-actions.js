@@ -2,18 +2,7 @@ export const SET_LOADED = 'setLoaded@data';
 export const SET_LOADING = 'setLoading@data';
 export const SET_UPDATED = 'setUpdated@data';
 export const SET_COMPANIES = 'setCompanies@data';
-export const SET_HISTORY = 'setHistory@data';
 export const SET_MESSAGE = 'setMessage@data';
-
-export function setHistory(company, history) {
-  return {
-    type: SET_HISTORY,
-    payload: {
-      company,
-      history,
-    },
-  };
-}
 
 export function setLoaded(loaded) {
   return {

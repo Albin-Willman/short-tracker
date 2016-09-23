@@ -20,9 +20,9 @@ export default class Disclaimer extends React.Component {
 
   setDescription = (props) => {
     var descTag = document.getElementById(descriptionId);
-    descTag.setAttribute("content", props.description);
+    descTag.setAttribute('content', props.description);
     var keywordsTag = document.getElementById(keywordsId);
-    keywordsTag.setAttribute("content", props.keywords);
+    keywordsTag.setAttribute('content', props.keywords);
   }
 
   render() {

@@ -4,9 +4,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Well from 'react-bootstrap/lib/Well';
 import ContentWell from 'components/Wells/ContentWell';
-import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
 import Description from 'components/Meta/Description';
 
@@ -68,8 +66,7 @@ export default class WelcomePage extends React.Component {
                     target="_blank">
                       Avanza
                   </a>. Fi publishes new data on all weekdays and I try to publish it as quickly
-                  as possible but this procedure is not 100% automatic yet so there might be
-                  delays.
+                  as possible but there may be delays.
                 </p>
                 <p>
                   It is important to know that the FI data is reported to them by the institutions
@@ -111,10 +108,7 @@ export default class WelcomePage extends React.Component {
           </Row>
         </Grid>
         <Grid>
-          <Well className="add-well">
-            <ChitikaAd config={{ width: 728, height: 90 }}/>
-            <OptimalAd config={{ width: 728, height: 90 }}/>
-          </Well>
+          <OptimalAd config={{ width: 728, height: 90 }}/>
         </Grid>
         <Grid>
           <Row className="well-row">
@@ -158,9 +152,7 @@ export default class WelcomePage extends React.Component {
           </Row>
         </Grid>
         <Grid>
-          <Well className="add-well">
-            <OptimalAd config={{ width: 728, height: 90 }}/>
-          </Well>
+          <OptimalAd config={{ width: 728, height: 90 }}/>
         </Grid>
       </div>
       );

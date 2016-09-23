@@ -9,11 +9,7 @@ import ActorList from 'components/ActorList';
 import LineChart from 'components/LineChart';
 import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
-import ChitikaAd from 'containers/Ads/ChitikaAd';
 import OptimalAd from 'containers/Ads/OptimalAd';
-
-import computeHistoryData from 'utils/formaters/history-chart-formater';
-import computeActorData from 'utils/formaters/actor-chart-formater';
 
 import { logEvent } from 'utils/ga';
 
@@ -22,14 +18,17 @@ export default class Company extends React.Component {
   static propTypes = {
     company: React.PropTypes.shape({
       name: React.PropTypes.string,
-      actors: React.PropTypes.object,
     }),
-    history: React.PropTypes.object,
+    positions: React.PropTypes.array,
+    history: React.PropTypes.array,
+    actorCases: React.PropTypes.array,
   }
 
   static defaultProps = {
     company: {},
-    history: {},
+    positions: [],
+    history: [],
+    actorCases: [],
   }
 
   state = {
@@ -49,12 +48,10 @@ export default class Company extends React.Component {
   }
 
   render() {
-    var { company, history } = this.props;
+    var { company, history, positions, actorCases } = this.props;
     var { detailed } = this.state;
 
-    var historyData = computeHistoryData(history);
-    var historyChart = this.buildHistoryChart(historyData);
-    var positionChartData = computeActorData(company.actors);
+    var historyChart = this.buildHistoryChart(history);
 
     var listWidth = detailed ? 12 : 6;
     var buttonLabel = detailed ? 'Hide details' : 'Show details';
@@ -85,26 +82,21 @@ export default class Company extends React.Component {
                     {buttonLabel}
                 </Button>
               </h3>
-              <ActorList positions={positionChartData} history={historyData} detailed={detailed} />
-              <div className="add-well in-content">
-                <OptimalAd config={{ width: 300, height: 250 }}/>
-              </div>
+              <ActorList actorCases={actorCases} detailed={detailed}/>
+              <OptimalAd config={{ width: 300, height: 250 }} inContent={true}/>
               <Link to="/stocks">Back</Link>
             </Well>
             <AppInfo/>
           </Col>
           <Col lg={6}>
             <Well className="accent">
-              <LineChart hAxis="Date" vAxis="Short position" data={positionChartData} />
+              <LineChart hAxis="Date" vAxis="Short position" data={positions} />
               {historyChart}
             </Well>
           </Col>
           <Col lg={6}>
             <CaseExplain visible={detailed}/>
-            <Well className="add-well">
-              <OptimalAd config={{ width: 300, height: 250 }}/>
-              <ChitikaAd config={{ width: 300, height: 250 }}/>
-            </Well>
+            <OptimalAd config={{ width: 300, height: 250 }}/>
           </Col>
         </Row>
       </div>

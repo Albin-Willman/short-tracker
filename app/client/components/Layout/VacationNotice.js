@@ -19,7 +19,7 @@ export default class VacationNotice extends React.Component {
   render() {
     var { message } = this.props;
 
-    if( !message || message.length == 0) {
+    if(!message || message.length === 0) {
       return false;
     }
 

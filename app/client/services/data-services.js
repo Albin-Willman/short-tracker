@@ -1,4 +1,21 @@
-import { setCompanies, setUpdated, setLoading, setLoaded, setHistory, setMessage } from 'actions/data-actions';
+import {
+  setCompanies,
+  setUpdated,
+  setLoading,
+  setLoaded,
+  setMessage,
+} from 'actions/data-actions';
+
+import {
+  setHistory,
+  setPositions,
+  setCompanyKey,
+  setActorCases,
+} from 'actions/company-actions';
+
+import computeHistoryData from 'utils/formaters/history-chart-formater';
+import computeActorData from 'utils/formaters/actor-chart-formater';
+import buildActorData from 'utils/formaters/actor-data-formater';
 
 const requestConfig = {
   headers: {
@@ -10,7 +27,7 @@ const requestConfig = {
 export function loadData() {
   return (dispatch) => {
     dispatch(setLoading(true));
-    fetch('/api/data.json', requestConfig)
+    fetch('/api/v2/stocks.json', requestConfig)
     .then(transformToJson)
     .then(data => {
       dispatch(setUpdated(data.updated));
@@ -26,11 +43,19 @@ export function loadData() {
 
 export function loadHistory(company) {
   return (dispatch) => {
-    dispatch(setHistory(company, 'No history'));
-    fetch('/api/stocks/' + company + '.json', requestConfig)
+    dispatch(setHistory([]));
+    dispatch(setPositions([]));
+    dispatch(setActorCases([]));
+    dispatch(setCompanyKey(company));
+    fetch('/api/v2/stocks/' + company + '.json', requestConfig)
     .then(transformToJson)
     .then(data => {
-      dispatch(setHistory(company, data));
+      var history = computeHistoryData(data.history);
+      dispatch(setHistory(history));
+      var positions = computeActorData(data.positions);
+      dispatch(setPositions(positions));
+      var cases = buildActorData(history, positions, data.positions);
+      dispatch(setActorCases(cases));
     });
   };
 }

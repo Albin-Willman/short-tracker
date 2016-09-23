@@ -1,4 +1,4 @@
-export default function buildActorData(history, positions, detailed) {
+export default function buildActorData(history, positions, keyData) {
   var actors = [];
   var labels = positions[0];
   if(!labels) {
@@ -7,13 +7,26 @@ export default function buildActorData(history, positions, detailed) {
   for (var i = 0; i < labels.length; i += 1) {
     actors.push(defaultActorCase(labels[i]));
   }
-  if(detailed) {
-    computeDetails(actors, history, positions, labels);
-  }
+  computeDetails(actors, history, positions, labels);
   for (i = 1; i < labels.length; i += 1) {
     findLastChange(i, positions, actors);
   }
-  return actors;
+  for (i = 1; i < labels.length; i += 1) {
+    actors[i].key = findKey(keyData, actors[i].name);
+  }
+
+  return actors.filter((actor) => {
+    return actor.name !== 'Date';
+  });
+}
+
+function findKey(keyData, name) {
+  for(var key in keyData) {
+    if(keyData[key].name === name) {
+      return key;
+    }
+  }
+  return null;
 }
 
 function findLastChange(i, positions, actors) {
@@ -26,7 +39,7 @@ function findLastChange(i, positions, actors) {
     }
   }
   actors[i].lastChanged = positions[1][0];
-  actors[i].lastChange = positions[1][i] - positions[j-1][i];
+  actors[i].lastChange = positions[1][i];
   actors[i].currentPos = positions[1][i];
 }
 

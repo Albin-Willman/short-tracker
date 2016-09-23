@@ -1,9 +1,9 @@
-export default function computeActorData(actors) {
+export default function computeActorData(actors, includeSum = true) {
   var rows = [];
-  if(!actors) {
+  if(!actors || Object.keys(actors).length === 0) {
     return rows;
   }
-  rows.push(buildLabels(actors));
+  rows.push(buildLabels(actors, includeSum));
   var allDates = findAllDates(actors);
 
   var lastRow = [];
@@ -11,7 +11,7 @@ export default function computeActorData(actors) {
     lastRow.push(0);
   }
   for (var j = 0; j < allDates.length; j += 1) {
-    var row = buildRow(actors, allDates[j], lastRow);
+    var row = buildRow(actors, allDates[j], lastRow, includeSum);
     rows.push(row);
     lastRow = row;
   }
@@ -19,7 +19,7 @@ export default function computeActorData(actors) {
 }
 
 
-function buildRow(actors, date, lastRow) {
+function buildRow(actors, date, lastRow, includeSum) {
   var row = [];
 
   for (var actor in actors) {
@@ -31,19 +31,23 @@ function buildRow(actors, date, lastRow) {
       row.push(value);
     }
   }
-  row.push(sumArray(row));
+  if(includeSum) {
+    row.push(sumArray(row));
+  }
   row.unshift(date);
   return row;
 }
 
-function buildLabels(actors) {
+function buildLabels(actors, includeSum) {
   var labels = ['Date'];
   for (var actor in actors) {
     if (actors.hasOwnProperty(actor)) {
       labels.push(actors[actor].name);
     }
   }
-  labels.push('Total');
+  if(includeSum) {
+    labels.push('Total');
+  }
   return labels;
 }
 
@@ -54,13 +58,9 @@ function sumArray(row) {
 }
 
 function findAllDates(actors) {
-  var res = [];
   for(var actor in actors) {
     if (actors.hasOwnProperty(actor)) {
-      res = res.concat(Object.keys(actors[actor].positions));
+      return Object.keys(actors[actor].positions).sort();
     }
   }
-  return res.filter((value, index, self) => {
-    return self.indexOf(value) === index;
-  }).sort();
 }
