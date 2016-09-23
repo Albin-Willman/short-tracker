@@ -1,0 +1,36 @@
+<h2>My starting point</h2>
+<p>
+  The nice thing about having data that only updates 5 times a week is that it is managable for a human to keep up. So starting this project it was good enough to build a script that I could run on my own local machine. The script builds json files that I publish in an staticly hosted s3 bucket on <a href="https://aws.amazon.com/" target="_blank">AWS</a>.
+</p>
+<p>
+  This way I don't have to have a server computing the results for every request. This is nice for three reasons: One it is easier debug if something turns out wierd, two the calculations only needs to be done once per day and three I don't have to pay for a server. The second reason also comes with a performance upside, servers have start up times and of course the computations takes time as well.
+</p>
+<p>
+  However there are limitations, one in particular became apparent when I went on vacation last week. If I don't have access to my computer the data on the site goes stale. So I decided to update my solution to be able to take care of itself. But rather than setting up a server hosting the api I decided to set up a server that did more or less the same work I had been doing manually.
+</p>
+<h2>My tech choices</h2>
+<h3>Hosting</h3>
+<p>
+  As I stated earlier this entire site is currently hosted staticly at AWS s3. Mainly because it is very straight forward and really cheap. I am currently paying ~$0.15/month for hosting and data transfer. I can also set up the folder structure to make the json files mimic a REST-like api. That way if I move it to a server-based achitecture later everything will just work.
+</p>
+<h3>Json builder</h3>
+<p>
+  I decided to go with <a href="https://heroku.com/">Heroku</a> as the service building json files and posting them to AWS. Mostly due to me having used them in the past for multiple project both private and proffesional and it is quite nifty. And running a small task once a day is way below their threshold for free use.
+</p>
+<h2>Script adaptations</h2>
+<p>
+  Heroku works nice with ruby so I figured I would write a small ruby script doing the stuff I usually did manually. The thing I realized was that there are some differences in what rights you have on your own computer and on a free server on heroku. These differences becomes obvious when it comes to writing files. I came to learn that heroku resets files as part of the cleanup after a task is done. This caused some issues with my scripts.
+</p>
+<p>
+  I probably could have made the old script work with just a few tweaks but I realized that this was a great opportunity to improve my api design. As always the first try is not perfect and by now I have been working with the first version of my api for almost two months which have tought me a few things I would like to tweak. In the first version there are quite a few computations being done in the browser that could be pre calculated in the api and so on.
+</p>
+<p>
+  The main difference between the old and new way of building the json files is how I store the components I use to build the json. The old way looked at how the previous json looked and used that in my new solution I make use of a database, this is much more flexible and allows me to use data I have computed now when building future features.
+</p>
+<h2>Currently in beta</h2>
+<p>
+  I am currently running both solutions in parallell, if you want to try version 2 of the api it can be done <a href="/indexv2.html">here</a>. The link will lead to a page saying that it does not exist but if you start navigating through the links from there you will be using api version 2. The only difference you should see at this point is that the graphs sholud be a bit more granular.
+</p>
+<p>
+  If everything works out it should be in production before the end of the week.
+</p>

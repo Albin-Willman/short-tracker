@@ -1,4 +1,12 @@
 {
+  "auto-updates": {
+    "title": "Adding automatic updates",
+    "abstract": "A quick overview of the infrastructure running this site and how to build stuff cheap.",
+    "published": "2016-09-20",
+    "author": "Albin Willman",
+    "tags": ["code", "tech", "heroku", "aws", "automation", "api"],
+    "metaTags": "heroku, development, aws, s3, automation, api, api construction"
+  },
   "tobii": {
     "title": "Tobii",
     "abstract": "How I found Tobii and why I'm keeping it.",
