@@ -60,9 +60,7 @@ export default class Blog extends React.Component {
               </strong></p>
               <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <div dangerouslySetInnerHTML={{ __html: article.content }}/>
-              <div className="add-well in-content">
-                <OptimalAd config={{ width: 728, height: 90 }}/>
-              </div>
+              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <Link to="/blog" className="btn">Back</Link>
             </Well>
           </Col>

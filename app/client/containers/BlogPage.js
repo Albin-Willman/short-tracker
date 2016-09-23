@@ -72,6 +72,7 @@ export default class Blog extends React.Component {
                 </strong>
               </p>
               {articleList}
+              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
             </Well>
           </Col>
           <Col md={4}>

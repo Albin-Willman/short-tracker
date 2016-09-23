@@ -66,8 +66,7 @@ export default class WelcomePage extends React.Component {
                     target="_blank">
                       Avanza
                   </a>. Fi publishes new data on all weekdays and I try to publish it as quickly
-                  as possible but this procedure is not 100% automatic yet so there might be
-                  delays.
+                  as possible but there may be delays.
                 </p>
                 <p>
                   It is important to know that the FI data is reported to them by the institutions
