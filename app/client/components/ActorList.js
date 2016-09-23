@@ -21,7 +21,8 @@ export default class ActorList extends React.Component {
     orderBy: { column: 'lastChanged', direction: 1 },
   }
 
-  buildRow(actorCase, detailed) {
+  buildRow = (actorCase) => {
+    var { detailed } = this.props;
     var cases, lastChanged, lastChange;
     if(detailed) {
       cases = [
@@ -35,7 +36,7 @@ export default class ActorList extends React.Component {
 
     var nameContent = actorCase.name;
     if(actorCase.key) {
-      nameContent = <Link to={`/shorter/${actorCase.key}`}>{nameContent}</Link>
+      nameContent = <Link to={`/shorter/${actorCase.key}`}>{nameContent}</Link>;
     }
 
     return (<tr key={actorCase.name}>
@@ -107,14 +108,9 @@ export default class ActorList extends React.Component {
 
   render() {
     var { actorCases, detailed } = this.props;
-    var rows = [];
 
     var sortedCases = actorCases.sort(this.buildCompare());
-
-    for(var i = 0; i < sortedCases.length; i += 1) {
-      var caseData = sortedCases[i];
-      rows.push(this.buildRow(sortedCases[i], detailed));
-    }
+    var rows = sortedCases.map(this.buildRow);
 
     var headers = this.buildHeaders();
 

@@ -4,7 +4,6 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Well from 'react-bootstrap/lib/Well';
 import ContentWell from 'components/Wells/ContentWell';
 import OptimalAd from 'containers/Ads/OptimalAd';
 import Description from 'components/Meta/Description';

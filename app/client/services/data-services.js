@@ -11,7 +11,7 @@ import {
   setPositions,
   setCompanyKey,
   setActorCases,
-} from 'actions/company-actions'
+} from 'actions/company-actions';
 
 import computeHistoryData from 'utils/formaters/history-chart-formater';
 import computeActorData from 'utils/formaters/actor-chart-formater';

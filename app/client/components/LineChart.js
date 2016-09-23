@@ -44,7 +44,7 @@ export default class LineChart extends React.Component {
       var row = [];
       row.push(new Date(Date.parse(data[i][0])));
       for(j = 1; j < data[i].length; j += 1) {
-        row.push(data[i][j])
+        row.push(data[i][j]);
       }
       transformedData.push(row);
     }

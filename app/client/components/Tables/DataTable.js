@@ -66,7 +66,7 @@ export default class DataTable extends React.Component {
 
   checkFilter = (item) => {
     var { filter } = this.state;
-    return filter.length === 0 || item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+    return filter.length === 0 || item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1;
   }
 
   compareItems = (a, b) => {

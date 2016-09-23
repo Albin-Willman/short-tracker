@@ -58,7 +58,6 @@ function sumArray(row) {
 }
 
 function findAllDates(actors) {
-  var res = [];
   for(var actor in actors) {
     if (actors.hasOwnProperty(actor)) {
       return Object.keys(actors[actor].positions).sort();

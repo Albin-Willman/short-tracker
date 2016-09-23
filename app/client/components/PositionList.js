@@ -3,7 +3,6 @@ import React from 'react';
 
 import Table from 'react-bootstrap/lib/Table';
 import { Link } from 'react-router';
-import { logEvent } from 'utils/ga';
 
 export default class ActorList extends React.Component {
 
@@ -22,7 +21,7 @@ export default class ActorList extends React.Component {
   buildRow(position) {
     var nameContent = position.name;
     if(position.key) {
-      nameContent = <Link to={`/stock/${position.key}`}>{nameContent}</Link>
+      nameContent = <Link to={`/stock/${position.key}`}>{nameContent}</Link>;
     }
 
     return (<tr key={position.name}>
@@ -33,11 +32,7 @@ export default class ActorList extends React.Component {
 
   render() {
     var { positions } = this.props;
-    var rows = [];
-
-    for(var i = 0; i < positions.length; i += 1) {
-      rows.push(this.buildRow(positions[i]));
-    }
+    var rows = positions.map(this.buildRow);
 
     return (
       <Table>

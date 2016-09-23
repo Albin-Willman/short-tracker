@@ -7,8 +7,6 @@ import AppInfo from 'containers/AppInfo';
 import DataTable from 'components/Tables/DataTable';
 import OptimalAd from 'containers/Ads/OptimalAd';
 
-import { logEvent } from 'utils/ga';
-
 export default class CompanyList extends React.Component {
 
   static propTypes = {

@@ -1,4 +1,4 @@
-import { setLoading, setLoaded, setActors, setActor } from "actions/actor-actions";
+import { setLoading, setLoaded, setActors, setActor } from 'actions/actor-actions';
 
 const requestConfig = {
   headers: {

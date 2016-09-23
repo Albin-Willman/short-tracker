@@ -13,7 +13,7 @@ export default class NoPage extends React.Component {
   render() {
     return (
       <MyGrid>
-        <Helmet title="Kortapositioner.se"/> 
+        <Helmet title="Kortapositioner.se"/>
         <Description
       description="A small service providing historic data over short positions in swedish stocks."
       keywords="finance, swedish-stocks, nasdaq, short, shorting, trading" />

@@ -64,7 +64,11 @@ export default class CompanyPage extends React.Component {
         <Description
           description={`Data describing who is shorting ${title}`}
           keywords={`${title}, short, shorts, finance, stock, investment`} />
-        <Company company={company} history={history} positions={positions} actorCases={actorCases} />
+        <Company
+          company={company}
+          history={history}
+          positions={positions}
+          actorCases={actorCases} />
       </MyGrid>);
   }
 }

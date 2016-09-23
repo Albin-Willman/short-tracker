@@ -34,12 +34,14 @@ export default class OptimalAd extends React.Component {
     if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)!==null) {
       return false;
     }
-    var className = "add-well";
+    var className = 'add-well';
     var { config, inContent } = this.props;
     if(inContent) {
       className += ' in-content';
     }
 
-    return <Well className={className}><div className="adsoptimal-slot" style={config}></div></Well>;
+    return (<Well className={className}>
+              <div className="adsoptimal-slot" style={config}></div>
+            </Well>);
   }
 }

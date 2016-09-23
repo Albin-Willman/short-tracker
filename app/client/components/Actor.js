@@ -12,9 +12,7 @@ import OptimalAd from 'containers/Ads/OptimalAd';
 export default class Actor extends React.Component {
 
   static propTypes = {
-    actor: React.PropTypes.shape({
-      name: React.PropTypes.string,
-    }),
+    name: React.PropTypes.string,
     positions: React.PropTypes.array,
     historyData: React.PropTypes.array,
   }

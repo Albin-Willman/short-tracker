@@ -49,6 +49,7 @@ export default class App extends React.Component {
     loading: React.PropTypes.bool,
     dispatch: React.PropTypes.func,
     logPageView: React.PropTypes.func,
+    message: React.PropTypes.string,
     cookies: React.PropTypes.shape({
       accepted: React.PropTypes.bool,
     }),
