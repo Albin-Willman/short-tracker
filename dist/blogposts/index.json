@@ -1,4 +1,12 @@
 {
+  "machine-learning-4": {
+    "title": "Getting my Machine learning running",
+    "abstract": "Finishing up my network and training it to do my bidding.",
+    "published": "2016-09-30",
+    "author": "Albin Willman",
+    "tags": ["code", "tech", "machine learning", "AI", "computerized investment"],
+    "metaTags": "Machine learning, code, experimental, AI, neural network"
+  },
   "version2": {
     "title": "New Version!",
     "abstract": "What changes in version 2? Here is the answer!",

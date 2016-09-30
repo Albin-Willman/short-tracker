@@ -1,0 +1,38 @@
+<h2>Back at it</h2>
+<p>
+  It has been a few weeks since I made time to play around with my neural nets. Since I wrote about this last I have been cheating and spent one evening codeing without writing anything about it. I managed to implement a basic genetic training algortihm I did however not manage to get it working quite properly. During the last week or so I have been reading a little bit about what could be wrong. I realized two things: 1. the cool kids in machine learning don't play with genetic algorithms, they use gradient based solutions and 2. I forgot to include a sigmoid function in my neural net.
+</p>
+<p>
+  A sigmoid function is a bounded differentiable real function that is defined for all real input values and has a positive derivative at each point. The one most usually used in machine learning (and the one I added) is 1/(1 + exp(-x)). This is nice because it maps all possible numbers to a number between 0 and 1 which turns out to be nifty.
+</p>
+<h2>It is working</h2>
+<p>
+  As soon as I added the sigmoid function it just worked for my basic examples. Time to start trying it out on other stuff! A while back I saw a data set online with handdrawn numbers. If I can manage to find that data set again it might make a nice step up from playing around with boolean algebra but not quite all the way to predicting the movements in the stock market.
+</p>
+<h3>Found it!</h3>
+<p>
+  It wasn't hard to find, it seems to be quite wide spread. If you have looked at this kind of problems you probably know about it, it is called MNIST and can be found <a href="http://yann.lecun.com/exdb/mnist/" targer="_blank">Here</a>. The only issue is that the data provided there is onn a less than straight forward format. Lucky for me I kow how to use google and this being a well known thing there are smart people out there that already solved the problem of transmuting this format in to formats that are easier to use. So I found <a href="http://www.rubylab.io/2015/03/18/simple-neural-network-implenentation-in-ruby/" target="_blank">this</a> and downloaded their csv files to work with.
+</p>
+<p>
+  So now I have a csv with 42 000 lines, each line represents an image with 784 pixels (probable 28x28 pixels). I also know what number each of these images depict. I will set my expected output as the binary repressentation of the digit in question.
+</p>
+<h2>Tweaking my breeding</h2>
+<p>
+  As I stated in an earlier post my solution is not optimized for performance and it is written in a script language (ruby). Training it takes time! 780 inputs 2-300 hidden nodes and 4 outputs makes 200 000 weights to be optimized. Calculating the result 42 000 times for each possible solution to evaluate how good that solution, creating ~10 solutions in each itteration makes for around 80 000 000 000 calculations per itteration. Running that as a background process on a laptop while doing other stuff is quite gruesome.
+</p>
+<p>
+  I made my algorithm print its progress on each itteration. Looking over the out put I realized a few things. My solution was converging very slowly and for long periods of time it got stuck and made no progress at all. The second issue here is why most people use gradient based algorithms rather than genetic, but I am trying to learn not invent something new or amazing and I like the idea of genetic algorithms.
+</p>
+<p>
+  So I started thinking about what I could do with my algorithm to make it converge faster. First thing I did was to reduce the number of inputs. After looking at some of the input data I realized that only the middle 20x20 pixels where relevant, this reduces the number of inputs to 400. Next I realized that my population after a few generations became very closely related. I needed to diversify my genepool! I solved this by adding two random solutions in each itteration and allowing them to breed with my other solutions. This increased my conversion rate significantly.
+</p>
+<h2>Converging to the right thing</h2>
+<p>
+  I started getting some results and they told me that even if my solution thought it was good it actually wasn't. It thought that guessing 0 when the expected result was 4 was good due to my binary representation of the numbers. To fix this I changed my error function to return 1 unless the solution was exactly correct.
+</p>
+<p>
+  After these tweaks and changes it was mostly waiting. I ran the algorithm on a subset of the data for only 100 itterations. When I tested the solution against 10 images not in the training data it managed to guess five of them correctly. The probability of it doing that by chance is less than 1 in 600. I took this as proof of my algorithm and network actually working and that given time it would have been able to do much better. Content in this knowledge I post this and go back to using other peoples stuff.
+</p>
+<p>
+  The code I have produced doing this is available at <a href="https://github.com/Albin-Willman/neural-network" target="_blank">Github</a>.
+</p>
