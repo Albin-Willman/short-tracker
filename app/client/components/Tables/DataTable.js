@@ -49,8 +49,9 @@ export default class DataTable extends React.Component {
   buildRow = (item) => {
     var { columns, viewItem } = this.props;
     var cells = columns.map((column) => {
+      var className = column.noMobile ? 'hidden-xs' : '';
       if(column.percent) {
-        return <td key={column.name}>{item[column.name].toFixed(2)} %</td>;
+        return <td key={column.name} className={className}>{item[column.name].toFixed(2)} %</td>;
       }
       return <td key={column.name}>{item[column.name]}</td>;
     });
@@ -89,6 +90,7 @@ export default class DataTable extends React.Component {
 
   buildHeader = (columnInfo) => {
     var { column, direction } = this.state.sortBy;
+    var className = columnInfo.noMobile ? 'hidden-xs' : '';
 
     var glyph, newDirection = 'desc';
     if(columnInfo.name === column) {
@@ -100,7 +102,7 @@ export default class DataTable extends React.Component {
       }
     }
 
-    return (<th key={columnInfo.name} style={ { cursor: 'pointer' } }
+    return (<th key={columnInfo.name} style={ { cursor: 'pointer' } } className={className}
       onClick={ ()=> {
           this.setSorting({ column: columnInfo.name, direction: newDirection });
         } }

@@ -1,5 +1,6 @@
 export const SET_HISTORY = 'setHistory@company';
 export const SET_POSITIONS = 'setPositions@company';
+export const SET_LOADING = 'setLoading@company';
 export const SET_COMPANY_KEY = 'setCompanyKey@company';
 export const SET_ACTOR_CASES = 'setActorCases@company';
 
@@ -28,5 +29,12 @@ export function setPositions(data) {
   return {
     type: SET_POSITIONS,
     payload: data,
+  };
+}
+
+export function setLoadingCompany(loading) {
+  return {
+    type: SET_LOADING,
+    payload: loading,
   };
 }

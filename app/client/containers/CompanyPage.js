@@ -21,6 +21,7 @@ export default class CompanyPage extends React.Component {
     positions: React.PropTypes.array,
     actorCases: React.PropTypes.array,
     params: React.PropTypes.object,
+    loading: React.PropTypes.bool,
     dispatch: React.PropTypes.func,
   }
 
@@ -30,6 +31,7 @@ export default class CompanyPage extends React.Component {
     positions: [],
     actorCases: [],
     params: {},
+    loading: false,
     dispatch: ()=>{},
   }
 
@@ -55,7 +57,7 @@ export default class CompanyPage extends React.Component {
 
   render() {
     var { company } = this.state;
-    var { history, positions, actorCases } = this.props;
+    var { history, positions, actorCases, loading } = this.props;
 
     var title = company ? company.name : '';
     return (
@@ -68,7 +70,8 @@ export default class CompanyPage extends React.Component {
           company={company}
           history={history}
           positions={positions}
-          actorCases={actorCases} />
+          actorCases={actorCases}
+          loading={loading} />
       </MyGrid>);
   }
 }
