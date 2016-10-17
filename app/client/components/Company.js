@@ -19,6 +19,7 @@ export default class Company extends React.Component {
   static propTypes = {
     company: React.PropTypes.shape({
       name: React.PropTypes.string,
+      blogPosts: React.PropTypes.array,
     }),
     positions: React.PropTypes.array,
     history: React.PropTypes.array,
@@ -66,11 +67,11 @@ export default class Company extends React.Component {
         <h3>Blog posts</h3>
         <p>I have written a few thoughts about this company.</p>
         {postLinks}
-      </div>)
+      </div>);
   }
 
   buildActorList() {
-    var { company, history, positions, actorCases, loading } = this.props;
+    var { actorCases, loading } = this.props;
     var { detailed } = this.state;
     if(loading) {
       return <LoadingScreen/>;
@@ -97,7 +98,7 @@ export default class Company extends React.Component {
   }
 
   buildCharts() {
-    var { company, history, positions, loading } = this.props;
+    var { history, positions, loading } = this.props;
     if(loading) {
       return <Well className="accent"><LoadingScreen/></Well>;
     }

@@ -16,5 +16,5 @@ export default class LoadingScreen extends React.Component {
         <div className="sk-cube sk-cube9"></div>
       </div>
     );
-  };
+  }
 }

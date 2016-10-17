@@ -23,9 +23,9 @@ export default class LineChart extends React.Component {
     var { data } = this.props;
     var stepSize = 1;
     var dataPoints = data.length * data[0].length;
-    if ( dataPoints > 1000 ) {
+    if (dataPoints > 1000) {
       stepSize = 7;
-    } else if ( dataPoints > 5000 ) {
+    } else if (dataPoints > 5000) {
       stepSize = 14;
     }
     return stepSize;

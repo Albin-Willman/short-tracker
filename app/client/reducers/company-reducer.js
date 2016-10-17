@@ -36,7 +36,7 @@ export function companyReducer(state = INITIAL_STATE, action) {
     case SET_LOADING:
       return { ...state,
         loading: payload,
-      }
+      };
     default: return state;
   }
 }
