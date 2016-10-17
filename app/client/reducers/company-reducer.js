@@ -3,6 +3,7 @@ import {
   SET_COMPANY_KEY,
   SET_POSITIONS,
   SET_ACTOR_CASES,
+  SET_LOADING,
 } from 'actions/company-actions';
 
 export const INITIAL_STATE = {
@@ -10,6 +11,7 @@ export const INITIAL_STATE = {
   key: '',
   positions: [],
   actorCases: [],
+  loading: true,
 };
 
 export function companyReducer(state = INITIAL_STATE, action) {
@@ -31,6 +33,10 @@ export function companyReducer(state = INITIAL_STATE, action) {
       return { ...state,
         actorCases: payload,
       };
+    case SET_LOADING:
+      return { ...state,
+        loading: payload,
+      }
     default: return state;
   }
 }

@@ -11,6 +11,7 @@ import {
   setPositions,
   setCompanyKey,
   setActorCases,
+  setLoadingCompany,
 } from 'actions/company-actions';
 
 import computeHistoryData from 'utils/formaters/history-chart-formater';
@@ -43,6 +44,7 @@ export function loadData() {
 
 export function loadHistory(company) {
   return (dispatch) => {
+    dispatch(setLoadingCompany(true));
     dispatch(setHistory([]));
     dispatch(setPositions([]));
     dispatch(setActorCases([]));
@@ -56,6 +58,7 @@ export function loadHistory(company) {
       dispatch(setPositions(positions));
       var cases = buildActorData(history, positions, data.positions);
       dispatch(setActorCases(cases));
+      dispatch(setLoadingCompany(false));
     });
   };
 }

@@ -25,7 +25,7 @@ export default class CompanyIndex extends React.Component {
     var columns = [
       { label: 'Company', name: 'name' },
       { label: 'Total short', name: 'total', percent: true },
-      { label: 'Change 30 days', name: 'change30Days', percent: true },
+      { label: 'Change 30 days', name: 'change30Days', percent: true, noMobile: true },
       { label: 'Last change', name: 'lastChange' },
     ];
 

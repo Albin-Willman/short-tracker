@@ -17,6 +17,11 @@ import CookieNotice from 'components/Layout/CookieNotice';
 import VacationNotice from 'components/Layout/VacationNotice';
 import WelcomePage from 'components/Pages/WelcomePage';
 import NoPage from 'components/Pages/NoPage';
+import LoadingScreen from 'components/Layout/LoadingScreen';
+import MyGrid from 'components/Layout/MyGrid';
+import Well from 'react-bootstrap/lib/Well';
+
+import { logEvent } from 'utils/ga';
 
 import { acceptCookies } from 'services/cookie-services';
 import { setAccepted } from 'actions/cookie-actions';
@@ -69,7 +74,7 @@ export default class App extends React.Component {
     var { loading, logPageView } = this.props;
 
     if (loading) {
-      return 'loading...';
+      return <MyGrid><Well className="accent"><LoadingScreen/></Well></MyGrid>;
     }
 
     return (
@@ -86,14 +91,15 @@ export default class App extends React.Component {
       <div>
         <Helmet titleTemplate="%s - Kortapositioner" />
         <div className="app-area">
-        <CookieNotice
-          accept={ ()=>{
-            dispatch(acceptCookies());
-          }}
-          accepted={cookies.accepted}/>
-        <VacationNotice message={message}/>
-        <TopBar />
-        {content}
+          <CookieNotice
+            accept={ ()=>{
+              logEvent('App', 'Accept cookies', 'true');
+              dispatch(acceptCookies());
+            }}
+            accepted={cookies.accepted}/>
+          <VacationNotice message={message}/>
+          <TopBar />
+          {content}
         </div>
         <Footer />
       </div>
