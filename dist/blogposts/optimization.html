@@ -1,0 +1,67 @@
+<h2>Reasoning</h2>
+<p>
+  Once a day on week days some where between 15:30 and 16:00 Finans inspektionen releases their list of current short positions. As described in my post about automatic updates I have a script deployed on heroku that watches for this list, parses it and updates this site. Since the script runs once a day I did not bother to make it efficient. Thus it takes a minute or two before the changes are visible on the site.
+</p>
+<p>
+  While I still think this is good enough to satisfy the purpose of this site it still bothers me that it is inefficient, and besides optimizing in ruby (rails) is fun. So let's see if we can shave a little bit of time of this script.
+</p>
+<h2>Step 1, test setup</h2>
+<p>
+  Step 1 when optimizing is always to set up a repeatable test case with a given expected result. So that you know that the end result after the optimization not only is faster but actually does the right thing as well.
+</p>
+<p>
+  In order to achieve this I create a database dump that I can use to give me the same starting point for each run and I will compare the result with what I have running in production.
+</p>
+<h2>Step 2, Benchmarking</h2>
+<p>
+  My script runs in a few quite distinctive steps: Download file, parse file, build and upload data files. The download step is a bit out of my reach so I will simply accept that the time spent there is unavoidable. Looking closer at the two other steps I can actually break down the build part in four categories: Stock Index, Individual Stocks, Shorter Index and Individual Shorters. I will measure these five areas individually to see where I should focus my efforts.
+</p>
+<p>
+  Now that I have a good test case I can take it for a spin and see if there are any obvious bottlenecks. These measurements gave me this data:
+</p>
+<ol>
+  <li>Parsing ~> 20 seconds</li>
+  <li>Stock Index ~> 2 seconds</li>
+  <li>Individual Stocks ~> 37 seconds</li>
+  <li>Shorter Index ~> 1.5 seconds</li>
+  <li>Individual Shorters ~> 15 seconds</li>
+</ol>
+<h2>Step 3, Parsing</h2>
+<h3>Adding an index</h3>
+<p>
+  When I built the parser I did not like the idea of trusting that FI will always be adding rows at the top. This means that each time I parse a new file, I parse the entire thing checking every row to see if it has been added to my database or not. This lookup has been quite rough and checking string equalities in a mysql on unindexed columns 6000 times is not super fast. My first attempt at speeding up the parsing is to add an extra column with an index that is a composite of all relevant data. Doing this changed the parsing time from 20 seconds to 15.
+</p>
+<p>
+  A clear improvement but not where I want to be.
+</p>
+<h3>Trusting convention</h3>
+<p>
+  I realize that in order to get this running fast I need to take my trust issues and throw the out the window and accept that all new lines are added at the top. I change my parsing so that if it finds X lines that it already has added it will stop and assume that it is done. I do it this way because if it turns out that my trust has been misplaced I can simply change X to a large number and my parser will start parsing the entire file again.
+</p>
+<p>
+  As a starting point I set X to 10 and try it out. This brings the parsing down below 1 second which I am happy with.
+</p>
+<h2>Step 4, Individual entities</h2>
+<p>
+  I look a bit at the code surrounding building files for the individual stocks and shorters and it is really similar so if I solve one the same solution can be applied to the other. So I will look at the stocks because I like them better.
+</p>
+<p>
+  I realize that I have the same issue as in the parsing I do not know when to quit! My algorithm at this moment looks like this. Fetch all stocks, look at each in turn and see if it has changed since the last time I uploaded it in order to know if I should skip it or build it. At this moment each stock model knows when it was last uploaded if I move this knowledge to a system level I can change my algorithm to fetch all stocks that has changed since the last time I uploaded data, then for each of these build and upload data. I can skip the checks on the individual stock since already I know it has changed.
+</p>
+<p>
+  Implementing this changed the time for individual stocks from 37 seconds to 1 or 2, and the shorters to half that.
+</p>
+<h2>Conclusions and moving forward</h2>
+<p>
+  So I got my script time down from around 2 minutes to 40ish seconds and most of that time is limited by the bandwidth of my server and FI. If we only look at that parts that I control it is a reduction from 75 seconds to less than 10 which I am really happy with.
+</p>
+<p>
+  I think the main lesson for me here is: don't over do it. Try to reduce future work early by eliminating in bulk instead of doing it at an individual level.
+</p>
+<p>
+  Hope you found my take on optimization by practical example somewhat entertaining :)
+</p>
+<h3>Deployment</h3>
+<p>
+  This solution will be running in parallel with my old code for a week or so in order for me to verify that I haven't done anything silly and my goal is to start using it for real as soon as I am comfortable with it.
+</p>
