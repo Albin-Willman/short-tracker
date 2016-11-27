@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Company from 'components/Company';
 import MyGrid from 'components/Layout/MyGrid';
 import Description from 'components/Meta/Description';
+import { setChangeLog } from 'actions/company-actions';
 
 import { loadHistory } from 'services/data-services';
 
@@ -20,6 +21,7 @@ export default class CompanyPage extends React.Component {
     history: React.PropTypes.array,
     positions: React.PropTypes.array,
     actorCases: React.PropTypes.array,
+    changeLog: React.PropTypes.array,
     params: React.PropTypes.object,
     loading: React.PropTypes.bool,
     dispatch: React.PropTypes.func,
@@ -30,6 +32,7 @@ export default class CompanyPage extends React.Component {
     history: [],
     positions: [],
     actorCases: [],
+    changeLog: [],
     params: {},
     loading: false,
     dispatch: ()=>{},
@@ -54,10 +57,14 @@ export default class CompanyPage extends React.Component {
     }
     return {};
   }
+  computeChangeLog = () => {
+    var { history, positions, dispatch } = this.props;
+    dispatch(setChangeLog(history, positions));
+  }
 
   render() {
     var { company } = this.state;
-    var { history, positions, actorCases, loading } = this.props;
+    var { history, positions, actorCases, loading, changeLog } = this.props;
 
     var title = company ? company.name : '';
     return (
@@ -71,7 +78,9 @@ export default class CompanyPage extends React.Component {
           history={history}
           positions={positions}
           actorCases={actorCases}
-          loading={loading} />
+          loading={loading}
+          changeLog={changeLog}
+          computeChangeLog={this.computeChangeLog} />
       </MyGrid>);
   }
 }

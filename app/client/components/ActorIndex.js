@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
-import DataTable from 'components/Tables/DataTable';
+import DataTable from 'components/Tables/DataTable.jsx';
 import OptimalAd from 'containers/Ads/OptimalAd';
 
 export default class CompanyList extends React.Component {

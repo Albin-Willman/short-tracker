@@ -6,6 +6,7 @@ import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
 import { Link } from 'react-router';
 import ActorList from 'components/ActorList';
+import ChangeLog from 'components/Tables/ChangeLog.jsx';
 import LineChart from 'components/LineChart';
 import LoadingScreen from 'components/Layout/LoadingScreen';
 import CaseExplain from 'components/CaseExplain';
@@ -23,8 +24,10 @@ export default class Company extends React.Component {
     }),
     positions: React.PropTypes.array,
     history: React.PropTypes.array,
+    changeLog: React.PropTypes.array,
     actorCases: React.PropTypes.array,
     loading: React.PropTypes.bool,
+    computeChangeLog: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -32,10 +35,12 @@ export default class Company extends React.Component {
     positions: [],
     history: [],
     actorCases: [],
+    changeLog: [],
   }
 
   state = {
     detailed: false,
+    showChangeLog: false,
   }
 
   buildHistoryChart(data) {
@@ -97,6 +102,40 @@ export default class Company extends React.Component {
       );
   }
 
+  showChangeLog = () => {
+    var { changeLog, computeChangeLog } = this.props;
+    computeChangeLog();
+    this.setState({ showChangeLog: true });
+  }
+
+  buildChangeLog() {
+    var { showChangeLog } = this.state;
+    var { loading, changeLog } = this.props;
+    if(loading || showChangeLog && changeLog.length === 0) {
+      return <LoadingScreen/>;
+    }
+    if(!showChangeLog) {
+      return (<Button
+                  bsStyle="primary"
+                  onClick={ ()=>{
+                    this.showChangeLog();
+                  } }>
+                    Show transaction log
+                </Button>);
+    }
+    return (<div>
+      <ChangeLog changeLog={changeLog}/>
+      <Button
+        bsStyle="primary"
+        style={{ marginTop: '15px' }}
+        onClick={ ()=>{
+          this.setState({ showChangeLog: false });
+        } }>
+          Hide transaction log
+      </Button>
+    </div>);
+  }
+
   buildCharts() {
     var { history, positions, loading } = this.props;
     if(loading) {
@@ -114,7 +153,7 @@ export default class Company extends React.Component {
 
   render() {
     var { company } = this.props;
-    var { detailed } = this.state;
+    var { detailed, showChangeLog } = this.state;
 
     var listWidth = detailed ? 12 : 6;
 
@@ -123,6 +162,9 @@ export default class Company extends React.Component {
 
     var actorList = this.buildActorList();
     var charts = this.buildCharts();
+    var changeLog = this.buildChangeLog();
+
+    var changeLogWidth = showChangeLog ? 12 : 6;
 
     return (
       <div>
@@ -142,12 +184,16 @@ export default class Company extends React.Component {
             </Well>
             <AppInfo/>
           </Col>
-          <Col lg={6}>
+          <Col lg={listWidth}>
             {charts}
+          </Col>
+          <Col lg={changeLogWidth}>
+            <Well className="highlight">
+              {changeLog}
+            </Well>
           </Col>
           <Col lg={6}>
             <CaseExplain visible={detailed}/>
-            <OptimalAd config={{ width: 300, height: 250 }}/>
           </Col>
         </Row>
       </div>

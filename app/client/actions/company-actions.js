@@ -3,6 +3,7 @@ export const SET_POSITIONS = 'setPositions@company';
 export const SET_LOADING = 'setLoading@company';
 export const SET_COMPANY_KEY = 'setCompanyKey@company';
 export const SET_ACTOR_CASES = 'setActorCases@company';
+export const SET_CHANGE_LOG = 'setChangeLog@company';
 
 export function setActorCases(key) {
   return {
@@ -36,5 +37,12 @@ export function setLoadingCompany(loading) {
   return {
     type: SET_LOADING,
     payload: loading,
+  };
+}
+
+export function setChangeLog(history, positions) {
+  return {
+    type: SET_CHANGE_LOG,
+    payload: { history, positions },
   };
 }

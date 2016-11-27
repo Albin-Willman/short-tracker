@@ -5,6 +5,10 @@ import {
   SET_COMPANIES,
   SET_MESSAGE,
 } from 'actions/data-actions';
+import {
+  ADD_ERROR,
+  REMOVE_ERROR,
+} from 'actions/app-actions';
 
 export const INITIAL_STATE = {
   title: 'React Client',
@@ -13,6 +17,7 @@ export const INITIAL_STATE = {
   companies: [],
   updated: '',
   message: '',
+  errors: [],
 };
 
 export function appReducer(state = INITIAL_STATE, action) {
@@ -34,6 +39,13 @@ export function appReducer(state = INITIAL_STATE, action) {
     case SET_UPDATED:
       return { ...state,
         updated: payload,
+      };
+    case ADD_ERROR:
+      var { id, message, retry } = payload;
+      return { ...state,
+        errors: [...state.errors,
+          { id, message, retry },
+        ],
       };
     case SET_COMPANIES:
       var companies = [];
