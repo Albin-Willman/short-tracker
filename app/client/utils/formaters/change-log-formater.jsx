@@ -1,8 +1,7 @@
 export default function(history, positions) {
-  console.log(history, positions);
   var lastRow = [ ...positions[0] ];
   var actors = [ ...positions[0] ];
-  console.log(positions);
+  var totalIndex = actors.length - 1;
   lastRow.fill(0);
   var changes = []
   for(var i = 1; i < positions.length; i += 1) {
@@ -17,10 +16,11 @@ export default function(history, positions) {
           change: position - lastPosition,
           name: actors[j],
           date: dateData[0],
+          price: history[i][3],
+          total: dateData[totalIndex],
         });
       }
     }
   }
-  console.log(changes);
   return changes;
 }

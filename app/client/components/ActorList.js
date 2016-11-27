@@ -19,10 +19,16 @@ export default class ActorList extends React.Component {
 
   state = {
     orderBy: { column: 'lastChanged', direction: 1 },
+    showAll: false,
   }
 
   buildRow = (actorCase) => {
     var { detailed } = this.props;
+    var { showAll } = this.state;
+    if(actorCase.currentPos === 0 && !showAll && !detailed) {
+      return false;
+    }
+
     var cases, lastChanged, lastChange;
     if(detailed) {
       cases = [
@@ -106,11 +112,36 @@ export default class ActorList extends React.Component {
     };
   }
 
+  toggleShowAll = (e) => {
+    e.preventDefault();
+    var { showAll } = this.state;
+    logEvent('Actor list', 'closed positions', showAll ? 'hide' : 'show');
+    this.setState({ showAll: !showAll });
+  }
+
+  buildShowAllLink() {
+    var { detailed } = this.props;
+    var { showAll } = this.state;
+    if(detailed) {
+      return false;
+    }
+
+    var text = showAll ? 'Hide closed positions' : 'Show closed positions';
+    return (
+      <tr>
+        <td colSpan="2">
+          <a href="#" onClick={this.toggleShowAll}>{text}</a>
+        </td>
+      </tr>
+      )
+  }
+
   render() {
     var { actorCases, detailed } = this.props;
 
     var sortedCases = actorCases.sort(this.buildCompare());
     var rows = sortedCases.map(this.buildRow);
+    var showAllLink = this.buildShowAllLink();
 
     var headers = this.buildHeaders();
 
@@ -124,6 +155,7 @@ export default class ActorList extends React.Component {
         {headers}
         <tbody>
           {rows}
+          {showAllLink}
         </tbody>
       </Table>
       );

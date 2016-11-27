@@ -104,6 +104,7 @@ export default class Company extends React.Component {
 
   showChangeLog = () => {
     var { changeLog, computeChangeLog } = this.props;
+    logEvent('Company page', 'change log', 'show');
     computeChangeLog();
     this.setState({ showChangeLog: true });
   }
@@ -129,6 +130,7 @@ export default class Company extends React.Component {
         bsStyle="primary"
         style={{ marginTop: '15px' }}
         onClick={ ()=>{
+          logEvent('Company page', 'change log', 'hide');
           this.setState({ showChangeLog: false });
         } }>
           Hide transaction log

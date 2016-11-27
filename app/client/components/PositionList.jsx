@@ -16,10 +16,16 @@ export default class ActorList extends React.Component {
 
   state = {
     orderBy: { column: 'lastChanged', direction: 1 },
+    showAll: false,
   }
 
-  buildRow(position) {
+  buildRow = (position) => {
     var nameContent = position.name;
+    var { showAll } = this.state;
+    if(position.current === 0 && !showAll) {
+      return false;
+    }
+
     if(position.key) {
       nameContent = <Link to={`/stock/${position.key}`}>{nameContent}</Link>;
     }
@@ -30,14 +36,36 @@ export default class ActorList extends React.Component {
       </tr>);
   }
 
+  toggleShowAll = (e) => {
+    e.preventDefault();
+    var { showAll } = this.state;
+    logEvent('Position list', 'closed positions', showAll ? 'hide' : 'show');
+    this.setState({ showAll: !showAll });
+  }
+
+  buildShowAllLink() {
+    var { showAll } = this.state;
+
+    var text = showAll ? 'Hide closed positions' : 'Show closed positions';
+    return (
+      <tr>
+        <td colSpan="2">
+          <a href="#" onClick={this.toggleShowAll}>{text}</a>
+        </td>
+      </tr>
+      )
+  }
+
   render() {
     var { positions } = this.props;
     var rows = positions.map(this.buildRow);
+    var showAllLink = this.buildShowAllLink();
 
     return (
       <Table>
         <tbody>
           {rows}
+          {showAllLink}
         </tbody>
       </Table>
       );

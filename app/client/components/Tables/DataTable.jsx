@@ -60,6 +60,9 @@ export default class DataTable extends React.Component {
       if(column.percent) {
         return <td key={column.name} className={className}>{item[column.name].toFixed(2)} %</td>;
       }
+      if(column.currency) {
+        return <td key={column.name} className={className}>{item[column.name].toFixed(2)} kr</td>;
+      }
       return <td key={column.name}>{item[column.name]}</td>;
     });
     return (<tr
@@ -141,7 +144,7 @@ export default class DataTable extends React.Component {
     return (<Pagination
             page={page}
             pageLength={pageLength}
-            totalCount={items.length}
+            totalCount={items.filter(this.checkFilter).length}
             goToPage={this.goToPage} />
           );
   }

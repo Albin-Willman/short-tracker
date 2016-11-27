@@ -5,7 +5,9 @@ const columns = [
   { label: 'Date', name: 'date' },
   { label: 'Shorter', name: 'name' },
   { label: 'Change', name: 'change', percent: true },
-  { label: 'Total', name: 'position', percent: true },
+  { label: 'Shorter Total', name: 'position', percent: true },
+  { label: 'Total', name: 'total', percent: true, noMobile: true },
+  { label: 'Stock price*', name: 'price', noMobile: true, currency: true },
 ];
 
 export default class ChangeLog extends React.Component {
@@ -26,6 +28,7 @@ export default class ChangeLog extends React.Component {
               direction: 'asc',
             }}
             filterPlaceholder="Start typing to filter"/>
+      <p style={{ textAlign: 'right' }}>* This is the price at the end of the date in question.</p>
     </div>;
   }
 }

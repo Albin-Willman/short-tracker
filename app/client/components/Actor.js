@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link } from 'react-router';
-import PositionList from 'components/PositionList';
+import PositionList from 'components/PositionList.jsx';
 import LineChart from 'components/LineChart';
 import AppInfo from 'containers/AppInfo';
 import OptimalAd from 'containers/Ads/OptimalAd';
