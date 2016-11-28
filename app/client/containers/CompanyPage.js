@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
-import Company from 'components/Company';
+import Company from 'components/Company.jsx';
 import MyGrid from 'components/Layout/MyGrid';
 import Description from 'components/Meta/Description';
 import { setChangeLog } from 'actions/company-actions';

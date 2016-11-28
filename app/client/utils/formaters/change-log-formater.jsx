@@ -11,14 +11,18 @@ export default function(history, positions) {
       var lastPosition = lastRow[j];
       if(position !== lastRow[j]) {
         lastRow[j] = position;
-        changes.push({
+        var data = {
           position,
           change: position - lastPosition,
           name: actors[j],
           date: dateData[0],
-          price: history[i][3],
           total: dateData[totalIndex],
-        });
+        };
+        console.log(history)
+        if(history && history[i]) {
+          data.price = history[i][3]
+        }
+        changes.push(data);
       }
     }
   }

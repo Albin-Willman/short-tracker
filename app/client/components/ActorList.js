@@ -141,7 +141,10 @@ export default class ActorList extends React.Component {
 
     var sortedCases = actorCases.sort(this.buildCompare());
     var rows = sortedCases.map(this.buildRow);
-    var showAllLink = this.buildShowAllLink();
+    var showAllLink;
+    if(rows.indexOf(false) !== -1 || this.state.showAll) {
+      showAllLink = this.buildShowAllLink();
+    }
 
     var headers = this.buildHeaders();
 

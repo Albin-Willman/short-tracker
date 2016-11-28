@@ -61,7 +61,9 @@ export default class DataTable extends React.Component {
         return <td key={column.name} className={className}>{item[column.name].toFixed(2)} %</td>;
       }
       if(column.currency) {
-        return <td key={column.name} className={className}>{item[column.name].toFixed(2)} kr</td>;
+        var value = item[column.name];
+        value = value ? value.toFixed(2) : '-'
+        return <td key={column.name} className={className}>{value} kr</td>;
       }
       return <td key={column.name}>{item[column.name]}</td>;
     });

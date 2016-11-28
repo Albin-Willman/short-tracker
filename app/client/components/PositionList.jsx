@@ -3,6 +3,7 @@ import React from 'react';
 
 import Table from 'react-bootstrap/lib/Table';
 import { Link } from 'react-router';
+import { logEvent } from 'utils/ga';
 
 export default class ActorList extends React.Component {
 
@@ -59,7 +60,10 @@ export default class ActorList extends React.Component {
   render() {
     var { positions } = this.props;
     var rows = positions.map(this.buildRow);
-    var showAllLink = this.buildShowAllLink();
+    var showAllLink;
+    if(rows.indexOf(false) !== -1 || this.state.showAll) {
+      showAllLink = this.buildShowAllLink();
+    }
 
     return (
       <Table>
