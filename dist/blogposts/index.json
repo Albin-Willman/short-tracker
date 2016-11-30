@@ -1,11 +1,19 @@
 {
+  "board-games": {
+    "title": "Board games and finance",
+    "abstract": "How playing board games growing up prepared me for investments.",
+    "published": "2016-11-30",
+    "author": "Albin Willman",
+    "tags": ["philosophy", "games", "investmens", "finance", "personal"],
+    "metaTags": "philosophy, games, investmens, finance"
+  },
   "optimization": {
     "title": "Optimization",
     "abstract": "Getting the data to you faster, a quick overview of how I work with performance.",
     "published": "2016-10-31",
     "author": "Albin Willman",
     "tags": ["code", "tech", "optimization", "algorithm"],
-    "metaTags": ["code", "tech", "optimization", "algorithm"]
+    "metaTags": "code, tech, optimization, algorithm"
   },
   "machine-learning-4": {
     "title": "Getting my Machine learning running",

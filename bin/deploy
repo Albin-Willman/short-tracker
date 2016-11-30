@@ -29,6 +29,7 @@ Dir.chdir dist_path do
   end
   if ARGV.include?('--full') || ARGV.include?('--blog')
     files += Dir.glob("blogposts/**/*.*")
+    files += Dir.glob("img/blog/**/*.*")
   end
 end
 
