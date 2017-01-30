@@ -11,7 +11,7 @@ import LineChart from 'components/LineChart';
 import LoadingScreen from 'components/Layout/LoadingScreen';
 import CaseExplain from 'components/CaseExplain';
 import AppInfo from 'containers/AppInfo';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 
 import { logEvent } from 'utils/ga';
 
@@ -181,7 +181,6 @@ export default class Company extends React.Component {
                 {actorList}
                 {blogBlurbs}
               </div>
-              <OptimalAd config={{ width: 300, height: 250 }} inContent={true}/>
               <Link to="/stocks">Back</Link>
             </Well>
             <AppInfo/>

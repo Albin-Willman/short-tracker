@@ -4,7 +4,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Table from 'react-bootstrap/lib/Table';
 import Pagination from 'components/Tables/Pagination';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 
 import { logEvent } from 'utils/ga';
 
@@ -167,7 +167,6 @@ export default class DataTable extends React.Component {
               this.setFilter(e.target.value);
             }}
             value={filter} />
-          <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
         <Table>
           <thead><tr>
             {headers}

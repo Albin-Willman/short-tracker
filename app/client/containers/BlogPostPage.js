@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import { Link, browserHistory } from 'react-router';
 import { loadBlogPost, loadIndex } from 'services/blog-services';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 
 @connect(s => s.blog)
 export default class Blog extends React.Component {
@@ -58,9 +58,7 @@ export default class Blog extends React.Component {
               <p><strong>
                 {article.abstract}
               </strong></p>
-              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <div dangerouslySetInnerHTML={{ __html: article.content }}/>
-              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <Link to="/blog" className="btn">Back</Link>
             </Well>
           </Col>
@@ -74,7 +72,6 @@ export default class Blog extends React.Component {
                 dispatch(loadBlogPost(id));
                 browserHistory.push('/blog/' + id);
               }}/>
-              <OptimalAd config={{ width: 300, height: 250 }}/>
               <Disclaimer />
           </Col>
         </Row>

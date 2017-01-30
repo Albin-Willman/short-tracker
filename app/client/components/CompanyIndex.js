@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
 import DataTable from 'components/Tables/DataTable.jsx';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 
 export default class CompanyIndex extends React.Component {
 
@@ -39,7 +39,6 @@ export default class CompanyIndex extends React.Component {
             columns={columns}
             filterPlaceholder="Start typing to find company"/>
 
-          <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
         </Well>
       </Col>
       <Col md={3}>
@@ -55,7 +54,6 @@ export default class CompanyIndex extends React.Component {
             Click on a row to see more details.
           </p>
         </Well>
-        <OptimalAd config={{ width: 160, height: 600 }}/>
         <AppInfo/>
       </Col>
     </Row>);

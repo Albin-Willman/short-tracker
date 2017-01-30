@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import Description from 'components/Meta/Description';
 import ArticleBrief from 'components/Blog/ArticleBrief';
 import MyGrid from 'components/Layout/MyGrid';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 import Introduction from 'components/Blog/Introduction';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -63,7 +63,6 @@ export default class Blog extends React.Component {
           <Col md={8}>
             <Well>
               <h1>Kortapositioner.se: The blog</h1>
-              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
               <p>
                 <strong>
                   A blog containing post more or less related to the main content of
@@ -72,12 +71,10 @@ export default class Blog extends React.Component {
                 </strong>
               </p>
               {articleList}
-              <OptimalAd config={{ width: 728, height: 90 }} inContent={true}/>
             </Well>
           </Col>
           <Col md={4}>
             <Introduction />
-            <OptimalAd config={{ width: 300, height: 250 }}/>
           </Col>
         </Row>
       </MyGrid>);

@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Well from 'react-bootstrap/lib/Well';
 import AppInfo from 'containers/AppInfo';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 import Description from 'components/Meta/Description';
 
 export default class AboutPage extends React.Component {
@@ -96,7 +96,6 @@ export default class AboutPage extends React.Component {
           </Col>
           <Col md={4}>
             <AppInfo />
-            <OptimalAd config={{ width: 300, height: 250 }}/>
           </Col>
         </Row>
       </MyGrid>

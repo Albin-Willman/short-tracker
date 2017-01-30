@@ -5,7 +5,7 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import ContentWell from 'components/Wells/ContentWell';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 import Description from 'components/Meta/Description';
 
 const repoLink = 'https://github.com/Albin-Willman/short-tracker';
@@ -108,9 +108,6 @@ export default class WelcomePage extends React.Component {
           </Row>
         </Grid>
         <Grid>
-          <OptimalAd config={{ width: 728, height: 90 }}/>
-        </Grid>
-        <Grid>
           <Row className="well-row">
             <Col md={4} sm={12}>
               <ContentWell
@@ -150,9 +147,6 @@ export default class WelcomePage extends React.Component {
               </ContentWell>
             </Col>
           </Row>
-        </Grid>
-        <Grid>
-          <OptimalAd config={{ width: 728, height: 90 }}/>
         </Grid>
       </div>
       );
