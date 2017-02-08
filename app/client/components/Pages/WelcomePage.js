@@ -12,7 +12,6 @@ const repoLink = 'https://github.com/Albin-Willman/short-tracker';
 const email = 'albin@kortapositioner.se';
 const twitterLink = 'https://twitter.com/SvenssonAlbin';
 const fiLink = 'https://en.wikipedia.org/wiki/Financial_Supervisory_Authority_(Sweden)';
-const avanzaLink = 'https://www.avanza.se';
 
 export default class WelcomePage extends React.Component {
   render() {
@@ -61,10 +60,6 @@ export default class WelcomePage extends React.Component {
                     href={fiLink}
                     target="_blank">
                     Financial Supervisory Authority (FI)
-                  </a> and <a
-                    href={avanzaLink}
-                    target="_blank">
-                      Avanza
                   </a>. Fi publishes new data on all weekdays and I try to publish it as quickly
                   as possible but there may be delays.
                 </p>
