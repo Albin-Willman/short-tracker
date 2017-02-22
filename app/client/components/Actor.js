@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import PositionList from 'components/PositionList.jsx';
 import LineChart from 'components/LineChart';
 import AppInfo from 'containers/AppInfo';
-import OptimalAd from 'containers/Ads/OptimalAd';
+// import OptimalAd from 'containers/Ads/OptimalAd';
 
 export default class Actor extends React.Component {
 
@@ -35,7 +35,6 @@ export default class Actor extends React.Component {
                 Current positions
               </h3>
               <PositionList positions={positions} />
-              <OptimalAd config={{ width: 300, height: 250 }} inContent={true}/>
               <Link to="/shorters">Back</Link>
             </Well>
             <AppInfo/>
@@ -44,9 +43,6 @@ export default class Actor extends React.Component {
             <Well className="accent">
               <LineChart hAxis="Date" vAxis="Short position" data={historyData} />
             </Well>
-          </Col>
-          <Col lg={6}>
-            <OptimalAd config={{ width: 300, height: 250 }}/>
           </Col>
         </Row>
       </div>

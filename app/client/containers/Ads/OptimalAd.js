@@ -19,11 +19,15 @@ export default class OptimalAd extends React.Component {
     if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)!==null) {
       return;
     }
+    var scriptContainer = document.getElementById(optimalScriptContainer);
+    if(!scriptContainer) {
+      return;
+    }
     const script1 = document.createElement('script');
     script1.setAttribute('src', '//cdn.adsoptimal.com/advertisement/settings/37659.js');
     const script2 = document.createElement('script');
     script2.setAttribute('src', '//cdn.adsoptimal.com/advertisement/manual.js');
-    var scriptContainer = document.getElementById(optimalScriptContainer);
+
     scriptContainer.innerHTML = '';
 
     scriptContainer.appendChild(script1);
