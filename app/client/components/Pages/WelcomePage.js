@@ -11,6 +11,7 @@ import Description from 'components/Meta/Description';
 const repoLink = 'https://github.com/Albin-Willman/short-tracker';
 const email = 'albin@kortapositioner.se';
 const twitterLink = 'https://twitter.com/SvenssonAlbin';
+const botTwitterLink = 'https://twitter.com/kortapositioner';
 const fiLink = 'https://en.wikipedia.org/wiki/Financial_Supervisory_Authority_(Sweden)';
 
 export default class WelcomePage extends React.Component {
@@ -136,6 +137,12 @@ export default class WelcomePage extends React.Component {
                   If you are interested in updates about this project please follow med on
                   twitter <a href={twitterLink} target="_blank">@SvenssonAlbin</a>.
                 </p>
+                <p>
+                  The project also has a bot that tweets associated with it. For daily updates
+                  of what positions have changed
+                  follow: <a href={botTwitterLink} target="_blank">@Kortapositioner</a>.
+                </p>
+
                 <p>
                   I will post there whenever I post new content or publish new features.
                 </p>
